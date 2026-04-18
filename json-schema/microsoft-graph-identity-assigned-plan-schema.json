@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssignedPlan",
+  "type": "object",
+  "description": "Represents a plan assigned to a user.",
+  "properties": {
+    "assignedDateTime": {
+      "type": "string"
+    },
+    "capabilityStatus": {
+      "type": "string"
+    },
+    "service": {
+      "type": "string"
+    },
+    "servicePlanId": {
+      "type": "string"
+    }
+  }
+}

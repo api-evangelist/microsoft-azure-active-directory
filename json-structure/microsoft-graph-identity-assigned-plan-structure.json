@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AssignedPlan",
+  "type": "object",
+  "properties": {
+    "assignedDateTime": {
+      "type": "string"
+    },
+    "capabilityStatus": {
+      "type": "string"
+    },
+    "service": {
+      "type": "string"
+    },
+    "servicePlanId": {
+      "type": "string"
+    }
+  }
+}

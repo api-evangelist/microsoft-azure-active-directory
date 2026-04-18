@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroupCreate",
+  "type": "object",
+  "description": "Properties required when creating a new group.",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "The display name for the group."
+    },
+    "description": {
+      "type": "string"
+    },
+    "groupTypes": {
+      "type": "array",
+      "description": "Set to [\"Unified\"] for Microsoft 365 groups. Omit for security groups."
+    },
+    "mailEnabled": {
+      "type": "boolean"
+    },
+    "mailNickname": {
+      "type": "string"
+    },
+    "securityEnabled": {
+      "type": "boolean"
+    },
+    "visibility": {
+      "type": "string"
+    },
+    "isAssignableToRole": {
+      "type": "boolean"
+    },
+    "members@odata.bind": {
+      "type": "array",
+      "description": "List of directory object URLs to add as members. Example: https://graph.microsoft.com/v1.0/directoryObjects/{id}"
+    },
+    "owners@odata.bind": {
+      "type": "array",
+      "description": "List of directory object URLs to set as owners."
+    }
+  }
+}

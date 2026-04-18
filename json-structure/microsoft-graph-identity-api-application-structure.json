@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ApiApplication",
+  "type": "object",
+  "properties": {
+    "acceptMappedClaims": {
+      "type": "['boolean', 'null']"
+    },
+    "knownClientApplications": {
+      "type": "array"
+    },
+    "oauth2PermissionScopes": {
+      "type": "array"
+    },
+    "preAuthorizedApplications": {
+      "type": "array"
+    },
+    "requestedAccessTokenVersion": {
+      "type": "['integer', 'null']"
+    }
+  }
+}

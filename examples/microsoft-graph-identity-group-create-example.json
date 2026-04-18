@@ -1,0 +1,12 @@
+{
+  "displayName": "example_value",
+  "description": "A sample description.",
+  "groupTypes": [],
+  "mailEnabled": true,
+  "mailNickname": "example_value",
+  "securityEnabled": true,
+  "visibility": "example_value",
+  "isAssignableToRole": true,
+  "members@odata.bind": [],
+  "owners@odata.bind": []
+}

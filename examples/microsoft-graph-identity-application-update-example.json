@@ -1,0 +1,9 @@
+{
+  "displayName": "example_value",
+  "description": "A sample description.",
+  "signInAudience": "example_value",
+  "identifierUris": [],
+  "appRoles": [],
+  "requiredResourceAccess": [],
+  "tags": []
+}

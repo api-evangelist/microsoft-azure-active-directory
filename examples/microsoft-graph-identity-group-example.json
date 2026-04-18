@@ -1,0 +1,23 @@
+{
+  "classification": "example_value",
+  "createdDateTime": "example_value",
+  "description": "A sample description.",
+  "displayName": "example_value",
+  "expirationDateTime": "example_value",
+  "groupTypes": [],
+  "isAssignableToRole": "example_value",
+  "mail": "example_value",
+  "mailEnabled": true,
+  "mailNickname": "example_value",
+  "membershipRule": "example_value",
+  "membershipRuleProcessingState": "example_value",
+  "onPremisesDomainName": "example_value",
+  "onPremisesLastSyncDateTime": "example_value",
+  "onPremisesSyncEnabled": "example_value",
+  "preferredLanguage": "example_value",
+  "proxyAddresses": [],
+  "renewedDateTime": "example_value",
+  "securityEnabled": true,
+  "securityIdentifier": "example_value",
+  "visibility": "example_value"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebApplication",
+  "type": "object",
+  "description": "Configuration for a web application.",
+  "properties": {
+    "homePageUrl": {
+      "type": "['string', 'null']",
+      "description": "Home page or landing page of the application."
+    },
+    "logoutUrl": {
+      "type": "['string', 'null']",
+      "description": "URL used by the authorization service to sign out a user."
+    },
+    "redirectUris": {
+      "type": "array",
+      "description": "URIs to which Azure AD will redirect after authentication."
+    },
+    "implicitGrantSettings": {
+      "type": "object"
+    }
+  }
+}

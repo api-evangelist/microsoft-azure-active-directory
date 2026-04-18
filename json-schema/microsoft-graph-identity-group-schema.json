@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Group",
+  "type": "object",
+  "description": "Represents an Azure AD group. Groups are collections of principals with shared access to resources. Microsoft Graph supports several types of groups: Microsoft 365 groups, security groups, and mail-enabled security groups.",
+  "properties": {
+    "classification": {
+      "type": "['string', 'null']",
+      "description": "Classification for the group (e.g., low, medium, high business impact)."
+    },
+    "createdDateTime": {
+      "type": "string",
+      "description": "Timestamp of when the group was created."
+    },
+    "description": {
+      "type": "['string', 'null']",
+      "description": "An optional description for the group."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name for the group. Required on creation."
+    },
+    "expirationDateTime": {
+      "type": "['string', 'null']",
+      "description": "Timestamp of when the group is set to expire."
+    },
+    "groupTypes": {
+      "type": "array",
+      "description": "Specifies the group type. Include Unified for Microsoft 365 groups. Include DynamicMembership for dynamic groups."
+    },
+    "isAssignableToRole": {
+      "type": "['boolean', 'null']",
+      "description": "Indicates whether this group can be assigned to an Azure AD role. Can only be set at creation time."
+    },
+    "mail": {
+      "type": "['string', 'null']",
+      "description": "The SMTP address for the group."
+    },
+    "mailEnabled": {
+      "type": "boolean",
+      "description": "Specifies whether the group is mail-enabled. Required on creation."
+    },
+    "mailNickname": {
+      "type": "string",
+      "description": "The mail alias for the group, unique for Microsoft 365 groups. Required on creation."
+    },
+    "membershipRule": {
+      "type": "['string', 'null']",
+      "description": "The rule that determines members for a dynamic group."
+    },
+    "membershipRuleProcessingState": {
+      "type": "['string', 'null']",
+      "description": "Indicates whether the dynamic membership processing is on or paused. On or Paused."
+    },
+    "onPremisesDomainName": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesLastSyncDateTime": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesSyncEnabled": {
+      "type": "['boolean', 'null']"
+    },
+    "preferredLanguage": {
+      "type": "['string', 'null']",
+      "description": "The preferred language for a Microsoft 365 group in ISO 639-1 format."
+    },
+    "proxyAddresses": {
+      "type": "array"
+    },
+    "renewedDateTime": {
+      "type": "string",
+      "description": "Timestamp of when the group was last renewed."
+    },
+    "securityEnabled": {
+      "type": "boolean",
+      "description": "Specifies whether the group is a security group. Required on creation."
+    },
+    "securityIdentifier": {
+      "type": "['string', 'null']",
+      "description": "Security identifier (SID) of the group."
+    },
+    "visibility": {
+      "type": "['string', 'null']",
+      "description": "Specifies the group join policy and group content visibility. Public, Private, or HiddenMembership."
+    }
+  }
+}

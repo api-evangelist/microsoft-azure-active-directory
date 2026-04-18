@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ServicePrincipalCreate",
+  "type": "object",
+  "properties": {
+    "appId": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "accountEnabled": {
+      "type": "boolean"
+    },
+    "appRoleAssignmentRequired": {
+      "type": "boolean"
+    },
+    "tags": {
+      "type": "array"
+    },
+    "notificationEmailAddresses": {
+      "type": "array"
+    }
+  }
+}

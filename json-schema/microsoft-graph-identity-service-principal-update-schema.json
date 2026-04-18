@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ServicePrincipalUpdate",
+  "type": "object",
+  "description": "Properties that can be updated on an existing service principal.",
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean"
+    },
+    "appRoleAssignmentRequired": {
+      "type": "boolean"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "homepage": {
+      "type": "string"
+    },
+    "loginUrl": {
+      "type": "string"
+    },
+    "logoutUrl": {
+      "type": "string"
+    },
+    "notificationEmailAddresses": {
+      "type": "array"
+    },
+    "replyUrls": {
+      "type": "array"
+    },
+    "tags": {
+      "type": "array"
+    }
+  }
+}

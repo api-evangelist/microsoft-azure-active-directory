@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ServicePrincipal",
+  "type": "object",
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean"
+    },
+    "appDescription": {
+      "type": "['string', 'null']"
+    },
+    "appDisplayName": {
+      "type": "['string', 'null']"
+    },
+    "appId": {
+      "type": "string"
+    },
+    "appOwnerOrganizationId": {
+      "type": "['string', 'null']"
+    },
+    "appRoleAssignmentRequired": {
+      "type": "boolean"
+    },
+    "appRoles": {
+      "type": "array"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "homepage": {
+      "type": "['string', 'null']"
+    },
+    "keyCredentials": {
+      "type": "array"
+    },
+    "loginUrl": {
+      "type": "['string', 'null']"
+    },
+    "logoutUrl": {
+      "type": "['string', 'null']"
+    },
+    "notificationEmailAddresses": {
+      "type": "array"
+    },
+    "oauth2PermissionScopes": {
+      "type": "array"
+    },
+    "passwordCredentials": {
+      "type": "array"
+    },
+    "replyUrls": {
+      "type": "array"
+    },
+    "servicePrincipalNames": {
+      "type": "array"
+    },
+    "servicePrincipalType": {
+      "type": "string"
+    },
+    "signInAudience": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array"
+    },
+    "tokenEncryptionKeyId": {
+      "type": "['string', 'null']"
+    }
+  }
+}

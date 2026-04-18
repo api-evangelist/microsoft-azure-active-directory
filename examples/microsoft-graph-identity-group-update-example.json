@@ -1,0 +1,10 @@
+{
+  "displayName": "example_value",
+  "description": "A sample description.",
+  "mailNickname": "example_value",
+  "visibility": "example_value",
+  "membershipRule": "example_value",
+  "membershipRuleProcessingState": "example_value",
+  "preferredLanguage": "example_value",
+  "classification": "example_value"
+}

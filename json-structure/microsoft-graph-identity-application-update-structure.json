@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ApplicationUpdate",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "signInAudience": {
+      "type": "string"
+    },
+    "identifierUris": {
+      "type": "array"
+    },
+    "appRoles": {
+      "type": "array"
+    },
+    "requiredResourceAccess": {
+      "type": "array"
+    },
+    "tags": {
+      "type": "array"
+    }
+  }
+}

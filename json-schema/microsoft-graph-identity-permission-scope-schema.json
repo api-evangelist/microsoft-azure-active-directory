@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PermissionScope",
+  "type": "object",
+  "description": "Represents a delegated permission (OAuth2 scope).",
+  "properties": {
+    "adminConsentDescription": {
+      "type": "string"
+    },
+    "adminConsentDisplayName": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "isEnabled": {
+      "type": "boolean"
+    },
+    "type": {
+      "type": "string"
+    },
+    "userConsentDescription": {
+      "type": "string"
+    },
+    "userConsentDisplayName": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string",
+      "description": "The value to include in the scp claim in access tokens."
+    }
+  }
+}

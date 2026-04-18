@@ -1,0 +1,566 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Microsoft Graph Identity API"
+  description: "Microsoft Graph API for managing Azure AD/Entra ID resources including users, groups, applications, and service principals."
+  tags:
+    - Identity
+    - Microsoft Graph
+    - Azure Active Directory
+    - Microsoft Entra
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      MICROSOFT_GRAPH_ACCESS_TOKEN: MICROSOFT_GRAPH_ACCESS_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: graph-identity
+      baseUri: https://graph.microsoft.com/v1.0
+      description: "Microsoft Graph Identity API for user, group, application, and service principal management."
+      authentication:
+        type: bearer
+        token: "{{MICROSOFT_GRAPH_ACCESS_TOKEN}}"
+      resources:
+        - name: users
+          path: /users
+          description: "Manage user accounts in Azure AD."
+          operations:
+            - name: list-users
+              method: GET
+              description: "List all users in the directory."
+              inputParameters:
+                - name: $top
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of results to return."
+                - name: $filter
+                  in: query
+                  type: string
+                  required: false
+                  description: "OData filter expression."
+                - name: $select
+                  in: query
+                  type: string
+                  required: false
+                  description: "Properties to return."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-user
+              method: POST
+              description: "Create a new user."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  displayName: "{{tools.display_name}}"
+                  mailNickname: "{{tools.mail_nickname}}"
+                  userPrincipalName: "{{tools.user_principal_name}}"
+                  accountEnabled: true
+                  passwordProfile:
+                    password: "{{tools.password}}"
+            - name: get-user
+              method: GET
+              description: "Get a user by ID or UPN."
+              inputParameters:
+                - name: userId
+                  in: path
+                  type: string
+                  required: true
+                  description: "User ID or UPN."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-user
+              method: PATCH
+              description: "Update user properties."
+              inputParameters:
+                - name: userId
+                  in: path
+                  type: string
+                  required: true
+                  description: "User ID or UPN."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-user
+              method: DELETE
+              description: "Delete a user."
+              inputParameters:
+                - name: userId
+                  in: path
+                  type: string
+                  required: true
+                  description: "User ID or UPN."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-user-member-of
+              method: GET
+              description: "List groups and roles the user is a member of."
+              inputParameters:
+                - name: userId
+                  in: path
+                  type: string
+                  required: true
+                  description: "User ID or UPN."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: groups
+          path: /groups
+          description: "Manage groups in Azure AD."
+          operations:
+            - name: list-groups
+              method: GET
+              description: "List all groups."
+              inputParameters:
+                - name: $filter
+                  in: query
+                  type: string
+                  required: false
+                  description: "OData filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-group
+              method: POST
+              description: "Create a new group."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-group
+              method: GET
+              description: "Get a group by ID."
+              inputParameters:
+                - name: groupId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Group ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-group
+              method: PATCH
+              description: "Update group properties."
+              inputParameters:
+                - name: groupId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Group ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-group
+              method: DELETE
+              description: "Delete a group."
+              inputParameters:
+                - name: groupId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Group ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-group-members
+              method: GET
+              description: "List members of a group."
+              inputParameters:
+                - name: groupId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Group ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: add-group-member
+              method: POST
+              description: "Add a member to a group."
+              inputParameters:
+                - name: groupId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Group ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: applications
+          path: /applications
+          description: "Manage application registrations."
+          operations:
+            - name: list-applications
+              method: GET
+              description: "List application registrations."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-application
+              method: POST
+              description: "Register a new application."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-application
+              method: GET
+              description: "Get an application by ID."
+              inputParameters:
+                - name: applicationId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-application
+              method: DELETE
+              description: "Delete an application registration."
+              inputParameters:
+                - name: applicationId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Application ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: service-principals
+          path: /servicePrincipals
+          description: "Manage service principals."
+          operations:
+            - name: list-service-principals
+              method: GET
+              description: "List service principals."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-service-principal
+              method: POST
+              description: "Create a service principal."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-service-principal
+              method: GET
+              description: "Get a service principal by ID."
+              inputParameters:
+                - name: servicePrincipalId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Service principal ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-service-principal
+              method: DELETE
+              description: "Delete a service principal."
+              inputParameters:
+                - name: servicePrincipalId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Service principal ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: graph-identity-api
+      resources:
+        - path: /v1/users
+          name: users
+          description: "User management."
+          operations:
+            - method: GET
+              name: list-users
+              description: "List users."
+              call: "graph-identity.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-user
+              description: "Create a user."
+              call: "graph-identity.create-user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/users/{userId}
+          name: user-detail
+          description: "Single user operations."
+          operations:
+            - method: GET
+              name: get-user
+              description: "Get a user."
+              call: "graph-identity.get-user"
+              with:
+                userId: "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/groups
+          name: groups
+          description: "Group management."
+          operations:
+            - method: GET
+              name: list-groups
+              description: "List groups."
+              call: "graph-identity.list-groups"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/applications
+          name: applications
+          description: "Application management."
+          operations:
+            - method: GET
+              name: list-applications
+              description: "List applications."
+              call: "graph-identity.list-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: graph-identity-mcp
+      transport: http
+      tools:
+        - name: list-users
+          description: "List Azure AD users."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "graph-identity.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-user
+          description: "Create a new Azure AD user."
+          hints:
+            readOnly: false
+          call: "graph-identity.create-user"
+          with:
+            display_name: "tools.display_name"
+            mail_nickname: "tools.mail_nickname"
+            user_principal_name: "tools.user_principal_name"
+            password: "tools.password"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-user
+          description: "Get an Azure AD user by ID or UPN."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "graph-identity.get-user"
+          with:
+            userId: "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-user
+          description: "Update Azure AD user properties."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "graph-identity.update-user"
+          with:
+            userId: "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-user
+          description: "Delete an Azure AD user."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "graph-identity.delete-user"
+          with:
+            userId: "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-user-member-of
+          description: "List groups a user belongs to."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "graph-identity.list-user-member-of"
+          with:
+            userId: "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-groups
+          description: "List Azure AD groups."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "graph-identity.list-groups"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-group
+          description: "Create a new Azure AD group."
+          hints:
+            readOnly: false
+          call: "graph-identity.create-group"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-group
+          description: "Get an Azure AD group by ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "graph-identity.get-group"
+          with:
+            groupId: "tools.groupId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-group
+          description: "Delete an Azure AD group."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "graph-identity.delete-group"
+          with:
+            groupId: "tools.groupId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-group-members
+          description: "List members of an Azure AD group."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "graph-identity.list-group-members"
+          with:
+            groupId: "tools.groupId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: add-group-member
+          description: "Add a member to an Azure AD group."
+          hints:
+            readOnly: false
+          call: "graph-identity.add-group-member"
+          with:
+            groupId: "tools.groupId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-applications
+          description: "List Azure AD application registrations."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "graph-identity.list-applications"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-application
+          description: "Register a new application in Azure AD."
+          hints:
+            readOnly: false
+          call: "graph-identity.create-application"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-application
+          description: "Get an application by ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "graph-identity.get-application"
+          with:
+            applicationId: "tools.applicationId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-service-principals
+          description: "List Azure AD service principals."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "graph-identity.list-service-principals"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-service-principal
+          description: "Get a service principal by ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "graph-identity.get-service-principal"
+          with:
+            servicePrincipalId: "tools.servicePrincipalId"
+          outputParameters:
+            - type: object
+              mapping: "$."

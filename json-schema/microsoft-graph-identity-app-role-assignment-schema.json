@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AppRoleAssignment",
+  "type": "object",
+  "description": "Represents an app role assigned to a user, group, or service principal.",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "appRoleId": {
+      "type": "string",
+      "description": "The identifier of the app role. Set to the default app role ID of 00000000-0000-0000-0000-000000000000 if not specified."
+    },
+    "createdDateTime": {
+      "type": "string"
+    },
+    "principalDisplayName": {
+      "type": "string",
+      "description": "The display name of the principal (user, group, or service principal)."
+    },
+    "principalId": {
+      "type": "string",
+      "description": "The unique identifier of the principal being granted the role."
+    },
+    "principalType": {
+      "type": "string",
+      "description": "The type of the assigned principal (User, Group, or ServicePrincipal)."
+    },
+    "resourceDisplayName": {
+      "type": "string",
+      "description": "The display name of the resource application."
+    },
+    "resourceId": {
+      "type": "string",
+      "description": "The unique identifier of the resource service principal."
+    }
+  }
+}

@@ -1,0 +1,11 @@
+name: azure-active-directory API Vocabulary
+provider: azure-active-directory
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 24
+schemas: 27
+tags:
+- Applications
+- Groups
+- Service Principals
+- Users

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "UserUpdate",
+  "type": "object",
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "givenName": {
+      "type": "string"
+    },
+    "surname": {
+      "type": "string"
+    },
+    "jobTitle": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "mail": {
+      "type": "string"
+    },
+    "mobilePhone": {
+      "type": "string"
+    },
+    "businessPhones": {
+      "type": "array"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "postalCode": {
+      "type": "string"
+    },
+    "streetAddress": {
+      "type": "string"
+    },
+    "officeLocation": {
+      "type": "string"
+    },
+    "usageLocation": {
+      "type": "string"
+    },
+    "preferredLanguage": {
+      "type": "string"
+    },
+    "employeeId": {
+      "type": "string"
+    },
+    "employeeType": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string"
+    }
+  }
+}

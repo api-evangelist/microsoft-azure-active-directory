@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GroupUpdate",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "mailNickname": {
+      "type": "string"
+    },
+    "visibility": {
+      "type": "string"
+    },
+    "membershipRule": {
+      "type": "string"
+    },
+    "membershipRuleProcessingState": {
+      "type": "string"
+    },
+    "preferredLanguage": {
+      "type": "string"
+    },
+    "classification": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "appId": "500123",
+  "displayName": "example_value",
+  "description": "A sample description.",
+  "createdDateTime": "example_value",
+  "identifierUris": [],
+  "keyCredentials": [],
+  "passwordCredentials": [],
+  "appRoles": [],
+  "requiredResourceAccess": [],
+  "signInAudience": "example_value",
+  "tags": [],
+  "publisherDomain": "example_value"
+}

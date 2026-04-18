@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApplicationCreate",
+  "type": "object",
+  "description": "Properties required when creating a new application registration.",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "The display name for the application."
+    },
+    "description": {
+      "type": "string"
+    },
+    "signInAudience": {
+      "type": "string"
+    },
+    "identifierUris": {
+      "type": "array"
+    },
+    "appRoles": {
+      "type": "array"
+    },
+    "requiredResourceAccess": {
+      "type": "array"
+    },
+    "tags": {
+      "type": "array"
+    }
+  }
+}

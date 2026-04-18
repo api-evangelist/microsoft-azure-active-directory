@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ServicePrincipal",
+  "type": "object",
+  "description": "Represents an instance of an application in a directory. A service principal is the local representation or application instance of a global application object in a single tenant. It defines what the app can do in the tenant, who can access it, and what resources the app can access.",
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean",
+      "description": "True if the service principal account is enabled."
+    },
+    "appDescription": {
+      "type": "['string', 'null']",
+      "description": "Description copied from the associated application."
+    },
+    "appDisplayName": {
+      "type": "['string', 'null']",
+      "description": "The display name exposed by the associated application."
+    },
+    "appId": {
+      "type": "string",
+      "description": "The unique identifier for the associated application (its appId property). Required on creation."
+    },
+    "appOwnerOrganizationId": {
+      "type": "['string', 'null']",
+      "description": "Contains the tenant ID where the application is registered."
+    },
+    "appRoleAssignmentRequired": {
+      "type": "boolean",
+      "description": "Specifies whether users or other service principals need to be granted an app role assignment before accessing."
+    },
+    "appRoles": {
+      "type": "array",
+      "description": "Roles exposed by the associated application."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name for the service principal."
+    },
+    "homepage": {
+      "type": "['string', 'null']",
+      "description": "Home page or landing page of the application."
+    },
+    "keyCredentials": {
+      "type": "array"
+    },
+    "loginUrl": {
+      "type": "['string', 'null']",
+      "description": "URL for the authentication provider to redirect users to for sign-in."
+    },
+    "logoutUrl": {
+      "type": "['string', 'null']"
+    },
+    "notificationEmailAddresses": {
+      "type": "array",
+      "description": "Email addresses where Azure AD sends notifications when the active certificate is near expiration."
+    },
+    "oauth2PermissionScopes": {
+      "type": "array",
+      "description": "The delegated permissions exposed by the application."
+    },
+    "passwordCredentials": {
+      "type": "array"
+    },
+    "replyUrls": {
+      "type": "array",
+      "description": "The URLs that user tokens are sent to for sign-in, or the redirect URIs for authorization code and access token responses."
+    },
+    "servicePrincipalNames": {
+      "type": "array",
+      "description": "Contains the list of identifierUris and the appId from the associated application."
+    },
+    "servicePrincipalType": {
+      "type": "string",
+      "description": "Identifies whether the service principal represents an Application, ManagedIdentity, Legacy, or SocialIdp."
+    },
+    "signInAudience": {
+      "type": "string",
+      "description": "The audience that can sign in."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Custom strings used to categorize the service principal. The WindowsAzureActiveDirectoryIntegratedApp tag is used by the portal."
+    },
+    "tokenEncryptionKeyId": {
+      "type": "['string', 'null']"
+    }
+  }
+}

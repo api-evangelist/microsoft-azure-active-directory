@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "WebApplication",
+  "type": "object",
+  "properties": {
+    "homePageUrl": {
+      "type": "['string', 'null']"
+    },
+    "logoutUrl": {
+      "type": "['string', 'null']"
+    },
+    "redirectUris": {
+      "type": "array"
+    },
+    "implicitGrantSettings": {
+      "type": "object"
+    }
+  }
+}

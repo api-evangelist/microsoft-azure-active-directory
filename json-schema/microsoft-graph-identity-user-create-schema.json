@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserCreate",
+  "type": "object",
+  "description": "Properties required when creating a new user.",
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean",
+      "description": "True if the account should be enabled."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The name to display in the address book."
+    },
+    "mailNickname": {
+      "type": "string",
+      "description": "The mail alias for the user."
+    },
+    "userPrincipalName": {
+      "type": "string",
+      "description": "The user principal name (user@contoso.com)."
+    },
+    "givenName": {
+      "type": "string"
+    },
+    "surname": {
+      "type": "string"
+    },
+    "jobTitle": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "usageLocation": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "mobilePhone": {
+      "type": "string"
+    },
+    "businessPhones": {
+      "type": "array"
+    }
+  }
+}

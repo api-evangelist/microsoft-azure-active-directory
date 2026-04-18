@@ -1,0 +1,10 @@
+{
+  "adminConsentDescription": "example_value",
+  "adminConsentDisplayName": "example_value",
+  "id": "abc123",
+  "isEnabled": true,
+  "type": "example_value",
+  "userConsentDescription": "example_value",
+  "userConsentDisplayName": "example_value",
+  "value": "example_value"
+}

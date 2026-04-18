@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AppRole",
+  "type": "object",
+  "properties": {
+    "allowedMemberTypes": {
+      "type": "array"
+    },
+    "description": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "isEnabled": {
+      "type": "boolean"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

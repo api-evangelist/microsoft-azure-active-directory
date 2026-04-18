@@ -1,0 +1,11 @@
+{
+  "accountEnabled": true,
+  "appRoleAssignmentRequired": true,
+  "displayName": "example_value",
+  "homepage": "example_value",
+  "loginUrl": "https://www.example.com",
+  "logoutUrl": "https://www.example.com",
+  "notificationEmailAddresses": "user@example.com",
+  "replyUrls": "https://www.example.com",
+  "tags": []
+}

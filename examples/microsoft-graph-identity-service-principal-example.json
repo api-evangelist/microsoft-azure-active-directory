@@ -1,0 +1,23 @@
+{
+  "accountEnabled": true,
+  "appDescription": "example_value",
+  "appDisplayName": "example_value",
+  "appId": "500123",
+  "appOwnerOrganizationId": "500123",
+  "appRoleAssignmentRequired": true,
+  "appRoles": [],
+  "displayName": "example_value",
+  "homepage": "example_value",
+  "keyCredentials": [],
+  "loginUrl": "https://www.example.com",
+  "logoutUrl": "https://www.example.com",
+  "notificationEmailAddresses": "user@example.com",
+  "oauth2PermissionScopes": [],
+  "passwordCredentials": [],
+  "replyUrls": "https://www.example.com",
+  "servicePrincipalNames": [],
+  "servicePrincipalType": "example_value",
+  "signInAudience": "example_value",
+  "tags": [],
+  "tokenEncryptionKeyId": "500123"
+}

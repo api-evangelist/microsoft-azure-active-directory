@@ -1,0 +1,8 @@
+{
+  "appId": "500123",
+  "displayName": "example_value",
+  "accountEnabled": true,
+  "appRoleAssignmentRequired": true,
+  "tags": [],
+  "notificationEmailAddresses": "user@example.com"
+}

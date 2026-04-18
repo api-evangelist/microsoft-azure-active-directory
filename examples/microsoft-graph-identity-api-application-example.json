@@ -1,0 +1,7 @@
+{
+  "acceptMappedClaims": "example_value",
+  "knownClientApplications": [],
+  "oauth2PermissionScopes": [],
+  "preAuthorizedApplications": [],
+  "requestedAccessTokenVersion": "example_value"
+}

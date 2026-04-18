@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RequiredResourceAccess",
+  "type": "object",
+  "description": "Specifies the set of OAuth 2.0 permission scopes and app roles that an application requires access to.",
+  "properties": {
+    "resourceAppId": {
+      "type": "string",
+      "description": "The unique identifier for the resource that the application requires access to (e.g., Microsoft Graph)."
+    },
+    "resourceAccess": {
+      "type": "array"
+    }
+  }
+}

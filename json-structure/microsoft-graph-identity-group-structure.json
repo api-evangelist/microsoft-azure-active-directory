@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Group",
+  "type": "object",
+  "properties": {
+    "classification": {
+      "type": "['string', 'null']"
+    },
+    "createdDateTime": {
+      "type": "string"
+    },
+    "description": {
+      "type": "['string', 'null']"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "expirationDateTime": {
+      "type": "['string', 'null']"
+    },
+    "groupTypes": {
+      "type": "array"
+    },
+    "isAssignableToRole": {
+      "type": "['boolean', 'null']"
+    },
+    "mail": {
+      "type": "['string', 'null']"
+    },
+    "mailEnabled": {
+      "type": "boolean"
+    },
+    "mailNickname": {
+      "type": "string"
+    },
+    "membershipRule": {
+      "type": "['string', 'null']"
+    },
+    "membershipRuleProcessingState": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesDomainName": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesLastSyncDateTime": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesSyncEnabled": {
+      "type": "['boolean', 'null']"
+    },
+    "preferredLanguage": {
+      "type": "['string', 'null']"
+    },
+    "proxyAddresses": {
+      "type": "array"
+    },
+    "renewedDateTime": {
+      "type": "string"
+    },
+    "securityEnabled": {
+      "type": "boolean"
+    },
+    "securityIdentifier": {
+      "type": "['string', 'null']"
+    },
+    "visibility": {
+      "type": "['string', 'null']"
+    }
+  }
+}

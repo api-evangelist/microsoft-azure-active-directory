@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DirectoryObject",
+  "type": "object",
+  "description": "Represents an Azure Active Directory directory object. This is the base type for most directory resources.",
+  "properties": {
+    "@odata.type": {
+      "type": "string",
+      "description": "The OData type of the directory object."
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the object. Globally unique across all directory objects."
+    },
+    "deletedDateTime": {
+      "type": "string",
+      "description": "Date and time when this object was deleted."
+    }
+  }
+}

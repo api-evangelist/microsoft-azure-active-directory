@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean"
+    },
+    "assignedLicenses": {
+      "type": "array"
+    },
+    "assignedPlans": {
+      "type": "array"
+    },
+    "businessPhones": {
+      "type": "array"
+    },
+    "city": {
+      "type": "['string', 'null']"
+    },
+    "companyName": {
+      "type": "['string', 'null']"
+    },
+    "country": {
+      "type": "['string', 'null']"
+    },
+    "createdDateTime": {
+      "type": "string"
+    },
+    "department": {
+      "type": "['string', 'null']"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "employeeId": {
+      "type": "['string', 'null']"
+    },
+    "employeeType": {
+      "type": "['string', 'null']"
+    },
+    "givenName": {
+      "type": "['string', 'null']"
+    },
+    "jobTitle": {
+      "type": "['string', 'null']"
+    },
+    "mail": {
+      "type": "['string', 'null']"
+    },
+    "mailNickname": {
+      "type": "string"
+    },
+    "mobilePhone": {
+      "type": "['string', 'null']"
+    },
+    "officeLocation": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesDistinguishedName": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesDomainName": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesImmutableId": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesLastSyncDateTime": {
+      "type": "['string', 'null']"
+    },
+    "onPremisesSyncEnabled": {
+      "type": "['boolean', 'null']"
+    },
+    "otherMails": {
+      "type": "array"
+    },
+    "passwordPolicies": {
+      "type": "['string', 'null']"
+    },
+    "postalCode": {
+      "type": "['string', 'null']"
+    },
+    "preferredLanguage": {
+      "type": "['string', 'null']"
+    },
+    "proxyAddresses": {
+      "type": "array"
+    },
+    "signInSessionsValidFromDateTime": {
+      "type": "string"
+    },
+    "state": {
+      "type": "['string', 'null']"
+    },
+    "streetAddress": {
+      "type": "['string', 'null']"
+    },
+    "surname": {
+      "type": "['string', 'null']"
+    },
+    "usageLocation": {
+      "type": "['string', 'null']"
+    },
+    "userPrincipalName": {
+      "type": "string"
+    },
+    "userType": {
+      "type": "['string', 'null']"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroupUpdate",
+  "type": "object",
+  "description": "Properties that can be updated on an existing group.",
+  "properties": {
+    "displayName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "mailNickname": {
+      "type": "string"
+    },
+    "visibility": {
+      "type": "string"
+    },
+    "membershipRule": {
+      "type": "string"
+    },
+    "membershipRuleProcessingState": {
+      "type": "string"
+    },
+    "preferredLanguage": {
+      "type": "string"
+    },
+    "classification": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "accountEnabled": true,
+  "displayName": "example_value",
+  "givenName": "example_value",
+  "surname": "example_value",
+  "jobTitle": "example_value",
+  "department": "example_value",
+  "mail": "example_value",
+  "mobilePhone": "example_value",
+  "businessPhones": [],
+  "city": "example_value",
+  "state": "example_value",
+  "country": "example_value",
+  "postalCode": "example_value",
+  "streetAddress": "example_value",
+  "officeLocation": "example_value",
+  "usageLocation": "example_value",
+  "preferredLanguage": "example_value",
+  "employeeId": "500123",
+  "employeeType": "example_value",
+  "companyName": "example_value"
+}

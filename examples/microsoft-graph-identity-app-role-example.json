@@ -1,0 +1,8 @@
+{
+  "allowedMemberTypes": [],
+  "description": "A sample description.",
+  "displayName": "example_value",
+  "id": "abc123",
+  "isEnabled": true,
+  "value": "example_value"
+}
