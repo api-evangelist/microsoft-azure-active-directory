@@ -1,10 +1,12 @@
-name: Azure Active Directory
+aid: microsoft-azure-active-directory
+name: Microsoft Azure Active Directory
 description: Microsoft Azure Active Directory (Azure AD), now Microsoft Entra ID, is Microsoft's cloud-based identity and access management service, which helps employees sign in and access resources.
+type: Index
 image: https://docs.microsoft.com/azure/media/index/active-directory.svg
-url: https://azure.microsoft.com/en-us/services/active-directory/
+url: https://raw.githubusercontent.com/api-evangelist/microsoft-azure-active-directory/refs/heads/main/apis.yml
 created: '2024-01-15'
-modified: '2026-04-18'
-specificationVersion: '0.18'
+modified: '2026-04-28'
+specificationVersion: '0.19'
 tags:
   - Authentication
   - Authorization

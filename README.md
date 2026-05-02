@@ -1,7 +1,7 @@
-# Azure Active Directory (azure-active-directory)
+# Microsoft Azure Active Directory (microsoft-azure-active-directory)
 Microsoft Azure Active Directory (Azure AD), now Microsoft Entra ID, is Microsoft's cloud-based identity and access management service, which helps employees sign in and access resources.
 
-**URL:** [Visit APIs.json URL](https://azure.microsoft.com/en-us/services/active-directory/)
+**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/microsoft-azure-active-directory/refs/heads/main/apis.yml)
 
 **Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
 
@@ -11,8 +11,8 @@ Microsoft Azure Active Directory (Azure AD), now Microsoft Entra ID, is Microsof
 
 ## Timestamps
 
-- **Created:** 2024-01-15 
-- **Modified:** 2026-04-18 
+- **Created:** 2024-01-15
+- **Modified:** 2026-04-28
 
 ## APIs
 
