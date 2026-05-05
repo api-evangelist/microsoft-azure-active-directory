@@ -1,0 +1,13 @@
+{
+  "repo": "microsoft-azure-active-directory",
+  "feeds": [
+    {
+      "source": "https://devblogs.microsoft.com/identity/",
+      "feed_url": "https://devblogs.microsoft.com/identity/feed/",
+      "saved": 10,
+      "title": "Microsoft Entra Identity Platform"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:32:32Z"
+}
