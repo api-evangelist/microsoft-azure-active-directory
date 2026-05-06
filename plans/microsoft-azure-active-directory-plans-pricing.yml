@@ -4,202 +4,219 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Azure Active Directory
 providerId: microsoft-azure-active-directory
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Authentication
   - Authorization
   - Identity
-  - Microsoft
   - Microsoft Entra
   - OAuth
   - OpenID Connect
   - SAML
   - SCIM
   - Single Sign-On
-  - Zero Trust
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Microsoft Entra ID (formerly Azure Active Directory) is licensed per user per month, on
+  top of a Free baseline included with Microsoft cloud subscriptions. P1 and P2 add advanced security
+  and identity protection; the Entra Suite bundles network access, governance, and verification on top
+  of P1/P2. External ID, Workload ID, Internet/Private Access, ID Governance, and Verified ID are sold
+  as standalone add-ons.
+sources:
+  - https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
+  - https://azure.microsoft.com/en-us/pricing/details/active-directory/
 plans:
   - id: microsoft-azure-active-directory-free
-    name: Free
+    name: Microsoft Entra ID Free
     type: freemium
-    description: Free entry tier for the Microsoft Azure Active Directory API surface. Intended for evaluation,
-      prototyping, and low-volume integrations. Real limits and pricing must be reconciled with the provider's
-      published plan documentation.
+    description: Included at no cost with Microsoft cloud subscriptions (Azure, Microsoft 365). Provides
+      MFA, unlimited SSO across SaaS apps, and basic reports.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
+      - label: Per user
+        name: entra_id_free
+        type: subscription
+        metric: seat
+        limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://graph.microsoft.com
-          - https://graph.windows.net
-          - https://login.microsoftonline.com
-          - https://verifiedid.did.msidentity.com
         unit: 1
         price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
+        userMultiplied: true
+    elements:
+      - name: Multifactor authentication
+      - name: Unlimited SSO across SaaS apps
+      - name: Basic reports
+      - name: Self-service password change for cloud users
+  - id: microsoft-azure-active-directory-p1
+    name: Microsoft Entra ID P1
+    type: subscription
+    description: Advanced identity management for hybrid environments with conditional access, MFA,
+      and self-service password management. Annual commitment.
+    entries:
+      - label: Per user / month
+        name: entra_id_p1
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
         geo: global
-        domains:
-          - https://graph.microsoft.com
-          - https://graph.windows.net
-          - https://login.microsoftonline.com
-          - https://verifiedid.did.msidentity.com
         unit: 1
-        price: '0.00'
+        price: '6.00'
+        userMultiplied: true
+    elements:
+      - name: Conditional access
+      - name: Multifactor authentication
+      - name: Self-service password reset for hybrid identities
+      - name: Application proxy
+  - id: microsoft-azure-active-directory-p2
+    name: Microsoft Entra ID P2
+    type: subscription
+    description: Adds identity protection (risk-based conditional access, real-time threat assessment)
+      and Privileged Identity Management. Annual commitment.
+    entries:
+      - label: Per user / month
+        name: entra_id_p2
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '9.00'
+        userMultiplied: true
+    elements:
+      - name: Identity Protection (risk-based conditional access)
+      - name: Privileged Identity Management
+      - name: Access reviews
+      - name: All P1 features
+  - id: microsoft-azure-active-directory-suite
+    name: Microsoft Entra Suite
+    type: subscription
+    description: Bundle combining network access, identity protection, governance, and verification.
+      Requires P1 or P2 subscription.
+    entries:
+      - label: Per user / month (add-on)
+        name: entra_suite
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '12.00'
+        userMultiplied: true
+    elements:
+      - name: Microsoft Entra Internet Access
+      - name: Microsoft Entra Private Access
+      - name: Microsoft Entra ID Governance
+      - name: Microsoft Entra Verified ID premium
+      - name: Microsoft Entra ID Protection
+  - id: microsoft-azure-active-directory-internet-access
+    name: Microsoft Entra Internet Access
+    type: subscription
+    description: Standalone secure web gateway / SSE component.
+    entries:
+      - label: Per user / month
+        name: entra_internet_access
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '5.00'
+        userMultiplied: true
+    elements:
+      - name: SaaS access controls
+      - name: Web content filtering
+      - name: Threat protection
+  - id: microsoft-azure-active-directory-private-access
+    name: Microsoft Entra Private Access
+    type: subscription
+    description: Standalone identity-centric ZTNA for private apps.
+    entries:
+      - label: Per user / month
+        name: entra_private_access
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '5.00'
+        userMultiplied: true
+    elements:
+      - name: ZTNA for private apps
+      - name: Per-app conditional access
+      - name: Identity-aware proxy
+  - id: microsoft-azure-active-directory-governance
+    name: Microsoft Entra ID Governance
+    type: subscription
+    description: Standalone identity governance with entitlement management, access reviews, and
+      lifecycle workflows.
+    entries:
+      - label: Per user / month
+        name: entra_id_governance
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '7.00'
+        userMultiplied: true
+    elements:
+      - name: Entitlement management
+      - name: Lifecycle workflows
+      - name: Access reviews
+  - id: microsoft-azure-active-directory-workload-id
+    name: Microsoft Entra Workload ID
+    type: subscription
+    description: Identity for service principals, managed identities, and workload identities.
+    entries:
+      - label: Per workload identity / month
+        name: entra_workload_id
+        type: subscription
+        metric: workload_identity
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '3.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Microsoft Graph API
-      - name: Microsoft Graph Identity and Access API
-      - name: Azure AD Graph API (Deprecated)
-      - name: Azure AD Authentication Library (ADAL)
-      - name: Microsoft Authentication Library (MSAL)
-      - name: Microsoft Identity Platform
-      - name: Microsoft Entra Verified ID API
-      - name: Microsoft Entra ID Governance API
-  - id: microsoft-azure-active-directory-pro
-    name: Professional
-    type: paid
-    description: Production tier for Microsoft Azure Active Directory. Provides higher quotas, priority
-      support, and access to the broader API portfolio. Pricing placeholder; align with the provider's
-      pricing page.
+      - name: Conditional access for workload identities
+      - name: Identity Protection for workloads
+      - name: Access reviews for workload identities
+  - id: microsoft-azure-active-directory-external-id
+    name: Microsoft Entra External ID
+    type: usage-based
+    description: CIAM for customers and partners. Free up to 50,000 monthly active users; usage-priced
+      thereafter (see Azure pricing page).
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
+      - label: Monthly active users (first 50,000)
+        name: external_id_mau_free
         type: quota
-        metric: requests
-        limit: 100000
+        metric: monthly_active_user
+        limit: 50000
         timeFrame: month
         geo: global
-        domains:
-          - https://graph.microsoft.com
-          - https://graph.windows.net
-          - https://login.microsoftonline.com
-          - https://verifiedid.did.msidentity.com
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://graph.microsoft.com
-          - https://graph.windows.net
-          - https://login.microsoftonline.com
-          - https://verifiedid.did.msidentity.com
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+      - label: Monthly active users (above 50,000)
+        name: external_id_mau_paid
         type: metered
-        metric: requests
+        metric: monthly_active_user
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://graph.microsoft.com
-          - https://graph.windows.net
-          - https://login.microsoftonline.com
-          - https://verifiedid.did.msidentity.com
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: 'see https://azure.microsoft.com/en-us/pricing/details/active-directory/external-identities/'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Microsoft Graph API
-      - name: Microsoft Graph Identity and Access API
-      - name: Azure AD Graph API (Deprecated)
-      - name: Azure AD Authentication Library (ADAL)
-      - name: Microsoft Authentication Library (MSAL)
-      - name: Microsoft Identity Platform
-      - name: Microsoft Entra Verified ID API
-      - name: Microsoft Entra ID Governance API
-      - name: Microsoft Entra SCIM Provisioning API
-      - name: Microsoft Entra PowerShell
-  - id: microsoft-azure-active-directory-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Microsoft Azure Active Directory. Includes dedicated capacity,
-      contractual SLAs, security review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://graph.microsoft.com
-          - https://graph.windows.net
-          - https://login.microsoftonline.com
-          - https://verifiedid.did.msidentity.com
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://graph.microsoft.com
-          - https://graph.windows.net
-          - https://login.microsoftonline.com
-          - https://verifiedid.did.msidentity.com
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Microsoft Graph API
-      - name: Microsoft Graph Identity and Access API
-      - name: Azure AD Graph API (Deprecated)
-      - name: Azure AD Authentication Library (ADAL)
-      - name: Microsoft Authentication Library (MSAL)
-      - name: Microsoft Identity Platform
-      - name: Microsoft Entra Verified ID API
-      - name: Microsoft Entra ID Governance API
-      - name: Microsoft Entra SCIM Provisioning API
-      - name: Microsoft Entra PowerShell
+      - name: CIAM for customer-facing apps
+      - name: Custom branding
+      - name: Social and federated identity providers
 maintainers:
-  - name: Microsoft
-    email: azuread@microsoft.com
-    url: https://azure.microsoft.com/en-us/services/active-directory/
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com
-    url: https://apievangelist.com
