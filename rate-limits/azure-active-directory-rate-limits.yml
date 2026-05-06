@@ -4,141 +4,90 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Azure Active Directory
 providerId: microsoft-azure-active-directory
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Authentication
-  - Authorization
   - Identity
-  - Microsoft
   - Microsoft Entra
-  - OAuth
-  - OpenID Connect
-  - SAML
-  - SCIM
-  - Single Sign-On
-  - Zero Trust
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Microsoft Azure Active Directory API surface.
-  Captures per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold
-  values to be replaced with published provider limits.
+description: Microsoft Entra ID enforces tenant-level service quotas on directory objects, group membership,
+  Conditional Access policies, and B2B invitations rather than per-second API rate limits. Microsoft
+  Graph (the primary API surface for Entra) applies its own request-rate throttling at the application
+  / tenant level. Limits documented here cover the Entra service quotas; Graph throttling is enforced
+  per-resource and per-app and is documented separately.
+sources:
+  - https://learn.microsoft.com/en-us/entra/identity/users/directory-service-limits-restrictions
+  - https://learn.microsoft.com/en-us/graph/throttling
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
   retryAfter: Retry-After
-  policy: RateLimit-Policy
+  requestId: request-id
+  clientRequestId: client-request-id
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Microsoft Graph API
-      - Microsoft Graph Identity and Access API
-      - Azure AD Graph API (Deprecated)
-      - Azure AD Authentication Library (ADAL)
-      - Microsoft Authentication Library (MSAL)
-      - Microsoft Identity Platform
-      - Microsoft Entra Verified ID API
-      - Microsoft Entra ID Governance API
-      - Microsoft Entra SCIM Provisioning API
-      - Microsoft Entra PowerShell
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Microsoft Graph API
-      - Microsoft Graph Identity and Access API
-      - Azure AD Graph API (Deprecated)
-      - Azure AD Authentication Library (ADAL)
-      - Microsoft Authentication Library (MSAL)
-      - Microsoft Identity Platform
-      - Microsoft Entra Verified ID API
-      - Microsoft Entra ID Governance API
-      - Microsoft Entra SCIM Provisioning API
-      - Microsoft Entra PowerShell
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: Tenants per user (member or guest)
+    scope: user
+    metric: tenants
+    limit: 500
+    notes: A single user can belong to a maximum of 500 Entra tenants.
+  - name: Directory objects per tenant (no verified domain)
+    scope: tenant
+    metric: objects
+    limit: 50000
+    notes: Default quota; raise via support.
+  - name: Directory objects per tenant (with verified domain)
+    scope: tenant
+    metric: objects
+    limit: 300000
+    notes: Default quota; raise via support.
+  - name: Managed domains per tenant
+    scope: tenant
+    metric: domains
+    limit: 5000
+  - name: Application Proxy transactions per app
+    scope: app
+    metric: requests_per_second
+    limit: 500
+    timeFrame: second
+    notes: 750 TPS aggregate per Entra organization; throttled clients receive 429.
+  - name: Conditional Access policies per tenant
+    scope: tenant
+    metric: policies
+    limit: 240
+  - name: Custom roles per tenant
+    scope: tenant
+    metric: roles
     limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Microsoft Graph API
-      - Microsoft Graph Identity and Access API
-      - Azure AD Graph API (Deprecated)
-      - Azure AD Authentication Library (ADAL)
-      - Microsoft Authentication Library (MSAL)
-      - Microsoft Identity Platform
-      - Microsoft Entra Verified ID API
-      - Microsoft Entra ID Governance API
-      - Microsoft Entra SCIM Provisioning API
-      - Microsoft Entra PowerShell
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Microsoft Graph API
-      - Microsoft Graph Identity and Access API
-      - Azure AD Graph API (Deprecated)
-      - Azure AD Authentication Library (ADAL)
-      - Microsoft Authentication Library (MSAL)
-      - Microsoft Identity Platform
-      - Microsoft Entra Verified ID API
-      - Microsoft Entra ID Governance API
-      - Microsoft Entra SCIM Provisioning API
-      - Microsoft Entra PowerShell
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Microsoft Graph API
-      - Microsoft Graph Identity and Access API
-      - Azure AD Graph API (Deprecated)
-      - Azure AD Authentication Library (ADAL)
-      - Microsoft Authentication Library (MSAL)
-      - Microsoft Identity Platform
-      - Microsoft Entra Verified ID API
-      - Microsoft Entra ID Governance API
-      - Microsoft Entra SCIM Provisioning API
-      - Microsoft Entra PowerShell
+  - name: B2B invitations (paid tenants > 30 days)
+    scope: tenant
+    metric: invitations_per_day
+    limit: -1
+    timeFrame: day
+    notes: Capped only by service quotas; new tenants limited to 200/day.
+  - name: B2B invitations (free tenants > 30 days)
+    scope: tenant
+    metric: invitations_per_day
+    limit: 100
+    timeFrame: day
+  - name: Microsoft Graph request throttling
+    scope: app/tenant
+    metric: varies
+    limit: see https://learn.microsoft.com/en-us/graph/throttling
+    notes: Per-resource limits (e.g., 10,000 req / 10 min for /users). Returns 429 with Retry-After.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Backoff
+    description: Honor Retry-After header on 429 responses; use exponential backoff with jitter.
+  - name: Service quota raise
+    description: Most Entra tenant quotas can be raised via Microsoft Support; some (Conditional Access,
+      built-in) are hard caps.
+  - name: Application Proxy throttling
+    description: Application Proxy transactions are tracked per connector and per organization; clients
+      exceeding 500 TPS per app receive 429.
+  - name: Use Microsoft Graph
+    description: Avoid the deprecated Azure AD Graph; all new integrations should use Microsoft Graph,
+      which has documented throttling guidance.
 maintainers:
-  - name: Microsoft
-    email: azuread@microsoft.com
-    url: https://azure.microsoft.com/en-us/services/active-directory/
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com
-    url: https://apievangelist.com
