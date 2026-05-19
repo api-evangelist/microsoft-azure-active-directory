@@ -1,0 +1,229 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Graph Identity API — Service Principals
+  description: 'Microsoft Graph Identity API — Service Principals. 6 operations. Lead operation: List Service Principals.
+    Self-contained Naftiko capability covering one Microsoft Azure Active Directory business surface.'
+  tags:
+  - Microsoft Azure Active Directory
+  - Service Principals
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_AZURE_ACTIVE_DIRECTORY_API_KEY: MICROSOFT_AZURE_ACTIVE_DIRECTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: microsoft-graph-identity-service-principals
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph Identity API — Service Principals business capability. Self-contained, no shared references.
+    resources:
+    - name: servicePrincipals
+      path: /servicePrincipals
+      operations:
+      - name: listserviceprincipals
+        method: GET
+        description: List Service Principals
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createserviceprincipal
+        method: POST
+        description: Create Service Principal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: servicePrincipals-servicePrincipal-id
+      path: /servicePrincipals/{servicePrincipal-id}
+      operations:
+      - name: getserviceprincipal
+        method: GET
+        description: Get Service Principal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateserviceprincipal
+        method: PATCH
+        description: Update Service Principal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteserviceprincipal
+        method: DELETE
+        description: Delete Service Principal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: servicePrincipals-servicePrincipal-id-appRoleAssignments
+      path: /servicePrincipals/{servicePrincipal-id}/appRoleAssignments
+      operations:
+      - name: listserviceprincipalapproleassignments
+        method: GET
+        description: List App Role Assignments for a Service Principal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_AZURE_ACTIVE_DIRECTORY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: microsoft-graph-identity-service-principals-rest
+    port: 8080
+    description: REST adapter for Microsoft Graph Identity API — Service Principals. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/serviceprincipals
+      name: serviceprincipals
+      description: REST surface for servicePrincipals.
+      operations:
+      - method: GET
+        name: listserviceprincipals
+        description: List Service Principals
+        call: microsoft-graph-identity-service-principals.listserviceprincipals
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createserviceprincipal
+        description: Create Service Principal
+        call: microsoft-graph-identity-service-principals.createserviceprincipal
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/serviceprincipals/{serviceprincipal-id}
+      name: serviceprincipals-serviceprincipal-id
+      description: REST surface for servicePrincipals-servicePrincipal-id.
+      operations:
+      - method: GET
+        name: getserviceprincipal
+        description: Get Service Principal
+        call: microsoft-graph-identity-service-principals.getserviceprincipal
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateserviceprincipal
+        description: Update Service Principal
+        call: microsoft-graph-identity-service-principals.updateserviceprincipal
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteserviceprincipal
+        description: Delete Service Principal
+        call: microsoft-graph-identity-service-principals.deleteserviceprincipal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/serviceprincipals/{serviceprincipal-id}/approleassignments
+      name: serviceprincipals-serviceprincipal-id-approleassignments
+      description: REST surface for servicePrincipals-servicePrincipal-id-appRoleAssignments.
+      operations:
+      - method: GET
+        name: listserviceprincipalapproleassignments
+        description: List App Role Assignments for a Service Principal
+        call: microsoft-graph-identity-service-principals.listserviceprincipalapproleassignments
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: microsoft-graph-identity-service-principals-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Graph Identity API — Service Principals. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-service-principals
+      description: List Service Principals
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-graph-identity-service-principals.listserviceprincipals
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-service-principal
+      description: Create Service Principal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: microsoft-graph-identity-service-principals.createserviceprincipal
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service-principal
+      description: Get Service Principal
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-graph-identity-service-principals.getserviceprincipal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-service-principal
+      description: Update Service Principal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-graph-identity-service-principals.updateserviceprincipal
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-service-principal
+      description: Delete Service Principal
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: microsoft-graph-identity-service-principals.deleteserviceprincipal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-app-role-assignments-service
+      description: List App Role Assignments for a Service Principal
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-graph-identity-service-principals.listserviceprincipalapproleassignments
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,271 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Graph Identity API — Groups
+  description: 'Microsoft Graph Identity API — Groups. 7 operations. Lead operation: List Groups. Self-contained Naftiko capability
+    covering one Microsoft Azure Active Directory business surface.'
+  tags:
+  - Microsoft Azure Active Directory
+  - Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_AZURE_ACTIVE_DIRECTORY_API_KEY: MICROSOFT_AZURE_ACTIVE_DIRECTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: microsoft-graph-identity-groups
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph Identity API — Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: groups
+      path: /groups
+      operations:
+      - name: listgroups
+        method: GET
+        description: List Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: creategroup
+        method: POST
+        description: Create Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: groups-group-id
+      path: /groups/{group-id}
+      operations:
+      - name: getgroup
+        method: GET
+        description: Get Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updategroup
+        method: PATCH
+        description: Update Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletegroup
+        method: DELETE
+        description: Delete Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: groups-group-id-members
+      path: /groups/{group-id}/members
+      operations:
+      - name: listgroupmembers
+        method: GET
+        description: List Group Members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: groups-group-id-members-$ref
+      path: /groups/{group-id}/members/$ref
+      operations:
+      - name: addgroupmember
+        method: POST
+        description: Add Group Member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_AZURE_ACTIVE_DIRECTORY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: microsoft-graph-identity-groups-rest
+    port: 8080
+    description: REST adapter for Microsoft Graph Identity API — Groups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/groups
+      name: groups
+      description: REST surface for groups.
+      operations:
+      - method: GET
+        name: listgroups
+        description: List Groups
+        call: microsoft-graph-identity-groups.listgroups
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: creategroup
+        description: Create Group
+        call: microsoft-graph-identity-groups.creategroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{group-id}
+      name: groups-group-id
+      description: REST surface for groups-group-id.
+      operations:
+      - method: GET
+        name: getgroup
+        description: Get Group
+        call: microsoft-graph-identity-groups.getgroup
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updategroup
+        description: Update Group
+        call: microsoft-graph-identity-groups.updategroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletegroup
+        description: Delete Group
+        call: microsoft-graph-identity-groups.deletegroup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{group-id}/members
+      name: groups-group-id-members
+      description: REST surface for groups-group-id-members.
+      operations:
+      - method: GET
+        name: listgroupmembers
+        description: List Group Members
+        call: microsoft-graph-identity-groups.listgroupmembers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{group-id}/members/ref
+      name: groups-group-id-members-ref
+      description: REST surface for groups-group-id-members-$ref.
+      operations:
+      - method: POST
+        name: addgroupmember
+        description: Add Group Member
+        call: microsoft-graph-identity-groups.addgroupmember
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: microsoft-graph-identity-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Graph Identity API — Groups. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-groups
+      description: List Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-graph-identity-groups.listgroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-group
+      description: Create Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: microsoft-graph-identity-groups.creategroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-group
+      description: Get Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-graph-identity-groups.getgroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-group
+      description: Update Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: microsoft-graph-identity-groups.updategroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-group
+      description: Delete Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: microsoft-graph-identity-groups.deletegroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-group-members
+      description: List Group Members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: microsoft-graph-identity-groups.listgroupmembers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-group-member
+      description: Add Group Member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: microsoft-graph-identity-groups.addgroupmember
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
