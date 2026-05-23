@@ -1,0 +1,74 @@
+{
+  "operationId": "updateApplication",
+  "method": "PATCH",
+  "path": "/applications/{application-id}",
+  "summary": "Update Application",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdateapplicationRequestExample",
+      "example": {
+        "displayName": "example_value",
+        "description": "A sample description.",
+        "signInAudience": "example_value",
+        "identifierUris": [
+          "example_value"
+        ],
+        "web": {
+          "homePageUrl": "https://www.example.com",
+          "logoutUrl": "https://www.example.com",
+          "redirectUris": [
+            {}
+          ],
+          "implicitGrantSettings": {
+            "enableAccessTokenIssuance": true,
+            "enableIdTokenIssuance": true
+          }
+        },
+        "spa": {
+          "redirectUris": [
+            {}
+          ]
+        },
+        "publicClient": {
+          "redirectUris": [
+            {}
+          ]
+        },
+        "api": {
+          "acceptMappedClaims": "example_value",
+          "knownClientApplications": [
+            {}
+          ],
+          "oauth2PermissionScopes": [
+            {}
+          ],
+          "preAuthorizedApplications": [
+            {}
+          ],
+          "requestedAccessTokenVersion": 1
+        },
+        "appRoles": [
+          {
+            "allowedMemberTypes": {},
+            "description": "A sample description.",
+            "displayName": "example_value",
+            "id": "abc123",
+            "isEnabled": true,
+            "value": "example_value"
+          }
+        ],
+        "requiredResourceAccess": [
+          {
+            "resourceAppId": "500123",
+            "resourceAccess": {}
+          }
+        ],
+        "tags": [
+          "example_value"
+        ]
+      }
+    }
+  ],
+  "responseExamples": []
+}

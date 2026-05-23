@@ -1,0 +1,64 @@
+{
+  "operationId": "createGroup",
+  "method": "POST",
+  "path": "/groups",
+  "summary": "Create Group",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreategroupRequestExample",
+      "example": {
+        "displayName": "example_value",
+        "description": "A sample description.",
+        "groupTypes": [
+          "example_value"
+        ],
+        "mailEnabled": true,
+        "mailNickname": "example_value",
+        "securityEnabled": true,
+        "visibility": "Public",
+        "isAssignableToRole": true,
+        "members@odata.bind": [
+          "https://www.example.com"
+        ],
+        "owners@odata.bind": [
+          "https://www.example.com"
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Creategroup201Example",
+      "example": {
+        "classification": "example_value",
+        "createdDateTime": "2026-01-15T10:30:00Z",
+        "description": "A sample description.",
+        "displayName": "example_value",
+        "expirationDateTime": "2026-01-15T10:30:00Z",
+        "groupTypes": [
+          "example_value"
+        ],
+        "isAssignableToRole": "example_value",
+        "mail": "example_value",
+        "mailEnabled": true,
+        "mailNickname": "example_value",
+        "membershipRule": "example_value",
+        "membershipRuleProcessingState": "example_value",
+        "onPremisesDomainName": "example_value",
+        "onPremisesLastSyncDateTime": "2026-01-15T10:30:00Z",
+        "onPremisesSyncEnabled": "example_value",
+        "preferredLanguage": "example_value",
+        "proxyAddresses": [
+          "example_value"
+        ],
+        "renewedDateTime": "2026-01-15T10:30:00Z",
+        "securityEnabled": true,
+        "securityIdentifier": "example_value",
+        "visibility": "Public"
+      }
+    }
+  ]
+}

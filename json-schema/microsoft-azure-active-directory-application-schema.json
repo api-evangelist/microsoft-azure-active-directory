@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Application",
+  "title": "Application",
+  "type": "object",
+  "description": "Represents an application registration in Azure AD. An application object is the global definition of an application, specifying how tokens are issued, the resources the application needs to access, and the actions it can perform.",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/DirectoryObject"
+    }
+  ],
+  "properties": {
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier assigned by Azure AD when the app is registered. Also known as the client ID.",
+      "readOnly": true,
+      "example": "500123"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name for the application.",
+      "example": "example_value"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A free text field to describe the application.",
+      "example": "A sample description."
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the application was registered.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "identifierUris": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "URIs that identify the application within its Azure AD tenant. Also known as App ID URIs.",
+      "example": []
+    },
+    "keyCredentials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/KeyCredential"
+      },
+      "description": "The collection of key credentials (certificates) associated with the application.",
+      "example": []
+    },
+    "passwordCredentials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PasswordCredential"
+      },
+      "description": "The collection of password credentials (client secrets) associated with the application.",
+      "example": []
+    },
+    "api": {
+      "$ref": "#/components/schemas/ApiApplication"
+    },
+    "appRoles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AppRole"
+      },
+      "description": "The collection of roles defined for the application.",
+      "example": []
+    },
+    "requiredResourceAccess": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RequiredResourceAccess"
+      },
+      "description": "Specifies the resources that the application needs access to.",
+      "example": []
+    },
+    "signInAudience": {
+      "type": "string",
+      "description": "Specifies the Microsoft accounts supported for the current application.",
+      "enum": [
+        "AzureADMyOrg",
+        "AzureADMultipleOrgs",
+        "AzureADandPersonalMicrosoftAccount",
+        "PersonalMicrosoftAccount"
+      ],
+      "example": "AzureADMyOrg"
+    },
+    "spa": {
+      "$ref": "#/components/schemas/SpaApplication"
+    },
+    "web": {
+      "$ref": "#/components/schemas/WebApplication"
+    },
+    "publicClient": {
+      "$ref": "#/components/schemas/PublicClientApplication"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom strings that can be used to categorize the application.",
+      "example": []
+    },
+    "publisherDomain": {
+      "type": "string",
+      "description": "The verified publisher domain for the application.",
+      "readOnly": true,
+      "example": "example_value"
+    }
+  }
+}

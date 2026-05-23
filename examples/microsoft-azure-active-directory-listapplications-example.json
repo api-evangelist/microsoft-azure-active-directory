@@ -1,0 +1,47 @@
+{
+  "operationId": "listApplications",
+  "method": "GET",
+  "path": "/applications",
+  "summary": "List Applications",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listapplications200Example",
+      "example": {
+        "@odata.context": "example_value",
+        "@odata.nextLink": "https://www.example.com",
+        "@odata.count": 10,
+        "value": [
+          {
+            "appId": "500123",
+            "displayName": "example_value",
+            "description": "A sample description.",
+            "createdDateTime": "2026-01-15T10:30:00Z",
+            "identifierUris": [
+              {}
+            ],
+            "keyCredentials": [
+              {}
+            ],
+            "passwordCredentials": [
+              {}
+            ],
+            "appRoles": [
+              {}
+            ],
+            "requiredResourceAccess": [
+              {}
+            ],
+            "signInAudience": "AzureADMyOrg",
+            "tags": [
+              {}
+            ],
+            "publisherDomain": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

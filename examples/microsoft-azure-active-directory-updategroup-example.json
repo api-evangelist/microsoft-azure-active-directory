@@ -1,0 +1,23 @@
+{
+  "operationId": "updateGroup",
+  "method": "PATCH",
+  "path": "/groups/{group-id}",
+  "summary": "Update Group",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdategroupRequestExample",
+      "example": {
+        "displayName": "example_value",
+        "description": "A sample description.",
+        "mailNickname": "example_value",
+        "visibility": "Public",
+        "membershipRule": "example_value",
+        "membershipRuleProcessingState": "On",
+        "preferredLanguage": "example_value",
+        "classification": "example_value"
+      }
+    }
+  ],
+  "responseExamples": []
+}

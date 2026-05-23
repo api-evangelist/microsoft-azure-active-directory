@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupUpdate",
+  "title": "GroupUpdate",
+  "type": "object",
+  "description": "Properties that can be updated on an existing group.",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "mailNickname": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "Public",
+        "Private",
+        "HiddenMembership"
+      ],
+      "example": "Public"
+    },
+    "membershipRule": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "membershipRuleProcessingState": {
+      "type": "string",
+      "enum": [
+        "On",
+        "Paused"
+      ],
+      "example": "On"
+    },
+    "preferredLanguage": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "classification": {
+      "type": "string",
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ServicePrincipalCreate",
+  "title": "ServicePrincipalCreate",
+  "type": "object",
+  "description": "Properties required when creating a new service principal.",
+  "required": [
+    "appId"
+  ],
+  "properties": {
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The appId of the application to create a service principal for.",
+      "example": "500123"
+    },
+    "displayName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "accountEnabled": {
+      "type": "boolean",
+      "example": true
+    },
+    "appRoleAssignmentRequired": {
+      "type": "boolean",
+      "example": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    },
+    "notificationEmailAddresses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": "user@example.com"
+    }
+  }
+}

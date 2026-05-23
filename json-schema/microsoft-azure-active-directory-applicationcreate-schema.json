@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationCreate",
+  "title": "ApplicationCreate",
+  "type": "object",
+  "description": "Properties required when creating a new application registration.",
+  "required": [
+    "displayName"
+  ],
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "The display name for the application.",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "signInAudience": {
+      "type": "string",
+      "enum": [
+        "AzureADMyOrg",
+        "AzureADMultipleOrgs",
+        "AzureADandPersonalMicrosoftAccount",
+        "PersonalMicrosoftAccount"
+      ],
+      "example": "AzureADMyOrg"
+    },
+    "identifierUris": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    },
+    "web": {
+      "$ref": "#/components/schemas/WebApplication"
+    },
+    "spa": {
+      "$ref": "#/components/schemas/SpaApplication"
+    },
+    "publicClient": {
+      "$ref": "#/components/schemas/PublicClientApplication"
+    },
+    "api": {
+      "$ref": "#/components/schemas/ApiApplication"
+    },
+    "appRoles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AppRole"
+      },
+      "example": []
+    },
+    "requiredResourceAccess": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RequiredResourceAccess"
+      },
+      "example": []
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "operationId": "getServicePrincipal",
+  "method": "GET",
+  "path": "/servicePrincipals/{servicePrincipal-id}",
+  "summary": "Get Service Principal",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getserviceprincipal200Example",
+      "example": {
+        "accountEnabled": true,
+        "appDescription": "example_value",
+        "appDisplayName": "example_value",
+        "appId": "500123",
+        "appOwnerOrganizationId": "500123",
+        "appRoleAssignmentRequired": true,
+        "appRoles": [
+          {
+            "allowedMemberTypes": {},
+            "description": "A sample description.",
+            "displayName": "example_value",
+            "id": "abc123",
+            "isEnabled": true,
+            "value": "example_value"
+          }
+        ],
+        "displayName": "example_value",
+        "homepage": "https://www.example.com",
+        "keyCredentials": [
+          {
+            "customKeyIdentifier": "example_value",
+            "displayName": "example_value",
+            "endDateTime": "2026-01-15T10:30:00Z",
+            "key": "example_value",
+            "keyId": "500123",
+            "startDateTime": "2026-01-15T10:30:00Z",
+            "type": "example_value",
+            "usage": "Sign"
+          }
+        ],
+        "loginUrl": "https://www.example.com",
+        "logoutUrl": "https://www.example.com",
+        "notificationEmailAddresses": [
+          "example_value"
+        ],
+        "oauth2PermissionScopes": [
+          {
+            "adminConsentDescription": "example_value",
+            "adminConsentDisplayName": "example_value",
+            "id": "abc123",
+            "isEnabled": true,
+            "type": "User",
+            "userConsentDescription": "example_value",
+            "userConsentDisplayName": "example_value",
+            "value": "example_value"
+          }
+        ],
+        "passwordCredentials": [
+          {
+            "customKeyIdentifier": "example_value",
+            "displayName": "example_value",
+            "endDateTime": "2026-01-15T10:30:00Z",
+            "hint": "example_value",
+            "keyId": "500123",
+            "secretText": "example_value",
+            "startDateTime": "2026-01-15T10:30:00Z"
+          }
+        ],
+        "replyUrls": [
+          "https://www.example.com"
+        ],
+        "servicePrincipalNames": [
+          "example_value"
+        ],
+        "servicePrincipalType": "example_value",
+        "signInAudience": "example_value",
+        "tags": [
+          "example_value"
+        ],
+        "tokenEncryptionKeyId": "500123"
+      }
+    }
+  ]
+}

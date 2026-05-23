@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppRole",
+  "title": "AppRole",
+  "type": "object",
+  "description": "Represents an application role that can be assigned to users, groups, or service principals.",
+  "properties": {
+    "allowedMemberTypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "User",
+          "Application"
+        ]
+      },
+      "description": "Specifies whether this app role can be assigned to users and groups or to applications.",
+      "example": []
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "displayName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "isEnabled": {
+      "type": "boolean",
+      "example": true
+    },
+    "value": {
+      "type": "string",
+      "description": "The value to include in the roles claim in access tokens.",
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Group",
+  "title": "Group",
+  "type": "object",
+  "description": "Represents an Azure AD group. Groups are collections of principals with shared access to resources. Microsoft Graph supports several types of groups: Microsoft 365 groups, security groups, and mail-enabled security groups.",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/DirectoryObject"
+    }
+  ],
+  "properties": {
+    "classification": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Classification for the group (e.g., low, medium, high business impact).",
+      "example": "example_value"
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of when the group was created.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "An optional description for the group.",
+      "example": "A sample description."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name for the group. Required on creation.",
+      "example": "example_value"
+    },
+    "expirationDateTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Timestamp of when the group is set to expire.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "groupTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specifies the group type. Include Unified for Microsoft 365 groups. Include DynamicMembership for dynamic groups.",
+      "example": []
+    },
+    "isAssignableToRole": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Indicates whether this group can be assigned to an Azure AD role. Can only be set at creation time.",
+      "example": "example_value"
+    },
+    "mail": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "email",
+      "description": "The SMTP address for the group.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "mailEnabled": {
+      "type": "boolean",
+      "description": "Specifies whether the group is mail-enabled. Required on creation.",
+      "example": true
+    },
+    "mailNickname": {
+      "type": "string",
+      "description": "The mail alias for the group, unique for Microsoft 365 groups. Required on creation.",
+      "example": "example_value"
+    },
+    "membershipRule": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The rule that determines members for a dynamic group.",
+      "example": "example_value"
+    },
+    "membershipRuleProcessingState": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Indicates whether the dynamic membership processing is on or paused. On or Paused.",
+      "example": "example_value"
+    },
+    "onPremisesDomainName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "onPremisesLastSyncDateTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "onPremisesSyncEnabled": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "preferredLanguage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The preferred language for a Microsoft 365 group in ISO 639-1 format.",
+      "example": "example_value"
+    },
+    "proxyAddresses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "readOnly": true,
+      "example": []
+    },
+    "renewedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of when the group was last renewed.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "securityEnabled": {
+      "type": "boolean",
+      "description": "Specifies whether the group is a security group. Required on creation.",
+      "example": true
+    },
+    "securityIdentifier": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Security identifier (SID) of the group.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "visibility": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Specifies the group join policy and group content visibility. Public, Private, or HiddenMembership.",
+      "enum": [
+        "Public",
+        "Private",
+        "HiddenMembership"
+      ],
+      "example": "Public"
+    }
+  }
+}

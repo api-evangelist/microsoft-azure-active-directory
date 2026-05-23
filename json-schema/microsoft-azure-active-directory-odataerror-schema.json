@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ODataError",
+  "title": "ODataError",
+  "type": "object",
+  "description": "OData error response from Microsoft Graph.",
+  "properties": {
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "innerError": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "request-id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "client-request-id": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

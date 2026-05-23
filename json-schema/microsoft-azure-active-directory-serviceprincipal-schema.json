@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ServicePrincipal",
+  "title": "ServicePrincipal",
+  "type": "object",
+  "description": "Represents an instance of an application in a directory. A service principal is the local representation or application instance of a global application object in a single tenant. It defines what the app can do in the tenant, who can access it, and what resources the app can access.",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/DirectoryObject"
+    }
+  ],
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean",
+      "description": "True if the service principal account is enabled.",
+      "example": true
+    },
+    "appDescription": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Description copied from the associated application.",
+      "example": "example_value"
+    },
+    "appDisplayName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The display name exposed by the associated application.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier for the associated application (its appId property). Required on creation.",
+      "example": "500123"
+    },
+    "appOwnerOrganizationId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid",
+      "description": "Contains the tenant ID where the application is registered.",
+      "readOnly": true,
+      "example": "500123"
+    },
+    "appRoleAssignmentRequired": {
+      "type": "boolean",
+      "description": "Specifies whether users or other service principals need to be granted an app role assignment before accessing.",
+      "example": true
+    },
+    "appRoles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AppRole"
+      },
+      "description": "Roles exposed by the associated application.",
+      "readOnly": true,
+      "example": []
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name for the service principal.",
+      "example": "example_value"
+    },
+    "homepage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "Home page or landing page of the application.",
+      "example": "https://www.example.com"
+    },
+    "keyCredentials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/KeyCredential"
+      },
+      "example": []
+    },
+    "loginUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "URL for the authentication provider to redirect users to for sign-in.",
+      "example": "https://www.example.com"
+    },
+    "logoutUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "example": "https://www.example.com"
+    },
+    "notificationEmailAddresses": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "email"
+      },
+      "description": "Email addresses where Azure AD sends notifications when the active certificate is near expiration.",
+      "example": "user@example.com"
+    },
+    "oauth2PermissionScopes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PermissionScope"
+      },
+      "description": "The delegated permissions exposed by the application.",
+      "readOnly": true,
+      "example": []
+    },
+    "passwordCredentials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PasswordCredential"
+      },
+      "example": []
+    },
+    "replyUrls": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "The URLs that user tokens are sent to for sign-in, or the redirect URIs for authorization code and access token responses.",
+      "example": "https://www.example.com"
+    },
+    "servicePrincipalNames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Contains the list of identifierUris and the appId from the associated application.",
+      "example": []
+    },
+    "servicePrincipalType": {
+      "type": "string",
+      "description": "Identifies whether the service principal represents an Application, ManagedIdentity, Legacy, or SocialIdp.",
+      "example": "example_value"
+    },
+    "signInAudience": {
+      "type": "string",
+      "description": "The audience that can sign in.",
+      "example": "example_value"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom strings used to categorize the service principal. The WindowsAzureActiveDirectoryIntegratedApp tag is used by the portal.",
+      "example": []
+    },
+    "tokenEncryptionKeyId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid",
+      "example": "500123"
+    }
+  }
+}

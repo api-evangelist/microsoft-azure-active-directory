@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationUpdate",
+  "title": "ApplicationUpdate",
+  "type": "object",
+  "description": "Properties that can be updated on an existing application.",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "signInAudience": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "identifierUris": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    },
+    "web": {
+      "$ref": "#/components/schemas/WebApplication"
+    },
+    "spa": {
+      "$ref": "#/components/schemas/SpaApplication"
+    },
+    "publicClient": {
+      "$ref": "#/components/schemas/PublicClientApplication"
+    },
+    "api": {
+      "$ref": "#/components/schemas/ApiApplication"
+    },
+    "appRoles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AppRole"
+      },
+      "example": []
+    },
+    "requiredResourceAccess": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RequiredResourceAccess"
+      },
+      "example": []
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    }
+  }
+}

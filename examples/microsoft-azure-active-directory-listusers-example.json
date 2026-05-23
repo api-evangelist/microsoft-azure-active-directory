@@ -1,0 +1,68 @@
+{
+  "operationId": "listUsers",
+  "method": "GET",
+  "path": "/users",
+  "summary": "List Users",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listusers200Example",
+      "example": {
+        "@odata.context": "example_value",
+        "@odata.nextLink": "https://www.example.com",
+        "@odata.count": 10,
+        "value": [
+          {
+            "accountEnabled": true,
+            "assignedLicenses": [
+              {}
+            ],
+            "assignedPlans": [
+              {}
+            ],
+            "businessPhones": [
+              {}
+            ],
+            "city": "example_value",
+            "companyName": "example_value",
+            "country": "example_value",
+            "createdDateTime": "2026-01-15T10:30:00Z",
+            "department": "example_value",
+            "displayName": "example_value",
+            "employeeId": "500123",
+            "employeeType": "example_value",
+            "givenName": "example_value",
+            "jobTitle": "example_value",
+            "mail": "example_value",
+            "mailNickname": "example_value",
+            "mobilePhone": "example_value",
+            "officeLocation": "example_value",
+            "onPremisesDistinguishedName": "example_value",
+            "onPremisesDomainName": "example_value",
+            "onPremisesImmutableId": "500123",
+            "onPremisesLastSyncDateTime": "2026-01-15T10:30:00Z",
+            "onPremisesSyncEnabled": "example_value",
+            "otherMails": [
+              {}
+            ],
+            "passwordPolicies": "example_value",
+            "postalCode": "example_value",
+            "preferredLanguage": "example_value",
+            "proxyAddresses": [
+              {}
+            ],
+            "signInSessionsValidFromDateTime": "2026-01-15T10:30:00Z",
+            "state": "example_value",
+            "streetAddress": "example_value",
+            "surname": "example_value",
+            "usageLocation": "example_value",
+            "userPrincipalName": "example_value",
+            "userType": "Member"
+          }
+        ]
+      }
+    }
+  ]
+}

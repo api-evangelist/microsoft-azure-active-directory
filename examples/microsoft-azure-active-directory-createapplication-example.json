@@ -1,0 +1,167 @@
+{
+  "operationId": "createApplication",
+  "method": "POST",
+  "path": "/applications",
+  "summary": "Create Application",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateapplicationRequestExample",
+      "example": {
+        "displayName": "example_value",
+        "description": "A sample description.",
+        "signInAudience": "AzureADMyOrg",
+        "identifierUris": [
+          "example_value"
+        ],
+        "web": {
+          "homePageUrl": "https://www.example.com",
+          "logoutUrl": "https://www.example.com",
+          "redirectUris": [
+            {}
+          ],
+          "implicitGrantSettings": {
+            "enableAccessTokenIssuance": true,
+            "enableIdTokenIssuance": true
+          }
+        },
+        "spa": {
+          "redirectUris": [
+            {}
+          ]
+        },
+        "publicClient": {
+          "redirectUris": [
+            {}
+          ]
+        },
+        "api": {
+          "acceptMappedClaims": "example_value",
+          "knownClientApplications": [
+            {}
+          ],
+          "oauth2PermissionScopes": [
+            {}
+          ],
+          "preAuthorizedApplications": [
+            {}
+          ],
+          "requestedAccessTokenVersion": 1
+        },
+        "appRoles": [
+          {
+            "allowedMemberTypes": {},
+            "description": "A sample description.",
+            "displayName": "example_value",
+            "id": "abc123",
+            "isEnabled": true,
+            "value": "example_value"
+          }
+        ],
+        "requiredResourceAccess": [
+          {
+            "resourceAppId": "500123",
+            "resourceAccess": {}
+          }
+        ],
+        "tags": [
+          "example_value"
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createapplication201Example",
+      "example": {
+        "appId": "500123",
+        "displayName": "example_value",
+        "description": "A sample description.",
+        "createdDateTime": "2026-01-15T10:30:00Z",
+        "identifierUris": [
+          "https://www.example.com"
+        ],
+        "keyCredentials": [
+          {
+            "customKeyIdentifier": "example_value",
+            "displayName": "example_value",
+            "endDateTime": "2026-01-15T10:30:00Z",
+            "key": "example_value",
+            "keyId": "500123",
+            "startDateTime": "2026-01-15T10:30:00Z",
+            "type": "example_value",
+            "usage": "Sign"
+          }
+        ],
+        "passwordCredentials": [
+          {
+            "customKeyIdentifier": "example_value",
+            "displayName": "example_value",
+            "endDateTime": "2026-01-15T10:30:00Z",
+            "hint": "example_value",
+            "keyId": "500123",
+            "secretText": "example_value",
+            "startDateTime": "2026-01-15T10:30:00Z"
+          }
+        ],
+        "api": {
+          "acceptMappedClaims": "example_value",
+          "knownClientApplications": [
+            {}
+          ],
+          "oauth2PermissionScopes": [
+            {}
+          ],
+          "preAuthorizedApplications": [
+            {}
+          ],
+          "requestedAccessTokenVersion": 1
+        },
+        "appRoles": [
+          {
+            "allowedMemberTypes": {},
+            "description": "A sample description.",
+            "displayName": "example_value",
+            "id": "abc123",
+            "isEnabled": true,
+            "value": "example_value"
+          }
+        ],
+        "requiredResourceAccess": [
+          {
+            "resourceAppId": "500123",
+            "resourceAccess": {}
+          }
+        ],
+        "signInAudience": "AzureADMyOrg",
+        "spa": {
+          "redirectUris": [
+            {}
+          ]
+        },
+        "web": {
+          "homePageUrl": "https://www.example.com",
+          "logoutUrl": "https://www.example.com",
+          "redirectUris": [
+            {}
+          ],
+          "implicitGrantSettings": {
+            "enableAccessTokenIssuance": true,
+            "enableIdTokenIssuance": true
+          }
+        },
+        "publicClient": {
+          "redirectUris": [
+            {}
+          ]
+        },
+        "tags": [
+          "example_value"
+        ],
+        "publisherDomain": "example_value"
+      }
+    }
+  ]
+}

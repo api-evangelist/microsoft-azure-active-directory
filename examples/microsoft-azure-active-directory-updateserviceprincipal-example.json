@@ -1,0 +1,30 @@
+{
+  "operationId": "updateServicePrincipal",
+  "method": "PATCH",
+  "path": "/servicePrincipals/{servicePrincipal-id}",
+  "summary": "Update Service Principal",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdateserviceprincipalRequestExample",
+      "example": {
+        "accountEnabled": true,
+        "appRoleAssignmentRequired": true,
+        "displayName": "example_value",
+        "homepage": "example_value",
+        "loginUrl": "https://www.example.com",
+        "logoutUrl": "https://www.example.com",
+        "notificationEmailAddresses": [
+          "example_value"
+        ],
+        "replyUrls": [
+          "example_value"
+        ],
+        "tags": [
+          "example_value"
+        ]
+      }
+    }
+  ],
+  "responseExamples": []
+}

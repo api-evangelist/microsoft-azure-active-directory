@@ -1,0 +1,96 @@
+{
+  "operationId": "createUser",
+  "method": "POST",
+  "path": "/users",
+  "summary": "Create User",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateuserRequestExample",
+      "example": {
+        "accountEnabled": true,
+        "displayName": "example_value",
+        "mailNickname": "example_value",
+        "userPrincipalName": "example_value",
+        "passwordProfile": {
+          "forceChangePasswordNextSignIn": true,
+          "forceChangePasswordNextSignInWithMfa": true,
+          "password": "example_value"
+        },
+        "givenName": "example_value",
+        "surname": "example_value",
+        "jobTitle": "example_value",
+        "department": "example_value",
+        "usageLocation": "example_value",
+        "city": "example_value",
+        "country": "example_value",
+        "mobilePhone": "example_value",
+        "businessPhones": [
+          "example_value"
+        ]
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createuser201Example",
+      "example": {
+        "accountEnabled": true,
+        "assignedLicenses": [
+          {
+            "disabledPlans": {},
+            "skuId": "500123"
+          }
+        ],
+        "assignedPlans": [
+          {
+            "assignedDateTime": "2026-01-15T10:30:00Z",
+            "capabilityStatus": "Enabled",
+            "service": "example_value",
+            "servicePlanId": "500123"
+          }
+        ],
+        "businessPhones": [
+          "example_value"
+        ],
+        "city": "example_value",
+        "companyName": "example_value",
+        "country": "example_value",
+        "createdDateTime": "2026-01-15T10:30:00Z",
+        "department": "example_value",
+        "displayName": "example_value",
+        "employeeId": "500123",
+        "employeeType": "example_value",
+        "givenName": "example_value",
+        "jobTitle": "example_value",
+        "mail": "example_value",
+        "mailNickname": "example_value",
+        "mobilePhone": "example_value",
+        "officeLocation": "example_value",
+        "onPremisesDistinguishedName": "example_value",
+        "onPremisesDomainName": "example_value",
+        "onPremisesImmutableId": "500123",
+        "onPremisesLastSyncDateTime": "2026-01-15T10:30:00Z",
+        "onPremisesSyncEnabled": "example_value",
+        "otherMails": [
+          "example_value"
+        ],
+        "passwordPolicies": "example_value",
+        "postalCode": "example_value",
+        "preferredLanguage": "example_value",
+        "proxyAddresses": [
+          "example_value"
+        ],
+        "signInSessionsValidFromDateTime": "2026-01-15T10:30:00Z",
+        "state": "example_value",
+        "streetAddress": "example_value",
+        "surname": "example_value",
+        "usageLocation": "example_value",
+        "userPrincipalName": "example_value",
+        "userType": "Member"
+      }
+    }
+  ]
+}

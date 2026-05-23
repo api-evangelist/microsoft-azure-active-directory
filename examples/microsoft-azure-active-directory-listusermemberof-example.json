@@ -1,0 +1,24 @@
+{
+  "operationId": "listUserMemberOf",
+  "method": "GET",
+  "path": "/users/{user-id}/memberOf",
+  "summary": "List User Group Memberships",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listusermemberof200Example",
+      "example": {
+        "@odata.context": "example_value",
+        "value": [
+          {
+            "@odata.type": "example_value",
+            "id": "abc123",
+            "deletedDateTime": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

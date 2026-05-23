@@ -1,0 +1,29 @@
+{
+  "operationId": "listServicePrincipalAppRoleAssignments",
+  "method": "GET",
+  "path": "/servicePrincipals/{servicePrincipal-id}/appRoleAssignments",
+  "summary": "List App Role Assignments for a Service Principal",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listserviceprincipalapproleassignments200Example",
+      "example": {
+        "@odata.context": "example_value",
+        "value": [
+          {
+            "id": "abc123",
+            "appRoleId": "500123",
+            "createdDateTime": "2026-01-15T10:30:00Z",
+            "principalDisplayName": "example_value",
+            "principalId": "500123",
+            "principalType": "example_value",
+            "resourceDisplayName": "example_value",
+            "resourceId": "500123"
+          }
+        ]
+      }
+    }
+  ]
+}

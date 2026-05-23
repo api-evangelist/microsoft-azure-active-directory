@@ -1,0 +1,16 @@
+{
+  "operationId": "addGroupMember",
+  "method": "POST",
+  "path": "/groups/{group-id}/members/$ref",
+  "summary": "Add Group Member",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "AddgroupmemberRequestExample",
+      "example": {
+        "@odata.id": "https://www.example.com"
+      }
+    }
+  ],
+  "responseExamples": []
+}

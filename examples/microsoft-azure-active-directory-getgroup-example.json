@@ -1,0 +1,41 @@
+{
+  "operationId": "getGroup",
+  "method": "GET",
+  "path": "/groups/{group-id}",
+  "summary": "Get Group",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getgroup200Example",
+      "example": {
+        "classification": "example_value",
+        "createdDateTime": "2026-01-15T10:30:00Z",
+        "description": "A sample description.",
+        "displayName": "example_value",
+        "expirationDateTime": "2026-01-15T10:30:00Z",
+        "groupTypes": [
+          "example_value"
+        ],
+        "isAssignableToRole": "example_value",
+        "mail": "example_value",
+        "mailEnabled": true,
+        "mailNickname": "example_value",
+        "membershipRule": "example_value",
+        "membershipRuleProcessingState": "example_value",
+        "onPremisesDomainName": "example_value",
+        "onPremisesLastSyncDateTime": "2026-01-15T10:30:00Z",
+        "onPremisesSyncEnabled": "example_value",
+        "preferredLanguage": "example_value",
+        "proxyAddresses": [
+          "example_value"
+        ],
+        "renewedDateTime": "2026-01-15T10:30:00Z",
+        "securityEnabled": true,
+        "securityIdentifier": "example_value",
+        "visibility": "Public"
+      }
+    }
+  ]
+}

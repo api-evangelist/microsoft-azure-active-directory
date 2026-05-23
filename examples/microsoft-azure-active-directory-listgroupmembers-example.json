@@ -1,0 +1,24 @@
+{
+  "operationId": "listGroupMembers",
+  "method": "GET",
+  "path": "/groups/{group-id}/members",
+  "summary": "List Group Members",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listgroupmembers200Example",
+      "example": {
+        "@odata.context": "example_value",
+        "value": [
+          {
+            "@odata.type": "example_value",
+            "id": "abc123",
+            "deletedDateTime": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

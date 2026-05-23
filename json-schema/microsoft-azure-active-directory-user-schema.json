@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/User",
+  "title": "User",
+  "type": "object",
+  "description": "Represents an Azure AD user account. Inherits from directoryObject. Contains identity, profile, organizational, and authentication properties.",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/DirectoryObject"
+    }
+  ],
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean",
+      "description": "True if the account is enabled; otherwise, false.",
+      "example": true
+    },
+    "assignedLicenses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AssignedLicense"
+      },
+      "description": "The licenses that are assigned to the user.",
+      "readOnly": true,
+      "example": []
+    },
+    "assignedPlans": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AssignedPlan"
+      },
+      "description": "The plans that are assigned to the user.",
+      "readOnly": true,
+      "example": []
+    },
+    "businessPhones": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The telephone numbers for the user.",
+      "example": []
+    },
+    "city": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The city where the user is located.",
+      "example": "example_value"
+    },
+    "companyName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The company name associated with the user.",
+      "example": "example_value"
+    },
+    "country": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The country or region where the user is located.",
+      "example": "example_value"
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the user was created.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "department": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The department in which the user works.",
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The name displayed in the address book for the user. Required on creation.",
+      "example": "example_value"
+    },
+    "employeeId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The employee identifier assigned to the user by the organization.",
+      "example": "500123"
+    },
+    "employeeType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Captures the enterprise worker type. For example, Employee, Contractor, Consultant, or Vendor.",
+      "example": "example_value"
+    },
+    "givenName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The given name (first name) of the user.",
+      "example": "example_value"
+    },
+    "jobTitle": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The user's job title.",
+      "example": "example_value"
+    },
+    "mail": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "email",
+      "description": "The SMTP address for the user.",
+      "example": "example_value"
+    },
+    "mailNickname": {
+      "type": "string",
+      "description": "The mail alias for the user. Required on creation.",
+      "example": "example_value"
+    },
+    "mobilePhone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The primary cellular telephone number for the user.",
+      "example": "example_value"
+    },
+    "officeLocation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The office location in the user's place of business.",
+      "example": "example_value"
+    },
+    "onPremisesDistinguishedName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The on-premises Active Directory distinguished name.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "onPremisesDomainName": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The on-premises domain name.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "onPremisesImmutableId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Used to associate an on-premises Active Directory user account to the Azure AD user object.",
+      "example": "500123"
+    },
+    "onPremisesLastSyncDateTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "The last time at which the object was synced with the on-premises directory.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "onPremisesSyncEnabled": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "True if this user object is currently being synced from an on-premises Active Directory.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "otherMails": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "email"
+      },
+      "description": "Additional email addresses for the user.",
+      "example": []
+    },
+    "passwordPolicies": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Specifies password policies for the user. One of DisableStrongPassword and DisablePasswordExpiration, or both.",
+      "example": "example_value"
+    },
+    "postalCode": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The postal code for the user's postal address.",
+      "example": "example_value"
+    },
+    "preferredLanguage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The preferred language for the user in ISO 639-1 code format. Example: en-US.",
+      "example": "example_value"
+    },
+    "proxyAddresses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The proxy addresses for the user. Example: SMTP:user@contoso.com, smtp:alias@contoso.com.",
+      "readOnly": true,
+      "example": []
+    },
+    "signInSessionsValidFromDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Any refresh tokens or session tokens issued before this time are invalid.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The state or province in the user's address.",
+      "example": "example_value"
+    },
+    "streetAddress": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The street address of the user's place of business.",
+      "example": "example_value"
+    },
+    "surname": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The user's surname (family name or last name).",
+      "example": "example_value"
+    },
+    "usageLocation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A two-letter country code (ISO 3166). Required for users who will be assigned licenses.",
+      "example": "example_value"
+    },
+    "userPrincipalName": {
+      "type": "string",
+      "description": "The user principal name (UPN) of the user. Required on creation. Format: alias@domain.",
+      "example": "example_value"
+    },
+    "userType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A string value that classifies the user. Typically Member or Guest.",
+      "enum": [
+        "Member",
+        "Guest"
+      ],
+      "example": "Member"
+    }
+  }
+}

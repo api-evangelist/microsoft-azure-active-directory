@@ -1,0 +1,60 @@
+{
+  "operationId": "listServicePrincipals",
+  "method": "GET",
+  "path": "/servicePrincipals",
+  "summary": "List Service Principals",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listserviceprincipals200Example",
+      "example": {
+        "@odata.context": "example_value",
+        "@odata.nextLink": "https://www.example.com",
+        "@odata.count": 10,
+        "value": [
+          {
+            "accountEnabled": true,
+            "appDescription": "example_value",
+            "appDisplayName": "example_value",
+            "appId": "500123",
+            "appOwnerOrganizationId": "500123",
+            "appRoleAssignmentRequired": true,
+            "appRoles": [
+              {}
+            ],
+            "displayName": "example_value",
+            "homepage": "https://www.example.com",
+            "keyCredentials": [
+              {}
+            ],
+            "loginUrl": "https://www.example.com",
+            "logoutUrl": "https://www.example.com",
+            "notificationEmailAddresses": [
+              {}
+            ],
+            "oauth2PermissionScopes": [
+              {}
+            ],
+            "passwordCredentials": [
+              {}
+            ],
+            "replyUrls": [
+              {}
+            ],
+            "servicePrincipalNames": [
+              {}
+            ],
+            "servicePrincipalType": "example_value",
+            "signInAudience": "example_value",
+            "tags": [
+              {}
+            ],
+            "tokenEncryptionKeyId": "500123"
+          }
+        ]
+      }
+    }
+  ]
+}

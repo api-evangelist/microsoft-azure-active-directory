@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SpaApplication",
+  "title": "SpaApplication",
+  "type": "object",
+  "description": "Configuration for a single-page application.",
+  "properties": {
+    "redirectUris": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "Redirect URIs for the single-page application using authorization code flow with PKCE.",
+      "example": []
+    }
+  }
+}

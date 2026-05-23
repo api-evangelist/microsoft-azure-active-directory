@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebApplication",
+  "title": "WebApplication",
+  "type": "object",
+  "description": "Configuration for a web application.",
+  "properties": {
+    "homePageUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "Home page or landing page of the application.",
+      "example": "https://www.example.com"
+    },
+    "logoutUrl": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "URL used by the authorization service to sign out a user.",
+      "example": "https://www.example.com"
+    },
+    "redirectUris": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "URIs to which Azure AD will redirect after authentication.",
+      "example": []
+    },
+    "implicitGrantSettings": {
+      "type": "object",
+      "properties": {
+        "enableAccessTokenIssuance": {
+          "type": "boolean",
+          "description": "Specifies whether web application can request an access token using OAuth 2.0 implicit flow."
+        },
+        "enableIdTokenIssuance": {
+          "type": "boolean",
+          "description": "Specifies whether web application can request an ID token using OAuth 2.0 implicit flow."
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

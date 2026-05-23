@@ -1,0 +1,407 @@
+{
+  "provider": "Microsoft Azure Active Directory",
+  "providerId": "microsoft-azure-active-directory",
+  "kind": "json-structure",
+  "description": "Structural overview of the Microsoft Azure Active Directory API surface; extracted from openapi/.",
+  "schemaCount": 27,
+  "operationCount": 24,
+  "schemas": [
+    {
+      "name": "DirectoryObject",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "User",
+      "type": "object",
+      "propertyCount": 35,
+      "required": []
+    },
+    {
+      "name": "UserCreate",
+      "type": "object",
+      "propertyCount": 14,
+      "required": [
+        "accountEnabled",
+        "displayName",
+        "mailNickname",
+        "userPrincipalName",
+        "passwordProfile"
+      ]
+    },
+    {
+      "name": "UserUpdate",
+      "type": "object",
+      "propertyCount": 21,
+      "required": []
+    },
+    {
+      "name": "PasswordProfile",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "password"
+      ]
+    },
+    {
+      "name": "AssignedLicense",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AssignedPlan",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Group",
+      "type": "object",
+      "propertyCount": 21,
+      "required": []
+    },
+    {
+      "name": "GroupCreate",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "displayName",
+        "mailEnabled",
+        "mailNickname",
+        "securityEnabled"
+      ]
+    },
+    {
+      "name": "GroupUpdate",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "Application",
+      "type": "object",
+      "propertyCount": 16,
+      "required": []
+    },
+    {
+      "name": "ApplicationCreate",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "displayName"
+      ]
+    },
+    {
+      "name": "ApplicationUpdate",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "WebApplication",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SpaApplication",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "PublicClientApplication",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ApiApplication",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "PermissionScope",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "AppRole",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "RequiredResourceAccess",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "KeyCredential",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "PasswordCredential",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ServicePrincipal",
+      "type": "object",
+      "propertyCount": 21,
+      "required": []
+    },
+    {
+      "name": "ServicePrincipalCreate",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "appId"
+      ]
+    },
+    {
+      "name": "ServicePrincipalUpdate",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "AppRoleAssignment",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "ODataError",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/users",
+      "operationId": "listUsers",
+      "summary": "List Users",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/users",
+      "operationId": "createUser",
+      "summary": "Create User",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users/{user-id}",
+      "operationId": "getUser",
+      "summary": "Get User",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/users/{user-id}",
+      "operationId": "deleteUser",
+      "summary": "Delete User",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/users/{user-id}",
+      "operationId": "updateUser",
+      "summary": "Update User",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users/{user-id}/memberOf",
+      "operationId": "listUserMemberOf",
+      "summary": "List User Group Memberships",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/groups",
+      "operationId": "listGroups",
+      "summary": "List Groups",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/groups",
+      "operationId": "createGroup",
+      "summary": "Create Group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/groups/{group-id}",
+      "operationId": "getGroup",
+      "summary": "Get Group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/groups/{group-id}",
+      "operationId": "deleteGroup",
+      "summary": "Delete Group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/groups/{group-id}",
+      "operationId": "updateGroup",
+      "summary": "Update Group",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/groups/{group-id}/members",
+      "operationId": "listGroupMembers",
+      "summary": "List Group Members",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/groups/{group-id}/members/$ref",
+      "operationId": "addGroupMember",
+      "summary": "Add Group Member",
+      "tags": [
+        "Groups"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/applications",
+      "operationId": "listApplications",
+      "summary": "List Applications",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/applications",
+      "operationId": "createApplication",
+      "summary": "Create Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/applications/{application-id}",
+      "operationId": "getApplication",
+      "summary": "Get Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/applications/{application-id}",
+      "operationId": "deleteApplication",
+      "summary": "Delete Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/applications/{application-id}",
+      "operationId": "updateApplication",
+      "summary": "Update Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/servicePrincipals",
+      "operationId": "listServicePrincipals",
+      "summary": "List Service Principals",
+      "tags": [
+        "Service Principals"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/servicePrincipals",
+      "operationId": "createServicePrincipal",
+      "summary": "Create Service Principal",
+      "tags": [
+        "Service Principals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/servicePrincipals/{servicePrincipal-id}",
+      "operationId": "getServicePrincipal",
+      "summary": "Get Service Principal",
+      "tags": [
+        "Service Principals"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/servicePrincipals/{servicePrincipal-id}",
+      "operationId": "deleteServicePrincipal",
+      "summary": "Delete Service Principal",
+      "tags": [
+        "Service Principals"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/servicePrincipals/{servicePrincipal-id}",
+      "operationId": "updateServicePrincipal",
+      "summary": "Update Service Principal",
+      "tags": [
+        "Service Principals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/servicePrincipals/{servicePrincipal-id}/appRoleAssignments",
+      "operationId": "listServicePrincipalAppRoleAssignments",
+      "summary": "List App Role Assignments for a Service Principal",
+      "tags": [
+        "Service Principals"
+      ]
+    }
+  ]
+}

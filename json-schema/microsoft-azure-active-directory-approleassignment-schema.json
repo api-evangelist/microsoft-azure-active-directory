@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppRoleAssignment",
+  "title": "AppRoleAssignment",
+  "type": "object",
+  "description": "Represents an app role assigned to a user, group, or service principal.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "readOnly": true,
+      "example": "abc123"
+    },
+    "appRoleId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The identifier of the app role. Set to the default app role ID of 00000000-0000-0000-0000-000000000000 if not specified.",
+      "example": "500123"
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "principalDisplayName": {
+      "type": "string",
+      "description": "The display name of the principal (user, group, or service principal).",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "principalId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the principal being granted the role.",
+      "example": "500123"
+    },
+    "principalType": {
+      "type": "string",
+      "description": "The type of the assigned principal (User, Group, or ServicePrincipal).",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "resourceDisplayName": {
+      "type": "string",
+      "description": "The display name of the resource application.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "resourceId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the resource service principal.",
+      "example": "500123"
+    }
+  }
+}

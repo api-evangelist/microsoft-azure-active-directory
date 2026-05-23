@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PublicClientApplication",
+  "title": "PublicClientApplication",
+  "type": "object",
+  "description": "Configuration for a public client (mobile/desktop) application.",
+  "properties": {
+    "redirectUris": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "Redirect URIs for the public client application.",
+      "example": []
+    }
+  }
+}

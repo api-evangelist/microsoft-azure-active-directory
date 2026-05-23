@@ -1,0 +1,18 @@
+name: Microsoft Azure Active Directory Domain Vocabulary
+provider: Microsoft Azure Active Directory
+providerId: microsoft-azure-active-directory
+description: Tag-derived vocabulary for the Microsoft Azure Active Directory API surface; sourced from openapi/ tags.
+terms:
+- term: Users
+  description: Manage user accounts in Azure Active Directory. Users are the core identity objects representing people in
+    an organization. Each user has a profile with attributes such as display name, email, job title, and authentication credentials.
+- term: Groups
+  description: Manage groups in Azure Active Directory. Groups can be security groups, Microsoft 365 groups, or mail-enabled
+    security groups. They provide shared access to resources for a collection of users and other directory objects.
+- term: Applications
+  description: Manage application registrations in Azure Active Directory. An application object is the global representation
+    of an application across all tenants, defining the app identity, access configuration, and capabilities.
+- term: Service Principals
+  description: Manage service principals in Azure Active Directory. A service principal is the local representation of an
+    application in a specific tenant. It defines what the application can do in the tenant, who can access it, and what resources
+    it can access.

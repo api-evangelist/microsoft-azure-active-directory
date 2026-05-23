@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ServicePrincipalUpdate",
+  "title": "ServicePrincipalUpdate",
+  "type": "object",
+  "description": "Properties that can be updated on an existing service principal.",
+  "properties": {
+    "accountEnabled": {
+      "type": "boolean",
+      "example": true
+    },
+    "appRoleAssignmentRequired": {
+      "type": "boolean",
+      "example": true
+    },
+    "displayName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "homepage": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "loginUrl": {
+      "type": "string",
+      "example": "https://www.example.com"
+    },
+    "logoutUrl": {
+      "type": "string",
+      "example": "https://www.example.com"
+    },
+    "notificationEmailAddresses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": "user@example.com"
+    },
+    "replyUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": "https://www.example.com"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    }
+  }
+}
