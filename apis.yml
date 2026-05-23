@@ -293,6 +293,9 @@ common:
 - type: Blog
   url: https://devblogs.microsoft.com/identity/
   title: Identity Developer Blog
+- url: https://devblogs.microsoft.com/identity/feed/
+  type: BlogRSS
+  description: Discovered RSS/Atom feed for https://devblogs.microsoft.com/identity/
 - type: ReleaseNotes
   url: https://learn.microsoft.com/en-us/entra/fundamentals/whats-new
 - type: Documentation

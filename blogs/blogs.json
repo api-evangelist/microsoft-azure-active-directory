@@ -1,20 +1,6 @@
 {
   "repo": "microsoft-azure-active-directory",
-  "feeds": [
-    {
-      "source": "https://techcommunity.microsoft.com/t5/azure-active-directory/bg-p/Azure-Active-Directory",
-      "feed_url": "",
-      "title": "",
-      "saved": 0,
-      "error": "no_feed"
-    },
-    {
-      "source": "https://devblogs.microsoft.com/identity/",
-      "feed_url": "https://devblogs.microsoft.com/identity/feed/",
-      "title": "Microsoft Entra Identity Platform",
-      "saved": 6
-    }
-  ],
+  "feeds": [],
   "post_count": 16,
   "fetched": "2026-05-17T20:48:52Z"
 }
