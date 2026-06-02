@@ -1,6 +1,28 @@
 {
-  "repo": "microsoft-azure-active-directory",
-  "feeds": [],
+  "repo": "azure-active-directory",
+  "feeds": [
+    {
+      "source": "https://azure.microsoft.com/en-us/support/",
+      "feed_url": "https://azure.microsoft.com/en-us/support/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://developer.microsoft.com/en-us/graph",
+      "feed_url": "https://developer.microsoft.com/en-us/graph",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://devblogs.microsoft.com/identity/feed/",
+      "feed_url": "https://devblogs.microsoft.com/identity/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    }
+  ],
   "post_count": 16,
-  "fetched": "2026-05-17T20:48:52Z"
+  "fetched": "2026-06-01T23:35:02Z"
 }
