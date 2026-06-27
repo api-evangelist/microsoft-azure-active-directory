@@ -41,7 +41,7 @@ apis:
         url: openapi/microsoft-graph-identity-api.yml
       - type: Authentication
         url: https://docs.microsoft.com/en-us/graph/auth/
-      - type: SDK
+      - type: SDKs
         url: https://docs.microsoft.com/en-us/graph/sdks/sdks-overview
       - type: Pricing
         url: https://azure.microsoft.com/en-us/pricing/details/active-directory/
