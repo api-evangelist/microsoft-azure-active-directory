@@ -1,10 +1,10 @@
 [
   {
-    "repo": "azure-active-directory",
-    "captured_at": "2026-06-20T172833",
+    "repo": "microsoft-azure-active-directory",
+    "captured_at": "2026-06-20T185351",
     "source_url": "https://portal.azure.com/",
     "source_type": "Portal",
-    "file": "azure-active-directory-2026-06-20T172833.png",
-    "bytes": 232235
+    "file": "microsoft-azure-active-directory-2026-06-20T185351.png",
+    "bytes": 232226
   }
 ]
