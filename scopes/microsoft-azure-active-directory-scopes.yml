@@ -1,0 +1,88 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/microsoft-graph-identity-api.yml
+schemes:
+- name: oauth2
+  source: openapi/microsoft-graph-identity-api.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+  description: Microsoft identity platform OAuth 2.0 authorization. Supports authorization code
+    flow, client credentials flow, and on-behalf-of flow. All API calls require a valid access
+    token obtained from the Microsoft identity platform.
+scopes:
+- scope: Application.Read.All
+  description: Read all applications
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: Application.ReadWrite.All
+  description: Read and write all applications
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: Directory.Read.All
+  description: Read directory data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: Directory.ReadWrite.All
+  description: Read and write directory data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: Group.Read.All
+  description: Read all groups
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: Group.ReadWrite.All
+  description: Read and write all groups
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: GroupMember.Read.All
+  description: Read group memberships
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: GroupMember.ReadWrite.All
+  description: Read and write group memberships
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: User.Read
+  description: Sign in and read user profile
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: User.Read.All
+  description: Read all users' full profiles
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: User.ReadWrite.All
+  description: Read and write all users' full profiles
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
+- scope: https://graph.microsoft.com/.default
+  description: Default scope for client credentials
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/microsoft-graph-identity-api.yml
