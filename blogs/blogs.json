@@ -1,5 +1,5 @@
 {
-  "repo": "azure-active-directory",
+  "repo": "microsoft-azure-active-directory",
   "feeds": [
     {
       "source": "https://devblogs.microsoft.com/identity/feed/",
@@ -31,5 +31,5 @@
     }
   ],
   "post_count": 16,
-  "fetched": "2026-06-27T12:03:07Z"
+  "fetched": "2026-07-11T11:50:51Z"
 }
