@@ -1,0 +1,1019 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Graph Identity Applications Service Principals API
+  description: The Microsoft Graph Identity API provides a unified programmability model for managing Azure Active Directory (Microsoft Entra ID) resources including users, groups, applications, and service principals. This specification covers the core identity and access management endpoints available through the Microsoft Graph v1.0 REST API.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph
+    email: graphdev@microsoft.com
+  license:
+    name: Microsoft API License
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  x-api-id: microsoft-graph-identity
+  x-audience: external-public
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 production endpoint
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta endpoint (preview features)
+security:
+- oauth2:
+  - User.Read
+  - User.ReadWrite.All
+  - Directory.Read.All
+  - Directory.ReadWrite.All
+tags:
+- name: Service Principals
+  description: Manage service principals in Azure Active Directory. A service principal is the local representation of an application in a specific tenant. It defines what the application can do in the tenant, who can access it, and what resources it can access.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/serviceprincipal?view=graph-rest-1.0
+paths:
+  /servicePrincipals:
+    get:
+      operationId: listServicePrincipals
+      summary: List Service Principals
+      description: Retrieve a list of service principal objects in the organization. Returns up to 100 objects by default.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/search'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/consistencyLevel'
+      responses:
+        '200':
+          description: A collection of service principal objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  '@odata.nextLink':
+                    type: string
+                    format: uri
+                  '@odata.count':
+                    type: integer
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServicePrincipal'
+              examples:
+                Listserviceprincipals200Example:
+                  summary: Default listServicePrincipals 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.nextLink': https://www.example.com
+                    '@odata.count': 10
+                    value:
+                    - accountEnabled: true
+                      appDescription: example_value
+                      appDisplayName: example_value
+                      appId: '500123'
+                      appOwnerOrganizationId: '500123'
+                      appRoleAssignmentRequired: true
+                      appRoles:
+                      - {}
+                      displayName: example_value
+                      homepage: https://www.example.com
+                      keyCredentials:
+                      - {}
+                      loginUrl: https://www.example.com
+                      logoutUrl: https://www.example.com
+                      notificationEmailAddresses:
+                      - {}
+                      oauth2PermissionScopes:
+                      - {}
+                      passwordCredentials:
+                      - {}
+                      replyUrls:
+                      - {}
+                      servicePrincipalNames:
+                      - {}
+                      servicePrincipalType: example_value
+                      signInAudience: example_value
+                      tags:
+                      - {}
+                      tokenEncryptionKeyId: '500123'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - Application.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-list?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createServicePrincipal
+      summary: Create Service Principal
+      description: Create a new service principal object. The appId property in the request body is required and must reference an existing application registration.
+      tags:
+      - Service Principals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServicePrincipalCreate'
+            examples:
+              CreateserviceprincipalRequestExample:
+                summary: Default createServicePrincipal request
+                x-microcks-default: true
+                value:
+                  appId: '500123'
+                  displayName: example_value
+                  accountEnabled: true
+                  appRoleAssignmentRequired: true
+                  tags:
+                  - example_value
+                  notificationEmailAddresses:
+                  - example_value
+      responses:
+        '201':
+          description: The created service principal object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicePrincipal'
+              examples:
+                Createserviceprincipal201Example:
+                  summary: Default createServicePrincipal 201 response
+                  x-microcks-default: true
+                  value:
+                    accountEnabled: true
+                    appDescription: example_value
+                    appDisplayName: example_value
+                    appId: '500123'
+                    appOwnerOrganizationId: '500123'
+                    appRoleAssignmentRequired: true
+                    appRoles:
+                    - allowedMemberTypes: {}
+                      description: A sample description.
+                      displayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      value: example_value
+                    displayName: example_value
+                    homepage: https://www.example.com
+                    keyCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      key: example_value
+                      keyId: '500123'
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      type: example_value
+                      usage: Sign
+                    loginUrl: https://www.example.com
+                    logoutUrl: https://www.example.com
+                    notificationEmailAddresses:
+                    - example_value
+                    oauth2PermissionScopes:
+                    - adminConsentDescription: example_value
+                      adminConsentDisplayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      type: User
+                      userConsentDescription: example_value
+                      userConsentDisplayName: example_value
+                      value: example_value
+                    passwordCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      hint: example_value
+                      keyId: '500123'
+                      secretText: example_value
+                      startDateTime: '2026-01-15T10:30:00Z'
+                    replyUrls:
+                    - https://www.example.com
+                    servicePrincipalNames:
+                    - example_value
+                    servicePrincipalType: example_value
+                    signInAudience: example_value
+                    tags:
+                    - example_value
+                    tokenEncryptionKeyId: '500123'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-post-serviceprincipals?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicePrincipals/{servicePrincipal-id}:
+    get:
+      operationId: getServicePrincipal
+      summary: Get Service Principal
+      description: Retrieve the properties and relationships of a service principal object.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/servicePrincipalId'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: The requested service principal object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicePrincipal'
+              examples:
+                Getserviceprincipal200Example:
+                  summary: Default getServicePrincipal 200 response
+                  x-microcks-default: true
+                  value:
+                    accountEnabled: true
+                    appDescription: example_value
+                    appDisplayName: example_value
+                    appId: '500123'
+                    appOwnerOrganizationId: '500123'
+                    appRoleAssignmentRequired: true
+                    appRoles:
+                    - allowedMemberTypes: {}
+                      description: A sample description.
+                      displayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      value: example_value
+                    displayName: example_value
+                    homepage: https://www.example.com
+                    keyCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      key: example_value
+                      keyId: '500123'
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      type: example_value
+                      usage: Sign
+                    loginUrl: https://www.example.com
+                    logoutUrl: https://www.example.com
+                    notificationEmailAddresses:
+                    - example_value
+                    oauth2PermissionScopes:
+                    - adminConsentDescription: example_value
+                      adminConsentDisplayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      type: User
+                      userConsentDescription: example_value
+                      userConsentDisplayName: example_value
+                      value: example_value
+                    passwordCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      hint: example_value
+                      keyId: '500123'
+                      secretText: example_value
+                      startDateTime: '2026-01-15T10:30:00Z'
+                    replyUrls:
+                    - https://www.example.com
+                    servicePrincipalNames:
+                    - example_value
+                    servicePrincipalType: example_value
+                    signInAudience: example_value
+                    tags:
+                    - example_value
+                    tokenEncryptionKeyId: '500123'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-get?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateServicePrincipal
+      summary: Update Service Principal
+      description: Update the properties of a service principal object.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/servicePrincipalId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServicePrincipalUpdate'
+            examples:
+              UpdateserviceprincipalRequestExample:
+                summary: Default updateServicePrincipal request
+                x-microcks-default: true
+                value:
+                  accountEnabled: true
+                  appRoleAssignmentRequired: true
+                  displayName: example_value
+                  homepage: example_value
+                  loginUrl: https://www.example.com
+                  logoutUrl: https://www.example.com
+                  notificationEmailAddresses:
+                  - example_value
+                  replyUrls:
+                  - example_value
+                  tags:
+                  - example_value
+      responses:
+        '204':
+          description: Service principal updated successfully. No content returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-update?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteServicePrincipal
+      summary: Delete Service Principal
+      description: Delete a service principal object.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/servicePrincipalId'
+      responses:
+        '204':
+          description: Service principal deleted successfully. No content returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-delete?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicePrincipals/{servicePrincipal-id}/appRoleAssignments:
+    get:
+      operationId: listServicePrincipalAppRoleAssignments
+      summary: List App Role Assignments for a Service Principal
+      description: Retrieve a list of app role assignments granted to a service principal. App role assignments granted to service principals are also known as application permissions.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/servicePrincipalId'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: A collection of app role assignment objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppRoleAssignment'
+              examples:
+                Listserviceprincipalapproleassignments200Example:
+                  summary: Default listServicePrincipalAppRoleAssignments 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    value:
+                    - id: abc123
+                      appRoleId: '500123'
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      principalDisplayName: example_value
+                      principalId: '500123'
+                      principalType: example_value
+                      resourceDisplayName: example_value
+                      resourceId: '500123'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-list-approleassignments?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The client has been throttled.
+      headers:
+        Retry-After:
+          description: Number of seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    NotFound:
+      description: Not found. The specified resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. Authentication is required or the provided token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+  schemas:
+    KeyCredential:
+      type: object
+      description: Contains a key credential (certificate) associated with an application or service principal.
+      properties:
+        customKeyIdentifier:
+          type:
+          - string
+          - 'null'
+          description: Custom key identifier.
+          example: example_value
+        displayName:
+          type:
+          - string
+          - 'null'
+          example: example_value
+        endDateTime:
+          type: string
+          format: date-time
+          description: The date and time at which the credential expires.
+          example: '2026-01-15T10:30:00Z'
+        key:
+          type:
+          - string
+          - 'null'
+          format: byte
+          description: The certificate raw data in byte array converted to Base64 string.
+          example: example_value
+        keyId:
+          type: string
+          format: uuid
+          example: '500123'
+        startDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        type:
+          type: string
+          description: The type of key credential (e.g., AsymmetricX509Cert).
+          example: example_value
+        usage:
+          type: string
+          description: Describes the purpose of the key. Valid values are Verify and Sign.
+          enum:
+          - Sign
+          - Verify
+          example: Sign
+    DirectoryObject:
+      type: object
+      description: Represents an Azure Active Directory directory object. This is the base type for most directory resources.
+      properties:
+        '@odata.type':
+          type: string
+          description: The OData type of the directory object.
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the object. Globally unique across all directory objects.
+          readOnly: true
+          example: abc123
+        deletedDateTime:
+          type: string
+          format: date-time
+          description: Date and time when this object was deleted.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+    PasswordCredential:
+      type: object
+      description: Contains a password credential (client secret) associated with an application or service principal.
+      properties:
+        customKeyIdentifier:
+          type:
+          - string
+          - 'null'
+          format: byte
+          example: example_value
+        displayName:
+          type:
+          - string
+          - 'null'
+          example: example_value
+        endDateTime:
+          type: string
+          format: date-time
+          description: The date and time at which the password expires.
+          example: '2026-01-15T10:30:00Z'
+        hint:
+          type:
+          - string
+          - 'null'
+          description: Contains the first three characters of the password.
+          readOnly: true
+          example: example_value
+        keyId:
+          type: string
+          format: uuid
+          example: '500123'
+        secretText:
+          type:
+          - string
+          - 'null'
+          description: The client secret value. Only returned on creation; not retrievable afterward.
+          readOnly: true
+          example: example_value
+        startDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    AppRole:
+      type: object
+      description: Represents an application role that can be assigned to users, groups, or service principals.
+      properties:
+        allowedMemberTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - User
+            - Application
+          description: Specifies whether this app role can be assigned to users and groups or to applications.
+          example: []
+        description:
+          type: string
+          example: A sample description.
+        displayName:
+          type: string
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        isEnabled:
+          type: boolean
+          example: true
+        value:
+          type: string
+          description: The value to include in the roles claim in access tokens.
+          example: example_value
+    PermissionScope:
+      type: object
+      description: Represents a delegated permission (OAuth2 scope).
+      properties:
+        adminConsentDescription:
+          type: string
+          example: example_value
+        adminConsentDisplayName:
+          type: string
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        isEnabled:
+          type: boolean
+          example: true
+        type:
+          type: string
+          enum:
+          - User
+          - Admin
+          example: User
+        userConsentDescription:
+          type: string
+          example: example_value
+        userConsentDisplayName:
+          type: string
+          example: example_value
+        value:
+          type: string
+          description: The value to include in the scp claim in access tokens.
+          example: example_value
+    AppRoleAssignment:
+      type: object
+      description: Represents an app role assigned to a user, group, or service principal.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: abc123
+        appRoleId:
+          type: string
+          format: uuid
+          description: The identifier of the app role. Set to the default app role ID of 00000000-0000-0000-0000-000000000000 if not specified.
+          example: '500123'
+        createdDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        principalDisplayName:
+          type: string
+          description: The display name of the principal (user, group, or service principal).
+          readOnly: true
+          example: example_value
+        principalId:
+          type: string
+          format: uuid
+          description: The unique identifier of the principal being granted the role.
+          example: '500123'
+        principalType:
+          type: string
+          description: The type of the assigned principal (User, Group, or ServicePrincipal).
+          readOnly: true
+          example: example_value
+        resourceDisplayName:
+          type: string
+          description: The display name of the resource application.
+          readOnly: true
+          example: example_value
+        resourceId:
+          type: string
+          format: uuid
+          description: The unique identifier of the resource service principal.
+          example: '500123'
+    ODataError:
+      type: object
+      description: OData error response from Microsoft Graph.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code.
+            message:
+              type: string
+              description: Error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                  format: uuid
+                client-request-id:
+                  type: string
+                  format: uuid
+          example: example_value
+    ServicePrincipalCreate:
+      type: object
+      description: Properties required when creating a new service principal.
+      required:
+      - appId
+      properties:
+        appId:
+          type: string
+          format: uuid
+          description: The appId of the application to create a service principal for.
+          example: '500123'
+        displayName:
+          type: string
+          example: example_value
+        accountEnabled:
+          type: boolean
+          example: true
+        appRoleAssignmentRequired:
+          type: boolean
+          example: true
+        tags:
+          type: array
+          items:
+            type: string
+          example: []
+        notificationEmailAddresses:
+          type: array
+          items:
+            type: string
+          example: user@example.com
+    ServicePrincipal:
+      type: object
+      description: Represents an instance of an application in a directory. A service principal is the local representation or application instance of a global application object in a single tenant. It defines what the app can do in the tenant, who can access it, and what resources the app can access.
+      allOf:
+      - $ref: '#/components/schemas/DirectoryObject'
+      properties:
+        accountEnabled:
+          type: boolean
+          description: True if the service principal account is enabled.
+          example: true
+        appDescription:
+          type:
+          - string
+          - 'null'
+          description: Description copied from the associated application.
+          example: example_value
+        appDisplayName:
+          type:
+          - string
+          - 'null'
+          description: The display name exposed by the associated application.
+          readOnly: true
+          example: example_value
+        appId:
+          type: string
+          format: uuid
+          description: The unique identifier for the associated application (its appId property). Required on creation.
+          example: '500123'
+        appOwnerOrganizationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Contains the tenant ID where the application is registered.
+          readOnly: true
+          example: '500123'
+        appRoleAssignmentRequired:
+          type: boolean
+          description: Specifies whether users or other service principals need to be granted an app role assignment before accessing.
+          example: true
+        appRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppRole'
+          description: Roles exposed by the associated application.
+          readOnly: true
+          example: []
+        displayName:
+          type: string
+          description: The display name for the service principal.
+          example: example_value
+        homepage:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Home page or landing page of the application.
+          example: https://www.example.com
+        keyCredentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyCredential'
+          example: []
+        loginUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL for the authentication provider to redirect users to for sign-in.
+          example: https://www.example.com
+        logoutUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: https://www.example.com
+        notificationEmailAddresses:
+          type: array
+          items:
+            type: string
+            format: email
+          description: Email addresses where Azure AD sends notifications when the active certificate is near expiration.
+          example: user@example.com
+        oauth2PermissionScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionScope'
+          description: The delegated permissions exposed by the application.
+          readOnly: true
+          example: []
+        passwordCredentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasswordCredential'
+          example: []
+        replyUrls:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: The URLs that user tokens are sent to for sign-in, or the redirect URIs for authorization code and access token responses.
+          example: https://www.example.com
+        servicePrincipalNames:
+          type: array
+          items:
+            type: string
+          description: Contains the list of identifierUris and the appId from the associated application.
+          example: []
+        servicePrincipalType:
+          type: string
+          description: Identifies whether the service principal represents an Application, ManagedIdentity, Legacy, or SocialIdp.
+          example: example_value
+        signInAudience:
+          type: string
+          description: The audience that can sign in.
+          example: example_value
+        tags:
+          type: array
+          items:
+            type: string
+          description: Custom strings used to categorize the service principal. The WindowsAzureActiveDirectoryIntegratedApp tag is used by the portal.
+          example: []
+        tokenEncryptionKeyId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: '500123'
+    ServicePrincipalUpdate:
+      type: object
+      description: Properties that can be updated on an existing service principal.
+      properties:
+        accountEnabled:
+          type: boolean
+          example: true
+        appRoleAssignmentRequired:
+          type: boolean
+          example: true
+        displayName:
+          type: string
+          example: example_value
+        homepage:
+          type: string
+          example: example_value
+        loginUrl:
+          type: string
+          example: https://www.example.com
+        logoutUrl:
+          type: string
+          example: https://www.example.com
+        notificationEmailAddresses:
+          type: array
+          items:
+            type: string
+          example: user@example.com
+        replyUrls:
+          type: array
+          items:
+            type: string
+          example: https://www.example.com
+        tags:
+          type: array
+          items:
+            type: string
+          example: []
+  parameters:
+    select:
+      name: $select
+      in: query
+      description: 'Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail.'
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 999
+    filter:
+      name: $filter
+      in: query
+      description: Filters results using OData filter expressions. Supports eq, ne, not, in, startsWith, endsWith, and lambda operators.
+      schema:
+        type: string
+    count:
+      name: $count
+      in: query
+      description: Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header.
+      schema:
+        type: boolean
+    search:
+      name: $search
+      in: query
+      description: Search items by search phrases. Requires ConsistencyLevel header set to eventual. Supports searching displayName and description.
+      schema:
+        type: string
+    consistencyLevel:
+      name: ConsistencyLevel
+      in: header
+      description: Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.
+      schema:
+        type: string
+        enum:
+        - eventual
+    skip:
+      name: $skip
+      in: query
+      description: Skips the specified number of items in the result set.
+      schema:
+        type: integer
+        minimum: 0
+    servicePrincipalId:
+      name: servicePrincipal-id
+      in: path
+      required: true
+      description: The unique identifier (object ID) of the service principal.
+      schema:
+        type: string
+        format: uuid
+    expand:
+      name: $expand
+      in: query
+      description: Expands related entities inline. For example, expand members of a group or manager of a user.
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      description: 'Specifies the order of items returned. Use asc for ascending or desc for descending. Example: displayName asc.'
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Microsoft identity platform OAuth 2.0 authorization. Supports authorization code flow, client credentials flow, and on-behalf-of flow. All API calls require a valid access token obtained from the Microsoft identity platform.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            User.Read: Sign in and read user profile
+            User.Read.All: Read all users' full profiles
+            User.ReadWrite.All: Read and write all users' full profiles
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
+            GroupMember.Read.All: Read group memberships
+            GroupMember.ReadWrite.All: Read and write group memberships
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications
+            Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            https://graph.microsoft.com/.default: Default scope for client credentials
