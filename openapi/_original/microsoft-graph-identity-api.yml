@@ -1,0 +1,3518 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Graph Identity API
+  description: >-
+    The Microsoft Graph Identity API provides a unified programmability model
+    for managing Azure Active Directory (Microsoft Entra ID) resources including
+    users, groups, applications, and service principals. This specification
+    covers the core identity and access management endpoints available through
+    the Microsoft Graph v1.0 REST API.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph
+    email: graphdev@microsoft.com
+  license:
+    name: Microsoft API License
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  x-api-id: microsoft-graph-identity
+  x-audience: external-public
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 production endpoint
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta endpoint (preview features)
+security:
+- oauth2:
+  - User.Read
+  - User.ReadWrite.All
+  - Directory.Read.All
+  - Directory.ReadWrite.All
+tags:
+- name: Users
+  description: >-
+    Manage user accounts in Azure Active Directory. Users are the core
+    identity objects representing people in an organization. Each user has
+    a profile with attributes such as display name, email, job title, and
+    authentication credentials.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0
+- name: Groups
+  description: >-
+    Manage groups in Azure Active Directory. Groups can be security groups,
+    Microsoft 365 groups, or mail-enabled security groups. They provide
+    shared access to resources for a collection of users and other
+    directory objects.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/group?view=graph-rest-1.0
+- name: Applications
+  description: >-
+    Manage application registrations in Azure Active Directory. An
+    application object is the global representation of an application
+    across all tenants, defining the app identity, access configuration,
+    and capabilities.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/application?view=graph-rest-1.0
+- name: Service Principals
+  description: >-
+    Manage service principals in Azure Active Directory. A service principal
+    is the local representation of an application in a specific tenant.
+    It defines what the application can do in the tenant, who can access it,
+    and what resources it can access.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/serviceprincipal?view=graph-rest-1.0
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: >-
+        Retrieve a list of user objects. By default, only a limited set of
+        properties are returned. To return additional properties, use the
+        $select OData query parameter. Returns up to 100 objects by default
+        and up to 999 with $top.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/search'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/consistencyLevel'
+      responses:
+        '200':
+          description: A collection of user objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                    description: OData context URL.
+                  '@odata.nextLink':
+                    type: string
+                    format: uri
+                    description: URL to retrieve the next page of results.
+                  '@odata.count':
+                    type: integer
+                    description: Total count of matching resources.
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+              examples:
+                Listusers200Example:
+                  summary: Default listUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.nextLink': https://www.example.com
+                    '@odata.count': 10
+                    value:
+                    - accountEnabled: true
+                      assignedLicenses:
+                      - {}
+                      assignedPlans:
+                      - {}
+                      businessPhones:
+                      - {}
+                      city: example_value
+                      companyName: example_value
+                      country: example_value
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      department: example_value
+                      displayName: example_value
+                      employeeId: '500123'
+                      employeeType: example_value
+                      givenName: example_value
+                      jobTitle: example_value
+                      mail: example_value
+                      mailNickname: example_value
+                      mobilePhone: example_value
+                      officeLocation: example_value
+                      onPremisesDistinguishedName: example_value
+                      onPremisesDomainName: example_value
+                      onPremisesImmutableId: '500123'
+                      onPremisesLastSyncDateTime: '2026-01-15T10:30:00Z'
+                      onPremisesSyncEnabled: example_value
+                      otherMails:
+                      - {}
+                      passwordPolicies: example_value
+                      postalCode: example_value
+                      preferredLanguage: example_value
+                      proxyAddresses:
+                      - {}
+                      signInSessionsValidFromDateTime: '2026-01-15T10:30:00Z'
+                      state: example_value
+                      streetAddress: example_value
+                      surname: example_value
+                      usageLocation: example_value
+                      userPrincipalName: example_value
+                      userType: Member
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      security:
+      - oauth2:
+        - User.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createUser
+      summary: Create User
+      description: >-
+        Create a new user object. The request body must contain the required
+        properties for the user including displayName, accountEnabled,
+        mailNickname, passwordProfile, and userPrincipalName.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+            examples:
+              CreateuserRequestExample:
+                summary: Default createUser request
+                x-microcks-default: true
+                value:
+                  accountEnabled: true
+                  displayName: example_value
+                  mailNickname: example_value
+                  userPrincipalName: example_value
+                  passwordProfile:
+                    forceChangePasswordNextSignIn: true
+                    forceChangePasswordNextSignInWithMfa: true
+                    password: example_value
+                  givenName: example_value
+                  surname: example_value
+                  jobTitle: example_value
+                  department: example_value
+                  usageLocation: example_value
+                  city: example_value
+                  country: example_value
+                  mobilePhone: example_value
+                  businessPhones:
+                  - example_value
+      responses:
+        '201':
+          description: The created user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Createuser201Example:
+                  summary: Default createUser 201 response
+                  x-microcks-default: true
+                  value:
+                    accountEnabled: true
+                    assignedLicenses:
+                    - disabledPlans: {}
+                      skuId: '500123'
+                    assignedPlans:
+                    - assignedDateTime: '2026-01-15T10:30:00Z'
+                      capabilityStatus: Enabled
+                      service: example_value
+                      servicePlanId: '500123'
+                    businessPhones:
+                    - example_value
+                    city: example_value
+                    companyName: example_value
+                    country: example_value
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    department: example_value
+                    displayName: example_value
+                    employeeId: '500123'
+                    employeeType: example_value
+                    givenName: example_value
+                    jobTitle: example_value
+                    mail: example_value
+                    mailNickname: example_value
+                    mobilePhone: example_value
+                    officeLocation: example_value
+                    onPremisesDistinguishedName: example_value
+                    onPremisesDomainName: example_value
+                    onPremisesImmutableId: '500123'
+                    onPremisesLastSyncDateTime: '2026-01-15T10:30:00Z'
+                    onPremisesSyncEnabled: example_value
+                    otherMails:
+                    - example_value
+                    passwordPolicies: example_value
+                    postalCode: example_value
+                    preferredLanguage: example_value
+                    proxyAddresses:
+                    - example_value
+                    signInSessionsValidFromDateTime: '2026-01-15T10:30:00Z'
+                    state: example_value
+                    streetAddress: example_value
+                    surname: example_value
+                    usageLocation: example_value
+                    userPrincipalName: example_value
+                    userType: Member
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - User.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/user-post-users?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /users/{user-id}:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: >-
+        Retrieve the properties and relationships of a user object. Returns
+        a default set of properties unless $select is used to specify
+        additional properties.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: The requested user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Getuser200Example:
+                  summary: Default getUser 200 response
+                  x-microcks-default: true
+                  value:
+                    accountEnabled: true
+                    assignedLicenses:
+                    - disabledPlans: {}
+                      skuId: '500123'
+                    assignedPlans:
+                    - assignedDateTime: '2026-01-15T10:30:00Z'
+                      capabilityStatus: Enabled
+                      service: example_value
+                      servicePlanId: '500123'
+                    businessPhones:
+                    - example_value
+                    city: example_value
+                    companyName: example_value
+                    country: example_value
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    department: example_value
+                    displayName: example_value
+                    employeeId: '500123'
+                    employeeType: example_value
+                    givenName: example_value
+                    jobTitle: example_value
+                    mail: example_value
+                    mailNickname: example_value
+                    mobilePhone: example_value
+                    officeLocation: example_value
+                    onPremisesDistinguishedName: example_value
+                    onPremisesDomainName: example_value
+                    onPremisesImmutableId: '500123'
+                    onPremisesLastSyncDateTime: '2026-01-15T10:30:00Z'
+                    onPremisesSyncEnabled: example_value
+                    otherMails:
+                    - example_value
+                    passwordPolicies: example_value
+                    postalCode: example_value
+                    preferredLanguage: example_value
+                    proxyAddresses:
+                    - example_value
+                    signInSessionsValidFromDateTime: '2026-01-15T10:30:00Z'
+                    state: example_value
+                    streetAddress: example_value
+                    surname: example_value
+                    usageLocation: example_value
+                    userPrincipalName: example_value
+                    userType: Member
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - User.Read
+        - User.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/user-get?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateUser
+      summary: Update User
+      description: >-
+        Update the properties of a user object. Not all properties can be
+        updated by member or guest users with their default permissions
+        without administrator roles.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/userId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+            examples:
+              UpdateuserRequestExample:
+                summary: Default updateUser request
+                x-microcks-default: true
+                value:
+                  accountEnabled: true
+                  displayName: example_value
+                  givenName: example_value
+                  surname: example_value
+                  jobTitle: example_value
+                  department: example_value
+                  mail: example_value
+                  mobilePhone: example_value
+                  businessPhones:
+                  - example_value
+                  city: example_value
+                  state: example_value
+                  country: example_value
+                  postalCode: example_value
+                  streetAddress: example_value
+                  officeLocation: example_value
+                  usageLocation: example_value
+                  passwordProfile:
+                    forceChangePasswordNextSignIn: true
+                    forceChangePasswordNextSignInWithMfa: true
+                    password: example_value
+                  preferredLanguage: example_value
+                  employeeId: '500123'
+                  employeeType: example_value
+                  companyName: example_value
+      responses:
+        '204':
+          description: User updated successfully. No content returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - User.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/user-update?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteUser
+      summary: Delete User
+      description: >-
+        Delete a user object. When deleted, user resources are moved to a
+        temporary container and can be restored within 30 days. After that
+        time, they are permanently deleted.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/userId'
+      responses:
+        '204':
+          description: User deleted successfully. No content returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - User.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/user-delete?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /users/{user-id}/memberOf:
+    get:
+      operationId: listUserMemberOf
+      summary: List User Group Memberships
+      description: >-
+        Get the groups, directory roles, and administrative units that the
+        user is a direct member of.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/consistencyLevel'
+      responses:
+        '200':
+          description: A collection of directory objects the user is a member of.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DirectoryObject'
+              examples:
+                Listusermemberof200Example:
+                  summary: Default listUserMemberOf 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    value:
+                    - '@odata.type': example_value
+                      id: abc123
+                      deletedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - User.Read
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/user-list-memberof?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups:
+    get:
+      operationId: listGroups
+      summary: List Groups
+      description: >-
+        List all the groups in an organization, including Microsoft 365
+        groups, security groups, and mail-enabled security groups. Returns
+        up to 100 objects by default.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/search'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/consistencyLevel'
+      responses:
+        '200':
+          description: A collection of group objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  '@odata.nextLink':
+                    type: string
+                    format: uri
+                  '@odata.count':
+                    type: integer
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+              examples:
+                Listgroups200Example:
+                  summary: Default listGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.nextLink': https://www.example.com
+                    '@odata.count': 10
+                    value:
+                    - classification: example_value
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      description: A sample description.
+                      displayName: example_value
+                      expirationDateTime: '2026-01-15T10:30:00Z'
+                      groupTypes:
+                      - {}
+                      isAssignableToRole: example_value
+                      mail: example_value
+                      mailEnabled: true
+                      mailNickname: example_value
+                      membershipRule: example_value
+                      membershipRuleProcessingState: example_value
+                      onPremisesDomainName: example_value
+                      onPremisesLastSyncDateTime: '2026-01-15T10:30:00Z'
+                      onPremisesSyncEnabled: example_value
+                      preferredLanguage: example_value
+                      proxyAddresses:
+                      - {}
+                      renewedDateTime: '2026-01-15T10:30:00Z'
+                      securityEnabled: true
+                      securityIdentifier: example_value
+                      visibility: Public
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - GroupMember.Read.All
+        - Group.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/group-list?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createGroup
+      summary: Create Group
+      description: >-
+        Create a new group. You can create a Microsoft 365 group, a security
+        group, or a mail-enabled security group. The request body must
+        include displayName, mailEnabled, mailNickname, and
+        securityEnabled.
+      tags:
+      - Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreate'
+            examples:
+              CreategroupRequestExample:
+                summary: Default createGroup request
+                x-microcks-default: true
+                value:
+                  displayName: example_value
+                  description: A sample description.
+                  groupTypes:
+                  - example_value
+                  mailEnabled: true
+                  mailNickname: example_value
+                  securityEnabled: true
+                  visibility: Public
+                  isAssignableToRole: true
+                  'members@odata.bind':
+                  - https://www.example.com
+                  'owners@odata.bind':
+                  - https://www.example.com
+      responses:
+        '201':
+          description: The created group object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                Creategroup201Example:
+                  summary: Default createGroup 201 response
+                  x-microcks-default: true
+                  value:
+                    classification: example_value
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    description: A sample description.
+                    displayName: example_value
+                    expirationDateTime: '2026-01-15T10:30:00Z'
+                    groupTypes:
+                    - example_value
+                    isAssignableToRole: example_value
+                    mail: example_value
+                    mailEnabled: true
+                    mailNickname: example_value
+                    membershipRule: example_value
+                    membershipRuleProcessingState: example_value
+                    onPremisesDomainName: example_value
+                    onPremisesLastSyncDateTime: '2026-01-15T10:30:00Z'
+                    onPremisesSyncEnabled: example_value
+                    preferredLanguage: example_value
+                    proxyAddresses:
+                    - example_value
+                    renewedDateTime: '2026-01-15T10:30:00Z'
+                    securityEnabled: true
+                    securityIdentifier: example_value
+                    visibility: Public
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - Group.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/group-post-groups?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{group-id}:
+    get:
+      operationId: getGroup
+      summary: Get Group
+      description: >-
+        Get the properties and relationships of a group object. Returns a
+        default set of properties unless $select is used.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: The requested group object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                Getgroup200Example:
+                  summary: Default getGroup 200 response
+                  x-microcks-default: true
+                  value:
+                    classification: example_value
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    description: A sample description.
+                    displayName: example_value
+                    expirationDateTime: '2026-01-15T10:30:00Z'
+                    groupTypes:
+                    - example_value
+                    isAssignableToRole: example_value
+                    mail: example_value
+                    mailEnabled: true
+                    mailNickname: example_value
+                    membershipRule: example_value
+                    membershipRuleProcessingState: example_value
+                    onPremisesDomainName: example_value
+                    onPremisesLastSyncDateTime: '2026-01-15T10:30:00Z'
+                    onPremisesSyncEnabled: example_value
+                    preferredLanguage: example_value
+                    proxyAddresses:
+                    - example_value
+                    renewedDateTime: '2026-01-15T10:30:00Z'
+                    securityEnabled: true
+                    securityIdentifier: example_value
+                    visibility: Public
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - GroupMember.Read.All
+        - Group.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/group-get?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateGroup
+      summary: Update Group
+      description: >-
+        Update the properties of a group object. Not all properties can be
+        updated at the same time.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUpdate'
+            examples:
+              UpdategroupRequestExample:
+                summary: Default updateGroup request
+                x-microcks-default: true
+                value:
+                  displayName: example_value
+                  description: A sample description.
+                  mailNickname: example_value
+                  visibility: Public
+                  membershipRule: example_value
+                  membershipRuleProcessingState: 'On'
+                  preferredLanguage: example_value
+                  classification: example_value
+      responses:
+        '204':
+          description: Group updated successfully. No content returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Group.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/group-update?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteGroup
+      summary: Delete Group
+      description: >-
+        Delete a group. When a Microsoft 365 group is deleted, it is moved
+        to a temporary container and can be restored within 30 days. Security
+        groups are permanently deleted immediately.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      responses:
+        '204':
+          description: Group deleted successfully. No content returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Group.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/group-delete?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{group-id}/members:
+    get:
+      operationId: listGroupMembers
+      summary: List Group Members
+      description: >-
+        Get a list of the group's direct members. A group can have users,
+        organizational contacts, devices, service principals, and other
+        groups as members.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/consistencyLevel'
+      responses:
+        '200':
+          description: A collection of directory objects that are members of the group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DirectoryObject'
+              examples:
+                Listgroupmembers200Example:
+                  summary: Default listGroupMembers 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    value:
+                    - '@odata.type': example_value
+                      id: abc123
+                      deletedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - GroupMember.Read.All
+        - Group.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/group-list-members?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /groups/{group-id}/members/$ref:
+    post:
+      operationId: addGroupMember
+      summary: Add Group Member
+      description: >-
+        Add a member to a group by posting a reference to the directory
+        object. Users, service principals, groups, and organizational
+        contacts can be added as members.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/groupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - '@odata.id'
+              properties:
+                '@odata.id':
+                  type: string
+                  format: uri
+                  description: >-
+                    The full URL of the directory object to add. For example,
+                    https://graph.microsoft.com/v1.0/directoryObjects/{id}.
+                  examples:
+                  - https://graph.microsoft.com/v1.0/directoryObjects/00000000-0000-0000-0000-000000000000
+            examples:
+              AddgroupmemberRequestExample:
+                summary: Default addGroupMember request
+                x-microcks-default: true
+                value:
+                  '@odata.id': https://www.example.com
+      responses:
+        '204':
+          description: Member added successfully. No content returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - GroupMember.ReadWrite.All
+        - Group.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/group-post-members?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /applications:
+    get:
+      operationId: listApplications
+      summary: List Applications
+      description: >-
+        Get the list of application registrations in the organization. By
+        default, returns a limited set of properties. Use $select to request
+        additional properties.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/search'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/consistencyLevel'
+      responses:
+        '200':
+          description: A collection of application objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  '@odata.nextLink':
+                    type: string
+                    format: uri
+                  '@odata.count':
+                    type: integer
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Application'
+              examples:
+                Listapplications200Example:
+                  summary: Default listApplications 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.nextLink': https://www.example.com
+                    '@odata.count': 10
+                    value:
+                    - appId: '500123'
+                      displayName: example_value
+                      description: A sample description.
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      identifierUris:
+                      - {}
+                      keyCredentials:
+                      - {}
+                      passwordCredentials:
+                      - {}
+                      appRoles:
+                      - {}
+                      requiredResourceAccess:
+                      - {}
+                      signInAudience: AzureADMyOrg
+                      tags:
+                      - {}
+                      publisherDomain: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - Application.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/application-list?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createApplication
+      summary: Create Application
+      description: >-
+        Create a new application registration. The request body must contain
+        the displayName property at minimum.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreate'
+            examples:
+              CreateapplicationRequestExample:
+                summary: Default createApplication request
+                x-microcks-default: true
+                value:
+                  displayName: example_value
+                  description: A sample description.
+                  signInAudience: AzureADMyOrg
+                  identifierUris:
+                  - example_value
+                  web:
+                    homePageUrl: https://www.example.com
+                    logoutUrl: https://www.example.com
+                    redirectUris:
+                    - {}
+                    implicitGrantSettings:
+                      enableAccessTokenIssuance: true
+                      enableIdTokenIssuance: true
+                  spa:
+                    redirectUris:
+                    - {}
+                  publicClient:
+                    redirectUris:
+                    - {}
+                  api:
+                    acceptMappedClaims: example_value
+                    knownClientApplications:
+                    - {}
+                    oauth2PermissionScopes:
+                    - {}
+                    preAuthorizedApplications:
+                    - {}
+                    requestedAccessTokenVersion: 1
+                  appRoles:
+                  - allowedMemberTypes: {}
+                    description: A sample description.
+                    displayName: example_value
+                    id: abc123
+                    isEnabled: true
+                    value: example_value
+                  requiredResourceAccess:
+                  - resourceAppId: '500123'
+                    resourceAccess: {}
+                  tags:
+                  - example_value
+      responses:
+        '201':
+          description: The created application object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+              examples:
+                Createapplication201Example:
+                  summary: Default createApplication 201 response
+                  x-microcks-default: true
+                  value:
+                    appId: '500123'
+                    displayName: example_value
+                    description: A sample description.
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    identifierUris:
+                    - https://www.example.com
+                    keyCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      key: example_value
+                      keyId: '500123'
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      type: example_value
+                      usage: Sign
+                    passwordCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      hint: example_value
+                      keyId: '500123'
+                      secretText: example_value
+                      startDateTime: '2026-01-15T10:30:00Z'
+                    api:
+                      acceptMappedClaims: example_value
+                      knownClientApplications:
+                      - {}
+                      oauth2PermissionScopes:
+                      - {}
+                      preAuthorizedApplications:
+                      - {}
+                      requestedAccessTokenVersion: 1
+                    appRoles:
+                    - allowedMemberTypes: {}
+                      description: A sample description.
+                      displayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      value: example_value
+                    requiredResourceAccess:
+                    - resourceAppId: '500123'
+                      resourceAccess: {}
+                    signInAudience: AzureADMyOrg
+                    spa:
+                      redirectUris:
+                      - {}
+                    web:
+                      homePageUrl: https://www.example.com
+                      logoutUrl: https://www.example.com
+                      redirectUris:
+                      - {}
+                      implicitGrantSettings:
+                        enableAccessTokenIssuance: true
+                        enableIdTokenIssuance: true
+                    publicClient:
+                      redirectUris:
+                      - {}
+                    tags:
+                    - example_value
+                    publisherDomain: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/application-post-applications?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /applications/{application-id}:
+    get:
+      operationId: getApplication
+      summary: Get Application
+      description: >-
+        Get the properties and relationships of an application object.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: The requested application object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+              examples:
+                Getapplication200Example:
+                  summary: Default getApplication 200 response
+                  x-microcks-default: true
+                  value:
+                    appId: '500123'
+                    displayName: example_value
+                    description: A sample description.
+                    createdDateTime: '2026-01-15T10:30:00Z'
+                    identifierUris:
+                    - https://www.example.com
+                    keyCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      key: example_value
+                      keyId: '500123'
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      type: example_value
+                      usage: Sign
+                    passwordCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      hint: example_value
+                      keyId: '500123'
+                      secretText: example_value
+                      startDateTime: '2026-01-15T10:30:00Z'
+                    api:
+                      acceptMappedClaims: example_value
+                      knownClientApplications:
+                      - {}
+                      oauth2PermissionScopes:
+                      - {}
+                      preAuthorizedApplications:
+                      - {}
+                      requestedAccessTokenVersion: 1
+                    appRoles:
+                    - allowedMemberTypes: {}
+                      description: A sample description.
+                      displayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      value: example_value
+                    requiredResourceAccess:
+                    - resourceAppId: '500123'
+                      resourceAccess: {}
+                    signInAudience: AzureADMyOrg
+                    spa:
+                      redirectUris:
+                      - {}
+                    web:
+                      homePageUrl: https://www.example.com
+                      logoutUrl: https://www.example.com
+                      redirectUris:
+                      - {}
+                      implicitGrantSettings:
+                        enableAccessTokenIssuance: true
+                        enableIdTokenIssuance: true
+                    publicClient:
+                      redirectUris:
+                      - {}
+                    tags:
+                    - example_value
+                    publisherDomain: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/application-get?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateApplication
+      summary: Update Application
+      description: >-
+        Update the properties of an application object.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationUpdate'
+            examples:
+              UpdateapplicationRequestExample:
+                summary: Default updateApplication request
+                x-microcks-default: true
+                value:
+                  displayName: example_value
+                  description: A sample description.
+                  signInAudience: example_value
+                  identifierUris:
+                  - example_value
+                  web:
+                    homePageUrl: https://www.example.com
+                    logoutUrl: https://www.example.com
+                    redirectUris:
+                    - {}
+                    implicitGrantSettings:
+                      enableAccessTokenIssuance: true
+                      enableIdTokenIssuance: true
+                  spa:
+                    redirectUris:
+                    - {}
+                  publicClient:
+                    redirectUris:
+                    - {}
+                  api:
+                    acceptMappedClaims: example_value
+                    knownClientApplications:
+                    - {}
+                    oauth2PermissionScopes:
+                    - {}
+                    preAuthorizedApplications:
+                    - {}
+                    requestedAccessTokenVersion: 1
+                  appRoles:
+                  - allowedMemberTypes: {}
+                    description: A sample description.
+                    displayName: example_value
+                    id: abc123
+                    isEnabled: true
+                    value: example_value
+                  requiredResourceAccess:
+                  - resourceAppId: '500123'
+                    resourceAccess: {}
+                  tags:
+                  - example_value
+      responses:
+        '204':
+          description: Application updated successfully. No content returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/application-update?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteApplication
+      summary: Delete Application
+      description: >-
+        Delete an application object. Permanently deletes the application
+        registration and its associated service principal.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/applicationId'
+      responses:
+        '204':
+          description: Application deleted successfully. No content returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/application-delete?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicePrincipals:
+    get:
+      operationId: listServicePrincipals
+      summary: List Service Principals
+      description: >-
+        Retrieve a list of service principal objects in the organization.
+        Returns up to 100 objects by default.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/search'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/consistencyLevel'
+      responses:
+        '200':
+          description: A collection of service principal objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  '@odata.nextLink':
+                    type: string
+                    format: uri
+                  '@odata.count':
+                    type: integer
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServicePrincipal'
+              examples:
+                Listserviceprincipals200Example:
+                  summary: Default listServicePrincipals 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.nextLink': https://www.example.com
+                    '@odata.count': 10
+                    value:
+                    - accountEnabled: true
+                      appDescription: example_value
+                      appDisplayName: example_value
+                      appId: '500123'
+                      appOwnerOrganizationId: '500123'
+                      appRoleAssignmentRequired: true
+                      appRoles:
+                      - {}
+                      displayName: example_value
+                      homepage: https://www.example.com
+                      keyCredentials:
+                      - {}
+                      loginUrl: https://www.example.com
+                      logoutUrl: https://www.example.com
+                      notificationEmailAddresses:
+                      - {}
+                      oauth2PermissionScopes:
+                      - {}
+                      passwordCredentials:
+                      - {}
+                      replyUrls:
+                      - {}
+                      servicePrincipalNames:
+                      - {}
+                      servicePrincipalType: example_value
+                      signInAudience: example_value
+                      tags:
+                      - {}
+                      tokenEncryptionKeyId: '500123'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - Application.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-list?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createServicePrincipal
+      summary: Create Service Principal
+      description: >-
+        Create a new service principal object. The appId property in the
+        request body is required and must reference an existing application
+        registration.
+      tags:
+      - Service Principals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServicePrincipalCreate'
+            examples:
+              CreateserviceprincipalRequestExample:
+                summary: Default createServicePrincipal request
+                x-microcks-default: true
+                value:
+                  appId: '500123'
+                  displayName: example_value
+                  accountEnabled: true
+                  appRoleAssignmentRequired: true
+                  tags:
+                  - example_value
+                  notificationEmailAddresses:
+                  - example_value
+      responses:
+        '201':
+          description: The created service principal object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicePrincipal'
+              examples:
+                Createserviceprincipal201Example:
+                  summary: Default createServicePrincipal 201 response
+                  x-microcks-default: true
+                  value:
+                    accountEnabled: true
+                    appDescription: example_value
+                    appDisplayName: example_value
+                    appId: '500123'
+                    appOwnerOrganizationId: '500123'
+                    appRoleAssignmentRequired: true
+                    appRoles:
+                    - allowedMemberTypes: {}
+                      description: A sample description.
+                      displayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      value: example_value
+                    displayName: example_value
+                    homepage: https://www.example.com
+                    keyCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      key: example_value
+                      keyId: '500123'
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      type: example_value
+                      usage: Sign
+                    loginUrl: https://www.example.com
+                    logoutUrl: https://www.example.com
+                    notificationEmailAddresses:
+                    - example_value
+                    oauth2PermissionScopes:
+                    - adminConsentDescription: example_value
+                      adminConsentDisplayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      type: User
+                      userConsentDescription: example_value
+                      userConsentDisplayName: example_value
+                      value: example_value
+                    passwordCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      hint: example_value
+                      keyId: '500123'
+                      secretText: example_value
+                      startDateTime: '2026-01-15T10:30:00Z'
+                    replyUrls:
+                    - https://www.example.com
+                    servicePrincipalNames:
+                    - example_value
+                    servicePrincipalType: example_value
+                    signInAudience: example_value
+                    tags:
+                    - example_value
+                    tokenEncryptionKeyId: '500123'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-post-serviceprincipals?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicePrincipals/{servicePrincipal-id}:
+    get:
+      operationId: getServicePrincipal
+      summary: Get Service Principal
+      description: >-
+        Retrieve the properties and relationships of a service principal
+        object.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/servicePrincipalId'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: The requested service principal object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicePrincipal'
+              examples:
+                Getserviceprincipal200Example:
+                  summary: Default getServicePrincipal 200 response
+                  x-microcks-default: true
+                  value:
+                    accountEnabled: true
+                    appDescription: example_value
+                    appDisplayName: example_value
+                    appId: '500123'
+                    appOwnerOrganizationId: '500123'
+                    appRoleAssignmentRequired: true
+                    appRoles:
+                    - allowedMemberTypes: {}
+                      description: A sample description.
+                      displayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      value: example_value
+                    displayName: example_value
+                    homepage: https://www.example.com
+                    keyCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      key: example_value
+                      keyId: '500123'
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      type: example_value
+                      usage: Sign
+                    loginUrl: https://www.example.com
+                    logoutUrl: https://www.example.com
+                    notificationEmailAddresses:
+                    - example_value
+                    oauth2PermissionScopes:
+                    - adminConsentDescription: example_value
+                      adminConsentDisplayName: example_value
+                      id: abc123
+                      isEnabled: true
+                      type: User
+                      userConsentDescription: example_value
+                      userConsentDisplayName: example_value
+                      value: example_value
+                    passwordCredentials:
+                    - customKeyIdentifier: example_value
+                      displayName: example_value
+                      endDateTime: '2026-01-15T10:30:00Z'
+                      hint: example_value
+                      keyId: '500123'
+                      secretText: example_value
+                      startDateTime: '2026-01-15T10:30:00Z'
+                    replyUrls:
+                    - https://www.example.com
+                    servicePrincipalNames:
+                    - example_value
+                    servicePrincipalType: example_value
+                    signInAudience: example_value
+                    tags:
+                    - example_value
+                    tokenEncryptionKeyId: '500123'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-get?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateServicePrincipal
+      summary: Update Service Principal
+      description: >-
+        Update the properties of a service principal object.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/servicePrincipalId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServicePrincipalUpdate'
+            examples:
+              UpdateserviceprincipalRequestExample:
+                summary: Default updateServicePrincipal request
+                x-microcks-default: true
+                value:
+                  accountEnabled: true
+                  appRoleAssignmentRequired: true
+                  displayName: example_value
+                  homepage: example_value
+                  loginUrl: https://www.example.com
+                  logoutUrl: https://www.example.com
+                  notificationEmailAddresses:
+                  - example_value
+                  replyUrls:
+                  - example_value
+                  tags:
+                  - example_value
+      responses:
+        '204':
+          description: Service principal updated successfully. No content returned.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-update?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteServicePrincipal
+      summary: Delete Service Principal
+      description: >-
+        Delete a service principal object.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/servicePrincipalId'
+      responses:
+        '204':
+          description: Service principal deleted successfully. No content returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.ReadWrite.All
+        - Directory.ReadWrite.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-delete?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /servicePrincipals/{servicePrincipal-id}/appRoleAssignments:
+    get:
+      operationId: listServicePrincipalAppRoleAssignments
+      summary: List App Role Assignments for a Service Principal
+      description: >-
+        Retrieve a list of app role assignments granted to a service
+        principal. App role assignments granted to service principals are
+        also known as application permissions.
+      tags:
+      - Service Principals
+      parameters:
+      - $ref: '#/components/parameters/servicePrincipalId'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: A collection of app role assignment objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppRoleAssignment'
+              examples:
+                Listserviceprincipalapproleassignments200Example:
+                  summary: Default listServicePrincipalAppRoleAssignments 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    value:
+                    - id: abc123
+                      appRoleId: '500123'
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      principalDisplayName: example_value
+                      principalId: '500123'
+                      principalType: example_value
+                      resourceDisplayName: example_value
+                      resourceId: '500123'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+      - oauth2:
+        - Application.Read.All
+        - Directory.Read.All
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/graph/api/serviceprincipal-list-approleassignments?view=graph-rest-1.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: >-
+        Microsoft identity platform OAuth 2.0 authorization. Supports
+        authorization code flow, client credentials flow, and on-behalf-of
+        flow. All API calls require a valid access token obtained from
+        the Microsoft identity platform.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            User.Read: Sign in and read user profile
+            User.Read.All: Read all users' full profiles
+            User.ReadWrite.All: Read and write all users' full profiles
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
+            GroupMember.Read.All: Read group memberships
+            GroupMember.ReadWrite.All: Read and write group memberships
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications
+            Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            https://graph.microsoft.com/.default: Default scope for client credentials
+  parameters:
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: >-
+        The unique identifier of the user (object ID) or the user principal
+        name (UPN), such as user@contoso.com.
+      schema:
+        type: string
+    groupId:
+      name: group-id
+      in: path
+      required: true
+      description: The unique identifier (object ID) of the group.
+      schema:
+        type: string
+        format: uuid
+    applicationId:
+      name: application-id
+      in: path
+      required: true
+      description: The unique identifier (object ID) of the application.
+      schema:
+        type: string
+        format: uuid
+    servicePrincipalId:
+      name: servicePrincipal-id
+      in: path
+      required: true
+      description: The unique identifier (object ID) of the service principal.
+      schema:
+        type: string
+        format: uuid
+    top:
+      name: $top
+      in: query
+      description: >-
+        Sets the page size of results. Maximum value depends on the API;
+        defaults to 100 for most identity resources.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 999
+    skip:
+      name: $skip
+      in: query
+      description: Skips the specified number of items in the result set.
+      schema:
+        type: integer
+        minimum: 0
+    search:
+      name: $search
+      in: query
+      description: >-
+        Search items by search phrases. Requires ConsistencyLevel header
+        set to eventual. Supports searching displayName and description.
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      description: >-
+        Filters results using OData filter expressions. Supports eq, ne,
+        not, in, startsWith, endsWith, and lambda operators.
+      schema:
+        type: string
+    count:
+      name: $count
+      in: query
+      description: >-
+        Includes a count of the total number of items in a collection
+        alongside the page of data values. Requires ConsistencyLevel header.
+      schema:
+        type: boolean
+    orderby:
+      name: $orderby
+      in: query
+      description: >-
+        Specifies the order of items returned. Use asc for ascending or
+        desc for descending. Example: displayName asc.
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: >-
+        Selects specific properties to return. Comma-separated list of
+        property names. Example: id,displayName,mail.
+      schema:
+        type: string
+    expand:
+      name: $expand
+      in: query
+      description: >-
+        Expands related entities inline. For example, expand members
+        of a group or manager of a user.
+      schema:
+        type: string
+    consistencyLevel:
+      name: ConsistencyLevel
+      in: header
+      description: >-
+        Indicates the requested consistency level. Required for advanced
+        queries using $search, $filter with certain functions, or $count.
+        Set to eventual.
+      schema:
+        type: string
+        enum:
+        - eventual
+  schemas:
+    DirectoryObject:
+      type: object
+      description: >-
+        Represents an Azure Active Directory directory object. This is the
+        base type for most directory resources.
+      properties:
+        '@odata.type':
+          type: string
+          description: The OData type of the directory object.
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          description: >-
+            The unique identifier for the object. Globally unique across
+            all directory objects.
+          readOnly: true
+          example: abc123
+        deletedDateTime:
+          type: string
+          format: date-time
+          description: Date and time when this object was deleted.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+    User:
+      type: object
+      description: >-
+        Represents an Azure AD user account. Inherits from directoryObject.
+        Contains identity, profile, organizational, and authentication
+        properties.
+      allOf:
+      - $ref: '#/components/schemas/DirectoryObject'
+      properties:
+        accountEnabled:
+          type: boolean
+          description: >-
+            True if the account is enabled; otherwise, false.
+          example: true
+        assignedLicenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssignedLicense'
+          description: The licenses that are assigned to the user.
+          readOnly: true
+          example: []
+        assignedPlans:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssignedPlan'
+          description: The plans that are assigned to the user.
+          readOnly: true
+          example: []
+        businessPhones:
+          type: array
+          items:
+            type: string
+          description: The telephone numbers for the user.
+          example: []
+        city:
+          type:
+          - string
+          - 'null'
+          description: The city where the user is located.
+          example: example_value
+        companyName:
+          type:
+          - string
+          - 'null'
+          description: The company name associated with the user.
+          example: example_value
+        country:
+          type:
+          - string
+          - 'null'
+          description: The country or region where the user is located.
+          example: example_value
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The date and time the user was created.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        department:
+          type:
+          - string
+          - 'null'
+          description: The department in which the user works.
+          example: example_value
+        displayName:
+          type: string
+          description: >-
+            The name displayed in the address book for the user. Required
+            on creation.
+          example: example_value
+        employeeId:
+          type:
+          - string
+          - 'null'
+          description: >-
+            The employee identifier assigned to the user by the organization.
+          example: '500123'
+        employeeType:
+          type:
+          - string
+          - 'null'
+          description: >-
+            Captures the enterprise worker type. For example, Employee,
+            Contractor, Consultant, or Vendor.
+          example: example_value
+        givenName:
+          type:
+          - string
+          - 'null'
+          description: The given name (first name) of the user.
+          example: example_value
+        jobTitle:
+          type:
+          - string
+          - 'null'
+          description: The user's job title.
+          example: example_value
+        mail:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: The SMTP address for the user.
+          example: example_value
+        mailNickname:
+          type: string
+          description: >-
+            The mail alias for the user. Required on creation.
+          example: example_value
+        mobilePhone:
+          type:
+          - string
+          - 'null'
+          description: The primary cellular telephone number for the user.
+          example: example_value
+        officeLocation:
+          type:
+          - string
+          - 'null'
+          description: The office location in the user's place of business.
+          example: example_value
+        onPremisesDistinguishedName:
+          type:
+          - string
+          - 'null'
+          description: The on-premises Active Directory distinguished name.
+          readOnly: true
+          example: example_value
+        onPremisesDomainName:
+          type:
+          - string
+          - 'null'
+          description: The on-premises domain name.
+          readOnly: true
+          example: example_value
+        onPremisesImmutableId:
+          type:
+          - string
+          - 'null'
+          description: >-
+            Used to associate an on-premises Active Directory user account
+            to the Azure AD user object.
+          example: '500123'
+        onPremisesLastSyncDateTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: >-
+            The last time at which the object was synced with the
+            on-premises directory.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        onPremisesSyncEnabled:
+          type:
+          - boolean
+          - 'null'
+          description: >-
+            True if this user object is currently being synced from an
+            on-premises Active Directory.
+          readOnly: true
+          example: example_value
+        otherMails:
+          type: array
+          items:
+            type: string
+            format: email
+          description: Additional email addresses for the user.
+          example: []
+        passwordPolicies:
+          type:
+          - string
+          - 'null'
+          description: >-
+            Specifies password policies for the user. One of
+            DisableStrongPassword and DisablePasswordExpiration, or both.
+          example: example_value
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: The postal code for the user's postal address.
+          example: example_value
+        preferredLanguage:
+          type:
+          - string
+          - 'null'
+          description: >-
+            The preferred language for the user in ISO 639-1 code format.
+            Example: en-US.
+          example: example_value
+        proxyAddresses:
+          type: array
+          items:
+            type: string
+          description: >-
+            The proxy addresses for the user. Example:
+            SMTP:user@contoso.com, smtp:alias@contoso.com.
+          readOnly: true
+          example: []
+        signInSessionsValidFromDateTime:
+          type: string
+          format: date-time
+          description: >-
+            Any refresh tokens or session tokens issued before this time
+            are invalid.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        state:
+          type:
+          - string
+          - 'null'
+          description: The state or province in the user's address.
+          example: example_value
+        streetAddress:
+          type:
+          - string
+          - 'null'
+          description: The street address of the user's place of business.
+          example: example_value
+        surname:
+          type:
+          - string
+          - 'null'
+          description: The user's surname (family name or last name).
+          example: example_value
+        usageLocation:
+          type:
+          - string
+          - 'null'
+          description: >-
+            A two-letter country code (ISO 3166). Required for users who
+            will be assigned licenses.
+          example: example_value
+        userPrincipalName:
+          type: string
+          description: >-
+            The user principal name (UPN) of the user. Required on
+            creation. Format: alias@domain.
+          example: example_value
+        userType:
+          type:
+          - string
+          - 'null'
+          description: >-
+            A string value that classifies the user. Typically Member
+            or Guest.
+          enum:
+          - Member
+          - Guest
+          example: Member
+    UserCreate:
+      type: object
+      description: Properties required when creating a new user.
+      required:
+      - accountEnabled
+      - displayName
+      - mailNickname
+      - userPrincipalName
+      - passwordProfile
+      properties:
+        accountEnabled:
+          type: boolean
+          description: True if the account should be enabled.
+          example: true
+        displayName:
+          type: string
+          description: The name to display in the address book.
+          example: example_value
+        mailNickname:
+          type: string
+          description: The mail alias for the user.
+          example: example_value
+        userPrincipalName:
+          type: string
+          description: The user principal name (user@contoso.com).
+          example: example_value
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        givenName:
+          type: string
+          example: example_value
+        surname:
+          type: string
+          example: example_value
+        jobTitle:
+          type: string
+          example: example_value
+        department:
+          type: string
+          example: example_value
+        usageLocation:
+          type: string
+          example: example_value
+        city:
+          type: string
+          example: example_value
+        country:
+          type: string
+          example: example_value
+        mobilePhone:
+          type: string
+          example: example_value
+        businessPhones:
+          type: array
+          items:
+            type: string
+          example: []
+    UserUpdate:
+      type: object
+      description: Properties that can be updated on an existing user.
+      properties:
+        accountEnabled:
+          type: boolean
+          example: true
+        displayName:
+          type: string
+          example: example_value
+        givenName:
+          type: string
+          example: example_value
+        surname:
+          type: string
+          example: example_value
+        jobTitle:
+          type: string
+          example: example_value
+        department:
+          type: string
+          example: example_value
+        mail:
+          type: string
+          example: example_value
+        mobilePhone:
+          type: string
+          example: example_value
+        businessPhones:
+          type: array
+          items:
+            type: string
+          example: []
+        city:
+          type: string
+          example: example_value
+        state:
+          type: string
+          example: example_value
+        country:
+          type: string
+          example: example_value
+        postalCode:
+          type: string
+          example: example_value
+        streetAddress:
+          type: string
+          example: example_value
+        officeLocation:
+          type: string
+          example: example_value
+        usageLocation:
+          type: string
+          example: example_value
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        preferredLanguage:
+          type: string
+          example: example_value
+        employeeId:
+          type: string
+          example: '500123'
+        employeeType:
+          type: string
+          example: example_value
+        companyName:
+          type: string
+          example: example_value
+    PasswordProfile:
+      type: object
+      description: Contains the password profile associated with a user.
+      required:
+      - password
+      properties:
+        forceChangePasswordNextSignIn:
+          type: boolean
+          description: >-
+            True if the user must change their password on the next sign-in.
+          default: false
+          example: true
+        forceChangePasswordNextSignInWithMfa:
+          type: boolean
+          description: >-
+            If true, the user must perform multi-factor authentication
+            before being forced to change their password.
+          default: false
+          example: true
+        password:
+          type: string
+          format: password
+          description: >-
+            The password for the user. Must satisfy the tenant's password
+            complexity requirements. Setting a strong password is
+            recommended.
+          example: example_value
+    AssignedLicense:
+      type: object
+      description: Represents a license assigned to a user.
+      properties:
+        disabledPlans:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: A collection of the unique identifiers for plans that have been disabled.
+          example: []
+        skuId:
+          type: string
+          format: uuid
+          description: The unique identifier for the SKU.
+          example: '500123'
+    AssignedPlan:
+      type: object
+      description: Represents a plan assigned to a user.
+      properties:
+        assignedDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        capabilityStatus:
+          type: string
+          enum:
+          - Enabled
+          - Warning
+          - Suspended
+          - Deleted
+          - LockedOut
+          example: Enabled
+        service:
+          type: string
+          example: example_value
+        servicePlanId:
+          type: string
+          format: uuid
+          example: '500123'
+    Group:
+      type: object
+      description: >-
+        Represents an Azure AD group. Groups are collections of principals
+        with shared access to resources. Microsoft Graph supports several
+        types of groups: Microsoft 365 groups, security groups, and
+        mail-enabled security groups.
+      allOf:
+      - $ref: '#/components/schemas/DirectoryObject'
+      properties:
+        classification:
+          type:
+          - string
+          - 'null'
+          description: Classification for the group (e.g., low, medium, high business impact).
+          example: example_value
+        createdDateTime:
+          type: string
+          format: date-time
+          description: Timestamp of when the group was created.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        description:
+          type:
+          - string
+          - 'null'
+          description: An optional description for the group.
+          example: A sample description.
+        displayName:
+          type: string
+          description: The display name for the group. Required on creation.
+          example: example_value
+        expirationDateTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp of when the group is set to expire.
+          example: '2026-01-15T10:30:00Z'
+        groupTypes:
+          type: array
+          items:
+            type: string
+          description: >-
+            Specifies the group type. Include Unified for Microsoft 365
+            groups. Include DynamicMembership for dynamic groups.
+          example: []
+        isAssignableToRole:
+          type:
+          - boolean
+          - 'null'
+          description: >-
+            Indicates whether this group can be assigned to an Azure AD
+            role. Can only be set at creation time.
+          example: example_value
+        mail:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: The SMTP address for the group.
+          readOnly: true
+          example: example_value
+        mailEnabled:
+          type: boolean
+          description: >-
+            Specifies whether the group is mail-enabled. Required on
+            creation.
+          example: true
+        mailNickname:
+          type: string
+          description: >-
+            The mail alias for the group, unique for Microsoft 365 groups.
+            Required on creation.
+          example: example_value
+        membershipRule:
+          type:
+          - string
+          - 'null'
+          description: >-
+            The rule that determines members for a dynamic group.
+          example: example_value
+        membershipRuleProcessingState:
+          type:
+          - string
+          - 'null'
+          description: >-
+            Indicates whether the dynamic membership processing is on
+            or paused. On or Paused.
+          example: example_value
+        onPremisesDomainName:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          example: example_value
+        onPremisesLastSyncDateTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        onPremisesSyncEnabled:
+          type:
+          - boolean
+          - 'null'
+          readOnly: true
+          example: example_value
+        preferredLanguage:
+          type:
+          - string
+          - 'null'
+          description: >-
+            The preferred language for a Microsoft 365 group in ISO 639-1
+            format.
+          example: example_value
+        proxyAddresses:
+          type: array
+          items:
+            type: string
+          readOnly: true
+          example: []
+        renewedDateTime:
+          type: string
+          format: date-time
+          description: Timestamp of when the group was last renewed.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        securityEnabled:
+          type: boolean
+          description: >-
+            Specifies whether the group is a security group. Required on
+            creation.
+          example: true
+        securityIdentifier:
+          type:
+          - string
+          - 'null'
+          description: Security identifier (SID) of the group.
+          readOnly: true
+          example: example_value
+        visibility:
+          type:
+          - string
+          - 'null'
+          description: >-
+            Specifies the group join policy and group content visibility.
+            Public, Private, or HiddenMembership.
+          enum:
+          - Public
+          - Private
+          - HiddenMembership
+          example: Public
+    GroupCreate:
+      type: object
+      description: Properties required when creating a new group.
+      required:
+      - displayName
+      - mailEnabled
+      - mailNickname
+      - securityEnabled
+      properties:
+        displayName:
+          type: string
+          description: The display name for the group.
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        groupTypes:
+          type: array
+          items:
+            type: string
+          description: >-
+            Set to ["Unified"] for Microsoft 365 groups. Omit for security
+            groups.
+          example: []
+        mailEnabled:
+          type: boolean
+          example: true
+        mailNickname:
+          type: string
+          example: example_value
+        securityEnabled:
+          type: boolean
+          example: true
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Private
+          - HiddenMembership
+          example: Public
+        isAssignableToRole:
+          type: boolean
+          example: true
+        'members@odata.bind':
+          type: array
+          items:
+            type: string
+            format: uri
+          description: >-
+            List of directory object URLs to add as members. Example:
+            https://graph.microsoft.com/v1.0/directoryObjects/{id}
+          example: []
+        'owners@odata.bind':
+          type: array
+          items:
+            type: string
+            format: uri
+          description: List of directory object URLs to set as owners.
+          example: []
+    GroupUpdate:
+      type: object
+      description: Properties that can be updated on an existing group.
+      properties:
+        displayName:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        mailNickname:
+          type: string
+          example: example_value
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Private
+          - HiddenMembership
+          example: Public
+        membershipRule:
+          type: string
+          example: example_value
+        membershipRuleProcessingState:
+          type: string
+          enum:
+          - 'On'
+          - Paused
+          example: 'On'
+        preferredLanguage:
+          type: string
+          example: example_value
+        classification:
+          type: string
+          example: example_value
+    Application:
+      type: object
+      description: >-
+        Represents an application registration in Azure AD. An application
+        object is the global definition of an application, specifying how
+        tokens are issued, the resources the application needs to access,
+        and the actions it can perform.
+      allOf:
+      - $ref: '#/components/schemas/DirectoryObject'
+      properties:
+        appId:
+          type: string
+          format: uuid
+          description: >-
+            The unique identifier assigned by Azure AD when the app is
+            registered. Also known as the client ID.
+          readOnly: true
+          example: '500123'
+        displayName:
+          type: string
+          description: The display name for the application.
+          example: example_value
+        description:
+          type:
+          - string
+          - 'null'
+          description: A free text field to describe the application.
+          example: A sample description.
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The date and time the application was registered.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        identifierUris:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: >-
+            URIs that identify the application within its Azure AD tenant.
+            Also known as App ID URIs.
+          example: []
+        keyCredentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyCredential'
+          description: The collection of key credentials (certificates) associated with the application.
+          example: []
+        passwordCredentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasswordCredential'
+          description: The collection of password credentials (client secrets) associated with the application.
+          example: []
+        api:
+          $ref: '#/components/schemas/ApiApplication'
+        appRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppRole'
+          description: >-
+            The collection of roles defined for the application.
+          example: []
+        requiredResourceAccess:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequiredResourceAccess'
+          description: >-
+            Specifies the resources that the application needs access to.
+          example: []
+        signInAudience:
+          type: string
+          description: >-
+            Specifies the Microsoft accounts supported for the current
+            application.
+          enum:
+          - AzureADMyOrg
+          - AzureADMultipleOrgs
+          - AzureADandPersonalMicrosoftAccount
+          - PersonalMicrosoftAccount
+          example: AzureADMyOrg
+        spa:
+          $ref: '#/components/schemas/SpaApplication'
+        web:
+          $ref: '#/components/schemas/WebApplication'
+        publicClient:
+          $ref: '#/components/schemas/PublicClientApplication'
+        tags:
+          type: array
+          items:
+            type: string
+          description: Custom strings that can be used to categorize the application.
+          example: []
+        publisherDomain:
+          type: string
+          description: The verified publisher domain for the application.
+          readOnly: true
+          example: example_value
+    ApplicationCreate:
+      type: object
+      description: Properties required when creating a new application registration.
+      required:
+      - displayName
+      properties:
+        displayName:
+          type: string
+          description: The display name for the application.
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        signInAudience:
+          type: string
+          enum:
+          - AzureADMyOrg
+          - AzureADMultipleOrgs
+          - AzureADandPersonalMicrosoftAccount
+          - PersonalMicrosoftAccount
+          example: AzureADMyOrg
+        identifierUris:
+          type: array
+          items:
+            type: string
+          example: []
+        web:
+          $ref: '#/components/schemas/WebApplication'
+        spa:
+          $ref: '#/components/schemas/SpaApplication'
+        publicClient:
+          $ref: '#/components/schemas/PublicClientApplication'
+        api:
+          $ref: '#/components/schemas/ApiApplication'
+        appRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppRole'
+          example: []
+        requiredResourceAccess:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequiredResourceAccess'
+          example: []
+        tags:
+          type: array
+          items:
+            type: string
+          example: []
+    ApplicationUpdate:
+      type: object
+      description: Properties that can be updated on an existing application.
+      properties:
+        displayName:
+          type: string
+          example: example_value
+        description:
+          type: string
+          example: A sample description.
+        signInAudience:
+          type: string
+          example: example_value
+        identifierUris:
+          type: array
+          items:
+            type: string
+          example: []
+        web:
+          $ref: '#/components/schemas/WebApplication'
+        spa:
+          $ref: '#/components/schemas/SpaApplication'
+        publicClient:
+          $ref: '#/components/schemas/PublicClientApplication'
+        api:
+          $ref: '#/components/schemas/ApiApplication'
+        appRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppRole'
+          example: []
+        requiredResourceAccess:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequiredResourceAccess'
+          example: []
+        tags:
+          type: array
+          items:
+            type: string
+          example: []
+    WebApplication:
+      type: object
+      description: Configuration for a web application.
+      properties:
+        homePageUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Home page or landing page of the application.
+          example: https://www.example.com
+        logoutUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL used by the authorization service to sign out a user.
+          example: https://www.example.com
+        redirectUris:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: >-
+            URIs to which Azure AD will redirect after authentication.
+          example: []
+        implicitGrantSettings:
+          type: object
+          properties:
+            enableAccessTokenIssuance:
+              type: boolean
+              description: Specifies whether web application can request an access token using OAuth 2.0 implicit flow.
+            enableIdTokenIssuance:
+              type: boolean
+              description: Specifies whether web application can request an ID token using OAuth 2.0 implicit flow.
+          example: example_value
+    SpaApplication:
+      type: object
+      description: Configuration for a single-page application.
+      properties:
+        redirectUris:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: >-
+            Redirect URIs for the single-page application using
+            authorization code flow with PKCE.
+          example: []
+    PublicClientApplication:
+      type: object
+      description: Configuration for a public client (mobile/desktop) application.
+      properties:
+        redirectUris:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: Redirect URIs for the public client application.
+          example: []
+    ApiApplication:
+      type: object
+      description: Configuration for an application that exposes a web API.
+      properties:
+        acceptMappedClaims:
+          type:
+          - boolean
+          - 'null'
+          description: >-
+            If true, allows an application to use claims mapping without
+            specifying a custom signing key.
+          example: example_value
+        knownClientApplications:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: >-
+            Used for bundling consent. Lists client app IDs that are
+            considered known clients of this API.
+          example: []
+        oauth2PermissionScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionScope'
+          description: >-
+            The definition of the delegated permissions exposed by the
+            web API.
+          example: []
+        preAuthorizedApplications:
+          type: array
+          items:
+            type: object
+            properties:
+              appId:
+                type: string
+                format: uuid
+              delegatedPermissionIds:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+          description: >-
+            Lists applications that are pre-authorized with specified
+            delegated permissions.
+          example: []
+        requestedAccessTokenVersion:
+          type:
+          - integer
+          - 'null'
+          description: >-
+            The access token version expected by this resource. Possible
+            values are 1 or 2.
+          enum:
+          - 1
+          - 2
+          example: 1
+    PermissionScope:
+      type: object
+      description: Represents a delegated permission (OAuth2 scope).
+      properties:
+        adminConsentDescription:
+          type: string
+          example: example_value
+        adminConsentDisplayName:
+          type: string
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        isEnabled:
+          type: boolean
+          example: true
+        type:
+          type: string
+          enum:
+          - User
+          - Admin
+          example: User
+        userConsentDescription:
+          type: string
+          example: example_value
+        userConsentDisplayName:
+          type: string
+          example: example_value
+        value:
+          type: string
+          description: >-
+            The value to include in the scp claim in access tokens.
+          example: example_value
+    AppRole:
+      type: object
+      description: >-
+        Represents an application role that can be assigned to users, groups,
+        or service principals.
+      properties:
+        allowedMemberTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - User
+            - Application
+          description: >-
+            Specifies whether this app role can be assigned to users and
+            groups or to applications.
+          example: []
+        description:
+          type: string
+          example: A sample description.
+        displayName:
+          type: string
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        isEnabled:
+          type: boolean
+          example: true
+        value:
+          type: string
+          description: >-
+            The value to include in the roles claim in access tokens.
+          example: example_value
+    RequiredResourceAccess:
+      type: object
+      description: >-
+        Specifies the set of OAuth 2.0 permission scopes and app roles
+        that an application requires access to.
+      properties:
+        resourceAppId:
+          type: string
+          format: uuid
+          description: >-
+            The unique identifier for the resource that the application
+            requires access to (e.g., Microsoft Graph).
+          example: '500123'
+        resourceAccess:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                description: Identifier of the permission scope or app role.
+              type:
+                type: string
+                enum:
+                - Scope
+                - Role
+                description: Whether this is a delegated permission (Scope) or application permission (Role).
+          example: []
+    KeyCredential:
+      type: object
+      description: Contains a key credential (certificate) associated with an application or service principal.
+      properties:
+        customKeyIdentifier:
+          type:
+          - string
+          - 'null'
+          description: Custom key identifier.
+          example: example_value
+        displayName:
+          type:
+          - string
+          - 'null'
+          example: example_value
+        endDateTime:
+          type: string
+          format: date-time
+          description: The date and time at which the credential expires.
+          example: '2026-01-15T10:30:00Z'
+        key:
+          type:
+          - string
+          - 'null'
+          format: byte
+          description: The certificate raw data in byte array converted to Base64 string.
+          example: example_value
+        keyId:
+          type: string
+          format: uuid
+          example: '500123'
+        startDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        type:
+          type: string
+          description: The type of key credential (e.g., AsymmetricX509Cert).
+          example: example_value
+        usage:
+          type: string
+          description: >-
+            Describes the purpose of the key. Valid values are Verify
+            and Sign.
+          enum:
+          - Sign
+          - Verify
+          example: Sign
+    PasswordCredential:
+      type: object
+      description: Contains a password credential (client secret) associated with an application or service principal.
+      properties:
+        customKeyIdentifier:
+          type:
+          - string
+          - 'null'
+          format: byte
+          example: example_value
+        displayName:
+          type:
+          - string
+          - 'null'
+          example: example_value
+        endDateTime:
+          type: string
+          format: date-time
+          description: The date and time at which the password expires.
+          example: '2026-01-15T10:30:00Z'
+        hint:
+          type:
+          - string
+          - 'null'
+          description: Contains the first three characters of the password.
+          readOnly: true
+          example: example_value
+        keyId:
+          type: string
+          format: uuid
+          example: '500123'
+        secretText:
+          type:
+          - string
+          - 'null'
+          description: >-
+            The client secret value. Only returned on creation; not
+            retrievable afterward.
+          readOnly: true
+          example: example_value
+        startDateTime:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+    ServicePrincipal:
+      type: object
+      description: >-
+        Represents an instance of an application in a directory. A service
+        principal is the local representation or application instance of a
+        global application object in a single tenant. It defines what the
+        app can do in the tenant, who can access it, and what resources the
+        app can access.
+      allOf:
+      - $ref: '#/components/schemas/DirectoryObject'
+      properties:
+        accountEnabled:
+          type: boolean
+          description: True if the service principal account is enabled.
+          example: true
+        appDescription:
+          type:
+          - string
+          - 'null'
+          description: Description copied from the associated application.
+          example: example_value
+        appDisplayName:
+          type:
+          - string
+          - 'null'
+          description: The display name exposed by the associated application.
+          readOnly: true
+          example: example_value
+        appId:
+          type: string
+          format: uuid
+          description: >-
+            The unique identifier for the associated application (its
+            appId property). Required on creation.
+          example: '500123'
+        appOwnerOrganizationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: >-
+            Contains the tenant ID where the application is registered.
+          readOnly: true
+          example: '500123'
+        appRoleAssignmentRequired:
+          type: boolean
+          description: >-
+            Specifies whether users or other service principals need to
+            be granted an app role assignment before accessing.
+          example: true
+        appRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppRole'
+          description: Roles exposed by the associated application.
+          readOnly: true
+          example: []
+        displayName:
+          type: string
+          description: The display name for the service principal.
+          example: example_value
+        homepage:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Home page or landing page of the application.
+          example: https://www.example.com
+        keyCredentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyCredential'
+          example: []
+        loginUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: >-
+            URL for the authentication provider to redirect users to for
+            sign-in.
+          example: https://www.example.com
+        logoutUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: https://www.example.com
+        notificationEmailAddresses:
+          type: array
+          items:
+            type: string
+            format: email
+          description: >-
+            Email addresses where Azure AD sends notifications when the
+            active certificate is near expiration.
+          example: user@example.com
+        oauth2PermissionScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionScope'
+          description: The delegated permissions exposed by the application.
+          readOnly: true
+          example: []
+        passwordCredentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/PasswordCredential'
+          example: []
+        replyUrls:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: >-
+            The URLs that user tokens are sent to for sign-in, or the
+            redirect URIs for authorization code and access token
+            responses.
+          example: https://www.example.com
+        servicePrincipalNames:
+          type: array
+          items:
+            type: string
+          description: >-
+            Contains the list of identifierUris and the appId from the
+            associated application.
+          example: []
+        servicePrincipalType:
+          type: string
+          description: >-
+            Identifies whether the service principal represents an
+            Application, ManagedIdentity, Legacy, or SocialIdp.
+          example: example_value
+        signInAudience:
+          type: string
+          description: The audience that can sign in.
+          example: example_value
+        tags:
+          type: array
+          items:
+            type: string
+          description: >-
+            Custom strings used to categorize the service principal.
+            The WindowsAzureActiveDirectoryIntegratedApp tag is used by
+            the portal.
+          example: []
+        tokenEncryptionKeyId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: '500123'
+    ServicePrincipalCreate:
+      type: object
+      description: Properties required when creating a new service principal.
+      required:
+      - appId
+      properties:
+        appId:
+          type: string
+          format: uuid
+          description: The appId of the application to create a service principal for.
+          example: '500123'
+        displayName:
+          type: string
+          example: example_value
+        accountEnabled:
+          type: boolean
+          example: true
+        appRoleAssignmentRequired:
+          type: boolean
+          example: true
+        tags:
+          type: array
+          items:
+            type: string
+          example: []
+        notificationEmailAddresses:
+          type: array
+          items:
+            type: string
+          example: user@example.com
+    ServicePrincipalUpdate:
+      type: object
+      description: Properties that can be updated on an existing service principal.
+      properties:
+        accountEnabled:
+          type: boolean
+          example: true
+        appRoleAssignmentRequired:
+          type: boolean
+          example: true
+        displayName:
+          type: string
+          example: example_value
+        homepage:
+          type: string
+          example: example_value
+        loginUrl:
+          type: string
+          example: https://www.example.com
+        logoutUrl:
+          type: string
+          example: https://www.example.com
+        notificationEmailAddresses:
+          type: array
+          items:
+            type: string
+          example: user@example.com
+        replyUrls:
+          type: array
+          items:
+            type: string
+          example: https://www.example.com
+        tags:
+          type: array
+          items:
+            type: string
+          example: []
+    AppRoleAssignment:
+      type: object
+      description: >-
+        Represents an app role assigned to a user, group, or service
+        principal.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          example: abc123
+        appRoleId:
+          type: string
+          format: uuid
+          description: >-
+            The identifier of the app role. Set to the default app role
+            ID of 00000000-0000-0000-0000-000000000000 if not specified.
+          example: '500123'
+        createdDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        principalDisplayName:
+          type: string
+          description: The display name of the principal (user, group, or service principal).
+          readOnly: true
+          example: example_value
+        principalId:
+          type: string
+          format: uuid
+          description: The unique identifier of the principal being granted the role.
+          example: '500123'
+        principalType:
+          type: string
+          description: The type of the assigned principal (User, Group, or ServicePrincipal).
+          readOnly: true
+          example: example_value
+        resourceDisplayName:
+          type: string
+          description: The display name of the resource application.
+          readOnly: true
+          example: example_value
+        resourceId:
+          type: string
+          format: uuid
+          description: The unique identifier of the resource service principal.
+          example: '500123'
+    ODataError:
+      type: object
+      description: OData error response from Microsoft Graph.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code.
+            message:
+              type: string
+              description: Error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                  format: uuid
+                client-request-id:
+                  type: string
+                  format: uuid
+          example: example_value
+  responses:
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. Authentication is required or the provided token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: Forbidden. The caller does not have sufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    NotFound:
+      description: Not found. The specified resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Conflict:
+      description: Conflict. The resource already exists or a concurrency conflict occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The client has been throttled.
+      headers:
+        Retry-After:
+          description: Number of seconds to wait before retrying.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
