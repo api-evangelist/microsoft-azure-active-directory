@@ -400,6 +400,15 @@ maintainers:
     email: kin@apievangelist.com
     url: https://apievangelist.com
 common:
+  - type: IssueTracker
+    url: https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/issues
+  - type: Releases
+    url: https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/releases
+  - type: ContributionGuide
+    url: https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/blob/dev/contributing.md
+  - type: License
+    name: MIT
+    url: https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/blob/dev/LICENSE
   - type: AgenticAccess
     url: agentic-access/microsoft-azure-active-directory-agentic-access.yml
   - type: DomainSecurity
@@ -446,7 +455,7 @@ common:
   - type: GitHubOrganization
     url: https://github.com/AzureAD
   - type: OpenAPI
-    url: openapi/microsoft-graph-identity-api.yml
+    url: openapi/_original/microsoft-graph-identity-api.yml
   - type: JSONSchema
     url: json-schema/azure-active-directory-user-schema.json
   - type: JSONLD
