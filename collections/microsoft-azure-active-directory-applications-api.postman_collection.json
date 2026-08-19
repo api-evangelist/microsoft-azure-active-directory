@@ -1,0 +1,1766 @@
+{
+  "item": [
+    {
+      "id": "32d71934-fa14-46b2-aa5b-b68bb8249d6f",
+      "name": "Applications",
+      "description": {
+        "content": "Manage application registrations in Azure Active Directory. An application object is the global representation of an application across all tenants, defining the app identity, access configuration, and capabilities.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3ad61c7-9f59-4bfd-bd5e-3067e23008f7",
+          "name": "List Applications",
+          "request": {
+            "name": "List Applications",
+            "description": {
+              "content": "Get the list of application registrations in the organization. By default, returns a limited set of properties. Use $select to request additional properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources."
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Skips the specified number of items in the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "$search",
+                  "value": "<string>",
+                  "description": "Search items by search phrases. Requires ConsistencyLevel header set to eventual. Supports searching displayName and description."
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "Filters results using OData filter expressions. Supports eq, ne, not, in, startsWith, endsWith, and lambda operators."
+                },
+                {
+                  "disabled": false,
+                  "key": "$count",
+                  "value": "<boolean>",
+                  "description": "Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header."
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "Specifies the order of items returned. Use asc for ascending or desc for descending. Example: displayName asc."
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                "key": "ConsistencyLevel",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "31a8ff58-f5c6-4264-8eb0-536836e4a79a",
+              "name": "A collection of application objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                    "key": "ConsistencyLevel",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"example_value\",\n  \"@odata.nextLink\": \"https://www.example.com\",\n  \"@odata.count\": 10,\n  \"value\": [\n    {\n      \"appId\": \"500123\",\n      \"displayName\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n      \"identifierUris\": [\n        {}\n      ],\n      \"keyCredentials\": [\n        {}\n      ],\n      \"passwordCredentials\": [\n        {}\n      ],\n      \"appRoles\": [\n        {}\n      ],\n      \"requiredResourceAccess\": [\n        {}\n      ],\n      \"signInAudience\": \"AzureADMyOrg\",\n      \"tags\": [\n        {}\n      ],\n      \"publisherDomain\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07da80ac-3372-4aa2-a064-8f228986d334",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                    "key": "ConsistencyLevel",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ab73f94-df9e-4320-bf4d-93478986d530",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                    "key": "ConsistencyLevel",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78aa110c-868d-4d09-8141-3ffcbf04beba",
+              "name": "Too many requests. The client has been throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                    "key": "ConsistencyLevel",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "4553"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5b586bb-1dfd-4724-b153-8d3341387268",
+          "name": "Create Application",
+          "request": {
+            "name": "Create Application",
+            "description": {
+              "content": "Create a new application registration. The request body must contain the displayName property at minimum.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"signInAudience\": \"<string>\",\n  \"identifierUris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"<string,null-uri>\",\n    \"logoutUrl\": \"<string,null-uri>\",\n    \"redirectUris\": [\n      \"<uri>\",\n      \"<uri>\"\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": \"<boolean>\",\n      \"enableIdTokenIssuance\": \"<boolean>\"\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      \"<uri>\",\n      \"<uri>\"\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      \"<uri>\",\n      \"<uri>\"\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"<boolean,null>\",\n    \"knownClientApplications\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"oauth2PermissionScopes\": [\n      {\n        \"adminConsentDescription\": \"<string>\",\n        \"adminConsentDisplayName\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"isEnabled\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"userConsentDescription\": \"<string>\",\n        \"userConsentDisplayName\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"adminConsentDescription\": \"<string>\",\n        \"adminConsentDisplayName\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"isEnabled\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"userConsentDescription\": \"<string>\",\n        \"userConsentDisplayName\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"preAuthorizedApplications\": [\n      {\n        \"appId\": \"<uuid>\",\n        \"delegatedPermissionIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      {\n        \"appId\": \"<uuid>\",\n        \"delegatedPermissionIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    ],\n    \"requestedAccessTokenVersion\": \"<integer,null>\"\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"isEnabled\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"allowedMemberTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"isEnabled\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"<uuid>\",\n      \"resourceAccess\": [\n        {\n          \"id\": \"<uuid>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"resourceAppId\": \"<uuid>\",\n      \"resourceAccess\": [\n        {\n          \"id\": \"<uuid>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae5d966c-d479-423e-a1b3-cfd652c79036",
+              "name": "The created application object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"AzureADMyOrg\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"appId\": \"500123\",\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n  \"identifierUris\": [\n    \"https://www.example.com\"\n  ],\n  \"keyCredentials\": [\n    {\n      \"customKeyIdentifier\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"endDateTime\": \"2026-01-15T10:30:00Z\",\n      \"key\": \"example_value\",\n      \"keyId\": \"500123\",\n      \"startDateTime\": \"2026-01-15T10:30:00Z\",\n      \"type\": \"example_value\",\n      \"usage\": \"Sign\"\n    }\n  ],\n  \"passwordCredentials\": [\n    {\n      \"customKeyIdentifier\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"endDateTime\": \"2026-01-15T10:30:00Z\",\n      \"hint\": \"example_value\",\n      \"keyId\": \"500123\",\n      \"secretText\": \"example_value\",\n      \"startDateTime\": \"2026-01-15T10:30:00Z\"\n    }\n  ],\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"signInAudience\": \"AzureADMyOrg\",\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"publisherDomain\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eba1d9a6-080a-452e-907f-ec3722847d4a",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"AzureADMyOrg\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c1b56f3-dea7-4e96-a9ba-e187c33e346c",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"AzureADMyOrg\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ae90644-0f4e-40e5-9293-94b9c90c1a6b",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"AzureADMyOrg\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f45a6cd9-b17a-4c5f-a90c-f4301b2f38d6",
+              "name": "Too many requests. The client has been throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"AzureADMyOrg\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "4553"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "410b903c-df0d-4e0a-bb2d-371bda559486",
+          "name": "Get Application",
+          "request": {
+            "name": "Get Application",
+            "description": {
+              "content": "Get the properties and relationships of an application object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":application-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Expands related entities inline. For example, expand members of a group or manager of a user."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "application-id",
+                  "description": "(Required) The unique identifier (object ID) of the application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "daadb592-b88a-47ce-a1c7-64cc7785e82b",
+              "name": "The requested application object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"appId\": \"500123\",\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n  \"identifierUris\": [\n    \"https://www.example.com\"\n  ],\n  \"keyCredentials\": [\n    {\n      \"customKeyIdentifier\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"endDateTime\": \"2026-01-15T10:30:00Z\",\n      \"key\": \"example_value\",\n      \"keyId\": \"500123\",\n      \"startDateTime\": \"2026-01-15T10:30:00Z\",\n      \"type\": \"example_value\",\n      \"usage\": \"Sign\"\n    }\n  ],\n  \"passwordCredentials\": [\n    {\n      \"customKeyIdentifier\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"endDateTime\": \"2026-01-15T10:30:00Z\",\n      \"hint\": \"example_value\",\n      \"keyId\": \"500123\",\n      \"secretText\": \"example_value\",\n      \"startDateTime\": \"2026-01-15T10:30:00Z\"\n    }\n  ],\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"signInAudience\": \"AzureADMyOrg\",\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"publisherDomain\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ff7afc5-b71f-4e68-b4af-a1726e0a1062",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6aefdd3c-a7c3-44b1-a018-41b364fb7274",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41e4f678-38f3-4ce6-92c4-6eeaf946b1e1",
+              "name": "Not found. The specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "598965ab-b5fc-4244-8dd5-6a3b6df4dda6",
+          "name": "Update Application",
+          "request": {
+            "name": "Update Application",
+            "description": {
+              "content": "Update the properties of an application object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":application-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "application-id",
+                  "description": "(Required) The unique identifier (object ID) of the application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"signInAudience\": \"<string>\",\n  \"identifierUris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"<string,null-uri>\",\n    \"logoutUrl\": \"<string,null-uri>\",\n    \"redirectUris\": [\n      \"<uri>\",\n      \"<uri>\"\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": \"<boolean>\",\n      \"enableIdTokenIssuance\": \"<boolean>\"\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      \"<uri>\",\n      \"<uri>\"\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      \"<uri>\",\n      \"<uri>\"\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"<boolean,null>\",\n    \"knownClientApplications\": [\n      \"<uuid>\",\n      \"<uuid>\"\n    ],\n    \"oauth2PermissionScopes\": [\n      {\n        \"adminConsentDescription\": \"<string>\",\n        \"adminConsentDisplayName\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"isEnabled\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"userConsentDescription\": \"<string>\",\n        \"userConsentDisplayName\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"adminConsentDescription\": \"<string>\",\n        \"adminConsentDisplayName\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"isEnabled\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"userConsentDescription\": \"<string>\",\n        \"userConsentDisplayName\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"preAuthorizedApplications\": [\n      {\n        \"appId\": \"<uuid>\",\n        \"delegatedPermissionIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      {\n        \"appId\": \"<uuid>\",\n        \"delegatedPermissionIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    ],\n    \"requestedAccessTokenVersion\": \"<integer,null>\"\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"isEnabled\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"allowedMemberTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"description\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"isEnabled\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"<uuid>\",\n      \"resourceAccess\": [\n        {\n          \"id\": \"<uuid>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"resourceAppId\": \"<uuid>\",\n      \"resourceAccess\": [\n        {\n          \"id\": \"<uuid>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f4f04e6-e45f-4c63-819f-e4962f9e2571",
+              "name": "Application updated successfully. No content returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"example_value\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "62a0091e-e057-4d62-8425-3d57a561ed98",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"example_value\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d85c0a34-78eb-4c35-ae48-31d6ac4e46f3",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"example_value\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2459ef60-2129-4c13-8bfc-a22102994b9f",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"example_value\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b4d6250-757f-472e-aa1d-92499a17a081",
+              "name": "Not found. The specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"description\": \"A sample description.\",\n  \"signInAudience\": \"example_value\",\n  \"identifierUris\": [\n    \"example_value\"\n  ],\n  \"web\": {\n    \"homePageUrl\": \"https://www.example.com\",\n    \"logoutUrl\": \"https://www.example.com\",\n    \"redirectUris\": [\n      {}\n    ],\n    \"implicitGrantSettings\": {\n      \"enableAccessTokenIssuance\": true,\n      \"enableIdTokenIssuance\": true\n    }\n  },\n  \"spa\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"publicClient\": {\n    \"redirectUris\": [\n      {}\n    ]\n  },\n  \"api\": {\n    \"acceptMappedClaims\": \"example_value\",\n    \"knownClientApplications\": [\n      {}\n    ],\n    \"oauth2PermissionScopes\": [\n      {}\n    ],\n    \"preAuthorizedApplications\": [\n      {}\n    ],\n    \"requestedAccessTokenVersion\": 1\n  },\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"requiredResourceAccess\": [\n    {\n      \"resourceAppId\": \"500123\",\n      \"resourceAccess\": {}\n    }\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6d735a6-f3eb-4377-adf0-71fb508595a5",
+          "name": "Delete Application",
+          "request": {
+            "name": "Delete Application",
+            "description": {
+              "content": "Delete an application object. Permanently deletes the application registration and its associated service principal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":application-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "application-id",
+                  "description": "(Required) The unique identifier (object ID) of the application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8bcf186a-7810-4a6e-a030-86ab134f85af",
+              "name": "Application deleted successfully. No content returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "411c0750-11ab-4a95-860b-482ca2fe91e0",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eac7aa75-23de-4a0c-8888-3fb113a962af",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57990042-b7ca-442c-ab28-da3112abe65f",
+              "name": "Not found. The specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "application-id",
+                      "description": "(Required) The unique identifier (object ID) of the application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"2004-06-28T01:43:00.989Z\",\n      \"request-id\": \"e9d9c21d-1f1b-e661-aef6-d7e3640319af\",\n      \"client-request-id\": \"84283675-5f06-7a63-c7bf-409fcc8e971a\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.microsoft.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "31e4f823-b2d4-4082-9c2a-61f699f46efe",
+    "name": "Microsoft Graph Identity Applications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Microsoft Graph Identity API provides a unified programmability model for managing Azure Active Directory (Microsoft Entra ID) resources including users, groups, applications, and service principals. This specification covers the core identity and access management endpoints available through the Microsoft Graph v1.0 REST API.\n\nContact Support:\n Name: Microsoft Graph Support\n Email: graphdev@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

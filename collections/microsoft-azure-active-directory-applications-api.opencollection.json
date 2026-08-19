@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Graph Identity Applications API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/applications",
+            "headers": [
+              {
+                "name": "ConsistencyLevel",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources."
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Skips the specified number of items in the result set."
+              },
+              {
+                "name": "$search",
+                "value": "",
+                "type": "query",
+                "description": "Search items by search phrases. Requires ConsistencyLevel header set to eventual. Supports searching displayName and description."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "Filters results using OData filter expressions. Supports eq, ne, not, in, startsWith, endsWith, and lambda operators."
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header."
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the order of items returned. Use asc for ascending or desc for descending. Example: displayName asc."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the list of application registrations in the organization. By default, returns a limited set of properties. Use $select to request additional properties."
+        },
+        {
+          "info": {
+            "name": "Create Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/applications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new application registration. The request body must contain the displayName property at minimum."
+        },
+        {
+          "info": {
+            "name": "Get Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/applications/:application-id",
+            "params": [
+              {
+                "name": "application-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the application."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expands related entities inline. For example, expand members of a group or manager of a user."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the properties and relationships of an application object."
+        },
+        {
+          "info": {
+            "name": "Update Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://graph.microsoft.com/v1.0/applications/:application-id",
+            "params": [
+              {
+                "name": "application-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the properties of an application object."
+        },
+        {
+          "info": {
+            "name": "Delete Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/applications/:application-id",
+            "params": [
+              {
+                "name": "application-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the application."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete an application object. Permanently deletes the application registration and its associated service principal."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

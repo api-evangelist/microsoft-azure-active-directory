@@ -1,0 +1,2136 @@
+{
+  "item": [
+    {
+      "id": "ea001dd8-01ba-4819-a9d8-0ae11153807e",
+      "name": "Service Principals",
+      "description": {
+        "content": "Manage service principals in Azure Active Directory. A service principal is the local representation of an application in a specific tenant. It defines what the application can do in the tenant, who can access it, and what resources it can access.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b24ba211-9930-4de1-9dfa-5060a3f93cd9",
+          "name": "List Service Principals",
+          "request": {
+            "name": "List Service Principals",
+            "description": {
+              "content": "Retrieve a list of service principal objects in the organization. Returns up to 100 objects by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources."
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Skips the specified number of items in the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "$search",
+                  "value": "<string>",
+                  "description": "Search items by search phrases. Requires ConsistencyLevel header set to eventual. Supports searching displayName and description."
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "Filters results using OData filter expressions. Supports eq, ne, not, in, startsWith, endsWith, and lambda operators."
+                },
+                {
+                  "disabled": false,
+                  "key": "$count",
+                  "value": "<boolean>",
+                  "description": "Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header."
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "Specifies the order of items returned. Use asc for ascending or desc for descending. Example: displayName asc."
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Expands related entities inline. For example, expand members of a group or manager of a user."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                "key": "ConsistencyLevel",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eecc62b5-19b3-4f78-b656-f9d347232dc7",
+              "name": "A collection of service principal objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                    "key": "ConsistencyLevel",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"example_value\",\n  \"@odata.nextLink\": \"https://www.example.com\",\n  \"@odata.count\": 10,\n  \"value\": [\n    {\n      \"accountEnabled\": true,\n      \"appDescription\": \"example_value\",\n      \"appDisplayName\": \"example_value\",\n      \"appId\": \"500123\",\n      \"appOwnerOrganizationId\": \"500123\",\n      \"appRoleAssignmentRequired\": true,\n      \"appRoles\": [\n        {}\n      ],\n      \"displayName\": \"example_value\",\n      \"homepage\": \"https://www.example.com\",\n      \"keyCredentials\": [\n        {}\n      ],\n      \"loginUrl\": \"https://www.example.com\",\n      \"logoutUrl\": \"https://www.example.com\",\n      \"notificationEmailAddresses\": [\n        {}\n      ],\n      \"oauth2PermissionScopes\": [\n        {}\n      ],\n      \"passwordCredentials\": [\n        {}\n      ],\n      \"replyUrls\": [\n        {}\n      ],\n      \"servicePrincipalNames\": [\n        {}\n      ],\n      \"servicePrincipalType\": \"example_value\",\n      \"signInAudience\": \"example_value\",\n      \"tags\": [\n        {}\n      ],\n      \"tokenEncryptionKeyId\": \"500123\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "447e211c-d840-4184-96a7-0b4955227328",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                    "key": "ConsistencyLevel",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5ce0e80-1187-490c-82d0-db02b654d53f",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                    "key": "ConsistencyLevel",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6965b2a1-344c-43f1-affd-b784d1172f23",
+              "name": "Too many requests. The client has been throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the requested consistency level. Required for advanced queries using $search, $filter with certain functions, or $count. Set to eventual.",
+                    "key": "ConsistencyLevel",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "2155"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01e8f70a-62c2-4d41-b621-a3b4f3c47b02",
+          "name": "Create Service Principal",
+          "request": {
+            "name": "Create Service Principal",
+            "description": {
+              "content": "Create a new service principal object. The appId property in the request body is required and must reference an existing application registration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appId\": \"<uuid>\",\n  \"displayName\": \"<string>\",\n  \"accountEnabled\": \"<boolean>\",\n  \"appRoleAssignmentRequired\": \"<boolean>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notificationEmailAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b7ada631-924f-46d0-8931-1b3d3e66fb0f",
+              "name": "The created service principal object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"500123\",\n  \"displayName\": \"example_value\",\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountEnabled\": true,\n  \"appDescription\": \"example_value\",\n  \"appDisplayName\": \"example_value\",\n  \"appId\": \"500123\",\n  \"appOwnerOrganizationId\": \"500123\",\n  \"appRoleAssignmentRequired\": true,\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"displayName\": \"example_value\",\n  \"homepage\": \"https://www.example.com\",\n  \"keyCredentials\": [\n    {\n      \"customKeyIdentifier\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"endDateTime\": \"2026-01-15T10:30:00Z\",\n      \"key\": \"example_value\",\n      \"keyId\": \"500123\",\n      \"startDateTime\": \"2026-01-15T10:30:00Z\",\n      \"type\": \"example_value\",\n      \"usage\": \"Sign\"\n    }\n  ],\n  \"loginUrl\": \"https://www.example.com\",\n  \"logoutUrl\": \"https://www.example.com\",\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ],\n  \"oauth2PermissionScopes\": [\n    {\n      \"adminConsentDescription\": \"example_value\",\n      \"adminConsentDisplayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"type\": \"User\",\n      \"userConsentDescription\": \"example_value\",\n      \"userConsentDisplayName\": \"example_value\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"passwordCredentials\": [\n    {\n      \"customKeyIdentifier\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"endDateTime\": \"2026-01-15T10:30:00Z\",\n      \"hint\": \"example_value\",\n      \"keyId\": \"500123\",\n      \"secretText\": \"example_value\",\n      \"startDateTime\": \"2026-01-15T10:30:00Z\"\n    }\n  ],\n  \"replyUrls\": [\n    \"https://www.example.com\"\n  ],\n  \"servicePrincipalNames\": [\n    \"example_value\"\n  ],\n  \"servicePrincipalType\": \"example_value\",\n  \"signInAudience\": \"example_value\",\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"tokenEncryptionKeyId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b4a9eae-39c0-435d-935c-96938780918c",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"500123\",\n  \"displayName\": \"example_value\",\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b82595b-7a05-46f5-8abc-8895cd4973b0",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"500123\",\n  \"displayName\": \"example_value\",\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bec19fc-6527-45c4-9ff6-7428699e76b8",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"500123\",\n  \"displayName\": \"example_value\",\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fae66d4-53b9-42c0-aa62-ca05dff70388",
+              "name": "Too many requests. The client has been throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"500123\",\n  \"displayName\": \"example_value\",\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "2155"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75cea6e7-e9de-4620-ab13-02edfcccbec4",
+          "name": "Get Service Principal",
+          "request": {
+            "name": "Get Service Principal",
+            "description": {
+              "content": "Retrieve the properties and relationships of a service principal object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals",
+                ":servicePrincipal-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Expands related entities inline. For example, expand members of a group or manager of a user."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "servicePrincipal-id",
+                  "description": "(Required) The unique identifier (object ID) of the service principal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6e97ec01-892d-448c-8c3e-442f07419094",
+              "name": "The requested service principal object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountEnabled\": true,\n  \"appDescription\": \"example_value\",\n  \"appDisplayName\": \"example_value\",\n  \"appId\": \"500123\",\n  \"appOwnerOrganizationId\": \"500123\",\n  \"appRoleAssignmentRequired\": true,\n  \"appRoles\": [\n    {\n      \"allowedMemberTypes\": {},\n      \"description\": \"A sample description.\",\n      \"displayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"value\": \"example_value\"\n    }\n  ],\n  \"displayName\": \"example_value\",\n  \"homepage\": \"https://www.example.com\",\n  \"keyCredentials\": [\n    {\n      \"customKeyIdentifier\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"endDateTime\": \"2026-01-15T10:30:00Z\",\n      \"key\": \"example_value\",\n      \"keyId\": \"500123\",\n      \"startDateTime\": \"2026-01-15T10:30:00Z\",\n      \"type\": \"example_value\",\n      \"usage\": \"Sign\"\n    }\n  ],\n  \"loginUrl\": \"https://www.example.com\",\n  \"logoutUrl\": \"https://www.example.com\",\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ],\n  \"oauth2PermissionScopes\": [\n    {\n      \"adminConsentDescription\": \"example_value\",\n      \"adminConsentDisplayName\": \"example_value\",\n      \"id\": \"abc123\",\n      \"isEnabled\": true,\n      \"type\": \"User\",\n      \"userConsentDescription\": \"example_value\",\n      \"userConsentDisplayName\": \"example_value\",\n      \"value\": \"example_value\"\n    }\n  ],\n  \"passwordCredentials\": [\n    {\n      \"customKeyIdentifier\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"endDateTime\": \"2026-01-15T10:30:00Z\",\n      \"hint\": \"example_value\",\n      \"keyId\": \"500123\",\n      \"secretText\": \"example_value\",\n      \"startDateTime\": \"2026-01-15T10:30:00Z\"\n    }\n  ],\n  \"replyUrls\": [\n    \"https://www.example.com\"\n  ],\n  \"servicePrincipalNames\": [\n    \"example_value\"\n  ],\n  \"servicePrincipalType\": \"example_value\",\n  \"signInAudience\": \"example_value\",\n  \"tags\": [\n    \"example_value\"\n  ],\n  \"tokenEncryptionKeyId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf31a885-f97f-4f88-89fa-26adbebbfe64",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fe55875-e057-445b-a2ff-bf9bba87901f",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "881b5ff8-f281-4980-9df2-a746760f133f",
+              "name": "Not found. The specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf886f74-a112-4bae-8b56-ea24347ebfa0",
+          "name": "Update Service Principal",
+          "request": {
+            "name": "Update Service Principal",
+            "description": {
+              "content": "Update the properties of a service principal object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals",
+                ":servicePrincipal-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "servicePrincipal-id",
+                  "description": "(Required) The unique identifier (object ID) of the service principal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountEnabled\": \"<boolean>\",\n  \"appRoleAssignmentRequired\": \"<boolean>\",\n  \"displayName\": \"<string>\",\n  \"homepage\": \"<string>\",\n  \"loginUrl\": \"<string>\",\n  \"logoutUrl\": \"<string>\",\n  \"notificationEmailAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"replyUrls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0bd24170-62fa-4422-83bb-9c96b9fdc1ea",
+              "name": "Service principal updated successfully. No content returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"displayName\": \"example_value\",\n  \"homepage\": \"example_value\",\n  \"loginUrl\": \"https://www.example.com\",\n  \"logoutUrl\": \"https://www.example.com\",\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ],\n  \"replyUrls\": [\n    \"example_value\"\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19ebad32-6b72-4231-a551-2efd27bd944a",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"displayName\": \"example_value\",\n  \"homepage\": \"example_value\",\n  \"loginUrl\": \"https://www.example.com\",\n  \"logoutUrl\": \"https://www.example.com\",\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ],\n  \"replyUrls\": [\n    \"example_value\"\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bca0245-6913-4656-ae19-83a6accf355d",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"displayName\": \"example_value\",\n  \"homepage\": \"example_value\",\n  \"loginUrl\": \"https://www.example.com\",\n  \"logoutUrl\": \"https://www.example.com\",\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ],\n  \"replyUrls\": [\n    \"example_value\"\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4400c115-9c93-4e48-a3c8-057c0ea2eaef",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"displayName\": \"example_value\",\n  \"homepage\": \"example_value\",\n  \"loginUrl\": \"https://www.example.com\",\n  \"logoutUrl\": \"https://www.example.com\",\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ],\n  \"replyUrls\": [\n    \"example_value\"\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ab44836-f492-448b-858a-8ae3dfc53cf5",
+              "name": "Not found. The specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"appRoleAssignmentRequired\": true,\n  \"displayName\": \"example_value\",\n  \"homepage\": \"example_value\",\n  \"loginUrl\": \"https://www.example.com\",\n  \"logoutUrl\": \"https://www.example.com\",\n  \"notificationEmailAddresses\": [\n    \"example_value\"\n  ],\n  \"replyUrls\": [\n    \"example_value\"\n  ],\n  \"tags\": [\n    \"example_value\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ae4f738-1359-4b1a-a138-06e1990b3ca9",
+          "name": "Delete Service Principal",
+          "request": {
+            "name": "Delete Service Principal",
+            "description": {
+              "content": "Delete a service principal object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals",
+                ":servicePrincipal-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "servicePrincipal-id",
+                  "description": "(Required) The unique identifier (object ID) of the service principal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cbe5a5ff-8d5d-4653-9755-fd7d10ce885f",
+              "name": "Service principal deleted successfully. No content returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42644db6-83fb-4746-8bf5-7f437a8e5736",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea7f1413-3caf-43e0-8e69-93054fb60a01",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "736a5174-4172-412a-abd1-f0d3d9eb9790",
+              "name": "Not found. The specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ab1ff68-cd02-462a-afc0-9d1386e1f804",
+          "name": "List App Role Assignments for a Service Principal",
+          "request": {
+            "name": "List App Role Assignments for a Service Principal",
+            "description": {
+              "content": "Retrieve a list of app role assignments granted to a service principal. App role assignments granted to service principals are also known as application permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals",
+                ":servicePrincipal-id",
+                "appRoleAssignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources."
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+                },
+                {
+                  "disabled": false,
+                  "key": "$count",
+                  "value": "<boolean>",
+                  "description": "Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "servicePrincipal-id",
+                  "description": "(Required) The unique identifier (object ID) of the service principal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "48c8d9ea-4445-4a29-8a05-350f34f2418d",
+              "name": "A collection of app role assignment objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id",
+                    "appRoleAssignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"example_value\",\n  \"value\": [\n    {\n      \"id\": \"abc123\",\n      \"appRoleId\": \"500123\",\n      \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n      \"principalDisplayName\": \"example_value\",\n      \"principalId\": \"500123\",\n      \"principalType\": \"example_value\",\n      \"resourceDisplayName\": \"example_value\",\n      \"resourceId\": \"500123\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d265ec54-0872-479c-82bc-654bfa69f34f",
+              "name": "Unauthorized. Authentication is required or the provided token is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id",
+                    "appRoleAssignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d8e3eb-8129-4412-a9da-4c20deeb1606",
+              "name": "Forbidden. The caller does not have sufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id",
+                    "appRoleAssignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92eb478e-cef0-4385-b69c-3a30cd366980",
+              "name": "Not found. The specified resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipal-id",
+                    "appRoleAssignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipal-id",
+                      "description": "(Required) The unique identifier (object ID) of the service principal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1978-04-30T12:03:39.191Z\",\n      \"request-id\": \"6c1cd188-3dc7-4b64-2bfa-47a2b7035f32\",\n      \"client-request-id\": \"db2351cf-e0e3-3f8a-8a95-e30905c37f33\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.microsoft.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "User.Read User.Read.All User.ReadWrite.All Group.Read.All Group.ReadWrite.All GroupMember.Read.All GroupMember.ReadWrite.All Application.Read.All Application.ReadWrite.All Directory.Read.All Directory.ReadWrite.All"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bd883cbb-d41f-4dc6-bb7e-334f1d138de3",
+    "name": "Microsoft Graph Identity Applications Service Principals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Microsoft Graph Identity API provides a unified programmability model for managing Azure Active Directory (Microsoft Entra ID) resources including users, groups, applications, and service principals. This specification covers the core identity and access management endpoints available through the Microsoft Graph v1.0 REST API.\n\nContact Support:\n Name: Microsoft Graph Support\n Email: graphdev@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

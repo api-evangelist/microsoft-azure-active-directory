@@ -1,0 +1,275 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Graph Identity Applications Service Principals API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Principals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Service Principals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals",
+            "headers": [
+              {
+                "name": "ConsistencyLevel",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources."
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Skips the specified number of items in the result set."
+              },
+              {
+                "name": "$search",
+                "value": "",
+                "type": "query",
+                "description": "Search items by search phrases. Requires ConsistencyLevel header set to eventual. Supports searching displayName and description."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "Filters results using OData filter expressions. Supports eq, ne, not, in, startsWith, endsWith, and lambda operators."
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header."
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the order of items returned. Use asc for ascending or desc for descending. Example: displayName asc."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expands related entities inline. For example, expand members of a group or manager of a user."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a list of service principal objects in the organization. Returns up to 100 objects by default."
+        },
+        {
+          "info": {
+            "name": "Create Service Principal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new service principal object. The appId property in the request body is required and must reference an existing application registration."
+        },
+        {
+          "info": {
+            "name": "Get Service Principal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals/:servicePrincipal-id",
+            "params": [
+              {
+                "name": "servicePrincipal-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the service principal."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expands related entities inline. For example, expand members of a group or manager of a user."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve the properties and relationships of a service principal object."
+        },
+        {
+          "info": {
+            "name": "Update Service Principal",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals/:servicePrincipal-id",
+            "params": [
+              {
+                "name": "servicePrincipal-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the service principal."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the properties of a service principal object."
+        },
+        {
+          "info": {
+            "name": "Delete Service Principal",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals/:servicePrincipal-id",
+            "params": [
+              {
+                "name": "servicePrincipal-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the service principal."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a service principal object."
+        },
+        {
+          "info": {
+            "name": "List App Role Assignments for a Service Principal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals/:servicePrincipal-id/appRoleAssignments",
+            "params": [
+              {
+                "name": "servicePrincipal-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the service principal."
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a list of app role assignments granted to a service principal. App role assignments granted to service principals are also known as application permissions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

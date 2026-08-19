@@ -1,0 +1,319 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Graph Identity Applications Groups API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups",
+            "headers": [
+              {
+                "name": "ConsistencyLevel",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources."
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Skips the specified number of items in the result set."
+              },
+              {
+                "name": "$search",
+                "value": "",
+                "type": "query",
+                "description": "Search items by search phrases. Requires ConsistencyLevel header set to eventual. Supports searching displayName and description."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "Filters results using OData filter expressions. Supports eq, ne, not, in, startsWith, endsWith, and lambda operators."
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header."
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the order of items returned. Use asc for ascending or desc for descending. Example: displayName asc."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expands related entities inline. For example, expand members of a group or manager of a user."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all the groups in an organization, including Microsoft 365 groups, security groups, and mail-enabled security groups. Returns up to 100 objects by default."
+        },
+        {
+          "info": {
+            "name": "Create Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a new group. You can create a Microsoft 365 group, a security group, or a mail-enabled security group. The request body must include displayName, mailEnabled, mailNickname, and securityEnabled."
+        },
+        {
+          "info": {
+            "name": "Get Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups/:group-id",
+            "params": [
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the group."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Expands related entities inline. For example, expand members of a group or manager of a user."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the properties and relationships of a group object. Returns a default set of properties unless $select is used."
+        },
+        {
+          "info": {
+            "name": "Update Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://graph.microsoft.com/v1.0/groups/:group-id",
+            "params": [
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update the properties of a group object. Not all properties can be updated at the same time."
+        },
+        {
+          "info": {
+            "name": "Delete Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/groups/:group-id",
+            "params": [
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the group."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a group. When a Microsoft 365 group is deleted, it is moved to a temporary container and can be restored within 30 days. Security groups are permanently deleted immediately."
+        },
+        {
+          "info": {
+            "name": "List Group Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups/:group-id/members",
+            "headers": [
+              {
+                "name": "ConsistencyLevel",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the group."
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Sets the page size of results. Maximum value depends on the API; defaults to 100 for most identity resources."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "Filters results using OData filter expressions. Supports eq, ne, not, in, startsWith, endsWith, and lambda operators."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Selects specific properties to return. Comma-separated list of property names. Example: id,displayName,mail."
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "Includes a count of the total number of items in a collection alongside the page of data values. Requires ConsistencyLevel header."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a list of the group's direct members. A group can have users, organizational contacts, devices, service principals, and other groups as members."
+        },
+        {
+          "info": {
+            "name": "Add Group Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/groups/:group-id/members/$ref",
+            "params": [
+              {
+                "name": "group-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (object ID) of the group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add a member to a group by posting a reference to the directory object. Users, service principals, groups, and organizational contacts can be added as members."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
