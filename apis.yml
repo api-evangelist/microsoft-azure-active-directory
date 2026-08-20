@@ -28,6 +28,17 @@ tags:
   - Identity
   - Microsoft
   - Microsoft Entra
+  - OpenID Connect
+  - SAML
+  - SCIM
+  - Single Sign-On
+  - Zero Trust
+tags_raw:
+  - Authentication
+  - Authorization
+  - Identity
+  - Microsoft
+  - Microsoft Entra
   - OAuth
   - OpenID Connect
   - SAML
@@ -70,6 +81,10 @@ apis:
   tags:
   - Authentication
   - Library
+  - OpenID Connect
+  tags_raw:
+  - Authentication
+  - Library
   - OAuth
   - OpenID Connect
   properties:
@@ -103,6 +118,11 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/entra/identity-platform/
   baseURL: https://login.microsoftonline.com
   tags:
+  - App Registration
+  - Authentication
+  - Authorization
+  - OpenID Connect
+  tags_raw:
   - App Registration
   - Authentication
   - Authorization
@@ -229,6 +249,8 @@ apis:
   humanURL: https://docs.microsoft.com/en-us/graph/overview
   baseURL: https://graph.microsoft.com
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -272,6 +294,8 @@ apis:
   humanURL: https://docs.microsoft.com/en-us/graph/overview
   baseURL: https://graph.microsoft.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -358,6 +382,8 @@ apis:
   humanURL: https://docs.microsoft.com/en-us/graph/overview
   baseURL: https://graph.microsoft.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
